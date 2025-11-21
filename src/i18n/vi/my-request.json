@@ -1,0 +1,74 @@
+{
+  "my-request": {
+    "title": "Yêu cầu phê duyệt của tôi",
+    "description": "",
+    "search-form": {
+      "request-date": "Ngày yêu cầu",
+      "status": "Trạng thái",
+      "recall": "Thu hồi"
+    },
+    "table": {
+      "approval-type": "Loại đối tượng",
+      "request-date-time": "Thời gian yêu cầu",
+      "approver": "Người duyệt",
+      "approved-time": "Thời gian duyệt"
+    },
+    "form": {
+      "approval-info-title": "Thông tin phê duyệt",
+      "target-transaction": "Loại yêu cầu",
+      "requester": "Người yêu cầu",
+      "approver": "Người duyệt",
+      "approval-status": "Trạng thái",
+      "request-date-time": "Thời gian yêu cầu",
+      "approved-date-time": "Thời gian duyệt",
+      "requester-note": "Ghi chú yêu cầu",
+      "approver-note": "Ghi chú duyệt",
+      "customer-number": "Service ID",
+      "contract-no": "Mã hợp đồng",
+      "contract-date": "Ngày đăng ký hợp đồng",
+      "customer-name": "Tên khách hàng",
+      "master-id": "Master ID",
+      "business-no": "Số đăng ký kinh doanh",
+      "service-count": "Số dịch vụ sử dụng",
+      "customer-information-title": "Thông tin khách hàng",
+      "banking-info": "Thông tin Internet Banking",
+      "contract-info": "Thông tin hợp đồng",
+      "service-information": "Thông tin dịch vụ",
+      "registration-date": "Ngày đăng ký",
+      "issued-date": "Ngày cấp",
+      "issued-place": "Nơi cấp",
+      "note": "Ghi chú"
+    },
+    "form-table": {
+      "acc-no": "Tài khoản sử dụng",
+      "ec-use": "Sử dụng E-Collection",
+      "ec-fee": "Phí E-Collection",
+      "ac-use": "Sử dụng Auto-Collection",
+      "ac-fee": "Phí Auto-Collection",
+      "transfer-use": "Sử dụng chuyển khoản"
+    },
+    "selected-value": {
+      "request-status": {
+        "draf": "Soạn thảo",
+        "pending": "Chờ duyệt",
+        "recalled": "Đã thu hồi",
+        "approved": "Đã duyệt",
+        "rejected": "Đã từ chối"
+      },
+      "request-type": {
+        "contract": "Hợp đồng",
+        "title": "Loại yêu cầu",
+        "ecollection": "E-Collection",
+        "add-contract": "Hợp đồng mới",
+        "edit-contract": "Chỉnh sửa hợp đồng",
+        "ter-contract": "Thanh lý hợp đồng"
+      }
+    },
+    "notification": {
+      "unSelected": "Vui lòng chọn một yêu cầu",
+      "checkPendingRequired": "Vui lòng chọn yêu cầu đang chờ xử lý.",
+      "confirmRecall": "Bạn có chắc chắn muôn thu hồi yêu cầu?",
+      "recallSuccess": "Thu hồi yêu cầu thành công"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "dashboard-notification": {
+    "heading": "ANNOUNCEMENT BOARD",
+    "types": {
+      "all": "All",
+      "bank": "Internal"
+    },
+    "popup": {
+      "title": "Information notification"
+    }
+  },
+  "dashboard-my-request": {
+    "title": "My Approval Requests",
+    "gotomenu": "Go to Menu",
+    "request-date": "Request date",
+    "table": {
+      "request": "Request",
+      "request-time": "Requested time",
+      "request-status": "Status"
+    }
+  },
+  "dashboard-approved-req": {
+    "title": "Requested Approval",
+    "gotomenu": "Go to Menu",
+    "request-date": "Request date",
+    "table": {
+      "request": "Request",
+      "request-time": "Requested time",
+      "request-status": "Status"
+    }
+  },
+  "dashboard-calendar": {
+    "title": "Calendar"
+  }
+}

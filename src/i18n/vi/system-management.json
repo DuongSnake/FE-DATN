@@ -1,0 +1,27 @@
+{
+  "system-management": {
+    "system-code": {
+      "title": "Code Management",
+      "group-name": "Group name",
+      "group-code": "Group code",
+      "use": "Using",
+      "group-name-en": "Group name (Eng)",
+      "group-name-vi": "Group name (VN)",
+      "group-name-ko": "Group name (Kor)",
+      "registed-date": "Registered date",
+      "registor": "Registor",
+      "updated-date": "Updated date",
+      "updater": "Updater",
+      "order": "Order",
+      "code-name": "Code",
+      "code-name-en": "Code name (Eng)",
+      "code-name-vi": "Code name (Vn)",
+      "code-name-kor": "Code name (Kor)",
+      "register-system-code": "Register new group code ",
+      "register-code": "Register new code ",
+      "update-system-code": "Update group code",
+      "update-code": "Update code",
+      "code": "Code"
+    }
+  }
+}

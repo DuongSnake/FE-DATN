@@ -1,0 +1,123 @@
+{
+  "breadcrumb": {
+    "Site-setting": "Thiết lập khu đô thị",
+    "Home": "Trang chủ"
+  },
+  "button": {
+    "update": "Update",
+    "add": "Add",
+    "save": "Save",
+    "close": "Close",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "add-group": "Add group",
+    "register": "Register",
+    "clear": "Clear",
+    "go-to-list": "Go to list",
+    "edit": "Edit",
+    "1month": "1 Month",
+    "3month": "3 Months",
+    "6month": "6 Months",
+    "send-sms": "Send SMS",
+    "send-email": "Send E-mail",
+    "excel-download": "Excel download",
+    "today": "Today",
+    "this-month": "This month",
+    "last-month": "Last month",
+    "search": "Search",
+    "detail": "Detail",
+    "download": "Download",
+    "action": "Request",
+    "recall": "Recall",
+    "send": "Send",
+    "cancel": "Cancel",
+    "deny": "Deny",
+    "approve": "Approve",
+    "select": "Select",
+    "submit": "Submit",
+    "check": "Check",
+    "reset": "Reset",
+    "yes": "Yes",
+    "extend": "Extend",
+    "logout": "Logout",
+    "view": "View"
+  },
+  "data": {
+    "no-data": "No data!"
+  },
+  "getData": "Getting data...",
+  "password": {
+    "not-match": "Password not match please check again"
+  },
+  "label": {
+    "total-record": "Total: ",
+    "success-quantity": "Success quantity: ",
+    "unsuccess-quantity": "Unsuccess quantity: ",
+    "input-place-holder": "Please input information",
+    "from-date": "From date",
+    "to-date": "To date",
+    "loading": "Loading...",
+    "notify": "Warning",
+    "vabank": "Viet A Bank",
+    "choose-file": "Choose file",
+    "all": "All",
+    "select": "Select"
+  },
+  "transferStatus": {
+    "request": "Transfer request",
+    "done": "Transfer is done",
+    "fail": "Transfer fail"
+  },
+  "pagination": {
+    "total": "total",
+    "of": "of",
+    "item": "item",
+    "items": "items"
+  },
+  "selectbox": {
+    "all": "All"
+  },
+  "modal-common": {
+    "info-title": "Information",
+    "question-title": "Question"
+  },
+  "confirm": {
+    "title": "Confirm",
+    "description": "Do you want to delete this selection?"
+  },
+  "check": {
+    "title": "Data duplicate",
+    "description": "Data is duplicate, please check again"
+  },
+  "account": "Account",
+  "extend": "Extend",
+  "logout": "Logout",
+  "change-pass": "Change password",
+  "contentLogout": "Do you want to logout?",
+  "notificationTitleSuccess": "Success",
+  "notificationTitleError": "Error",
+  "notificationTitleWarning": "Warning",
+  "blocked": "Blocked",
+  "normal": "Normal",
+  "initialized": "Initialized",
+  "detail": "Detail",
+  "closed": "Closed",
+  "not-closed": "Not closed",
+  "fileName": {
+    "z020ExcelExport": "E-Collection_Reconciliation_",
+    "z012ExcelExport": "Service_Fee_Inquiry_",
+    "z010ExcelExport": "E_Collection_Management_",
+    "z022ExcelExport": "ECollection_Payer_List_",
+    "z023ExcelExport": "SMS_Inquiry_",
+    "z024ExcelExport": "Report_Daily_",
+    "z025ExcelExport": "Report_Monthly_",
+    "z011ExcelExport": "Auto_Collection_Management_",
+    "z026ExcelExport": "Auto_Collection_Reconciliation_",
+    "z021ExcelExport": "Transfer_Reconciliation_",
+    "z030ExcelExport": "Message_Template_Management_"
+  },
+  "confirmCloseTab": {
+    "content": "Do you want to close this tab?",
+    "contentAll": "Do you want to close all tab?"
+  }
+}

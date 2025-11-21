@@ -1,0 +1,32 @@
+{
+  "reports": {
+    "title": "Báo cáo ngày",
+    "titleMonth": "Báo cáo tháng",
+    "search": {
+      "collectionDate": "Ngày giao dịch",
+      "department": "Phòng ban",
+      "customerNumber": "Tên khách hàng",
+      "status": "Trạng thái",
+      "success": "Thành công",
+      "fail": "Thất bại"
+    },
+    "table": {
+      "no": "STT",
+      "month": "Tháng phát sinh",
+      "date": "Ngày phát sinh",
+      "department": "Tên phòng ban",
+      "customerNo": "Service ID",
+      "customerName": "Tên khách hàng",
+      "eCollectionTransaction": "Số giao dịch E-Collection",
+      "eCollectionTransactionAmount": "Số tiền E-Collection",
+      "autoCollectionTransaction": "Số giao dịch Auto Collection",
+      "autoCollectionTransactionAmount": "Số tiền Auto Collection",
+      "totalTransaction": "Tổng số giao dịch",
+      "totalAmount": "Tổng số tiền",
+      "successCnt": "Số giao dịch thành công",
+      "successAmt": "Số tiền thành công",
+      "failCnt": "Số giao dịch thất bại",
+      "failAmt": "Số tiền thất bại"
+    }
+  }
+}

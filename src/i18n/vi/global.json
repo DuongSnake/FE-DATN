@@ -1,0 +1,124 @@
+{
+  "breadcrumb": {
+    "Site-setting": "Thiết lập khu đô thị",
+    "Home": "Trang chủ"
+  },
+  "button": {
+    "update": "Cập nhật",
+    "add": "Thêm",
+    "save": "Lưu",
+    "close": "Đóng",
+    "confirm": "Đồng ý",
+    "delete": "Xóa",
+    "add-group": "Thêm nhóm",
+    "register": "Đăng ký",
+    "clear": "Làm mới",
+    "go-to-list": "Đi đến bảng",
+    "edit": "Sửa",
+    "1month": "1 tháng",
+    "3month": "3 tháng",
+    "6month": "6 tháng",
+    "send-sms": "Gửi tin nhắn",
+    "send-email": "Gửi E-mail",
+    "excel-download": "Xuất Excel",
+    "today": "Hôm nay",
+    "this-month": "Tháng này",
+    "last-month": "Tháng trước",
+    "search": "Tìm kiếm",
+    "detail": "Chi tiết",
+    "download": "Tải về",
+    "action": "Thực hiện",
+    "recall": "Recall",
+    "send": "Gửi",
+    "cancel": "Thu hồi",
+    "deny": "Từ chối",
+    "approve": "Phê duyệt",
+    "select": "Chọn",
+    "submit": "Gửi phê duyệt",
+    "check": "Check",
+    "reset": "Reset",
+    "yes": "Đồng ý",
+    "extend": "Gia hạn",
+    "logout": "Thoát",
+    "view": "Xem"
+  },
+  "data": {
+    "no-data": "Không có dữ liệu!"
+  },
+  "password": {
+    "not-match": "Mật khẩu không trùng khớp vui lòng kiểm tra lại"
+  },
+  "getData": "Đang lấy dữ liệu...",
+  "label": {
+    "total-record": "Tổng số bản ghi: ",
+    "success-quantity": "Tổng số thành công: ",
+    "unsuccess-quantity": "Tổng số thất bại: ",
+    "input-place-holder": "Vui lòng điền thông tin",
+    "from-date": "Từ ngày",
+    "to-date": "Đến ngày",
+    "loading": "Đang tải...",
+    "notify": "Thông báo",
+    "warning": "Cảnh báo",
+    "vabank": "Ngân hàng Viêt Á",
+    "choose-file": "Chọn file",
+    "all": "Tất cả",
+    "select": "Chọn"
+  },
+  "transferStatus": {
+    "request": "Transfer request",
+    "done": "Transfer is done",
+    "fail": "Transfer fail"
+  },
+  "pagination": {
+    "total": "tất cả",
+    "of": "của",
+    "item": "bản ghi",
+    "items": "bản ghi"
+  },
+  "selectbox": {
+    "all": "Tất cả"
+  },
+  "modal-common": {
+    "info-title": "Thông tin",
+    "question-title": "Thông báo"
+  },
+  "confirm": {
+    "title": "Xác nhận",
+    "description": "Bạn chắc chắn muốn xóa thông tin này?"
+  },
+  "check": {
+    "title": "Dữ liệu đã tồn tại",
+    "description": "Dữ liệu đã tồn tại trên hệ thống, vui lòng kiểm tra lại"
+  },
+  "account": "Tài khoản",
+  "extend": "Gia hạn",
+  "logout": "Đăng xuất",
+  "change-pass": "Thay đổi mật khẩu",
+  "contentLogout": "Bạn chắc chắn muốn đăng xuất?",
+  "notificationTitleSuccess": "Thành công",
+  "notificationTitleError": "Thất bại",
+  "notificationTitleWarning": "Cảnh báo",
+  "blocked": "Đã khóa",
+  "normal": "Đang hoạt động",
+  "initialized": "Mới khởi tạo",
+  "detail": "Chi tiết",
+  "closed": "Đã chốt phí",
+  "not-closed": "Chưa chốt phí",
+  "fileName": {
+    "z020ExcelExport": "KQ_tra_soat_E-Collection_",
+    "z012ExcelExport": "TraCuu_Phi_dich_vu_",
+    "z010ExcelExport": "Quanly_E-Collection_",
+    "z022ExcelExport": "DanhSach_NguoiNopTien_ECollection_",
+    "z023ExcelExport": "Tracuu_Dichvu_SMS_",
+    "z024ExcelExport": "Bao_Cao_Ngay_",
+    "z025ExcelExport": "Bao_Cao_Thang_",
+    "z011ExcelExport": "Quan_ly_Auto_Collection_",
+    "z026ExcelExport": "KQ_tra_soat_Auto_Collection",
+    "z021ExcelExport": "KQ_tra_soat_Transfer",
+    "z030ExcelExport": "Quan_Ly_Mau_Bieu_Tin_Nhan_"
+  },
+  "confirmCloseTab": {
+    "content": "Bạn chắc chắn muốn đóng tab này?",
+    "contentAll": "Bạn chắc chắn muốn đóng tất cả các tab?"
+  }
+}

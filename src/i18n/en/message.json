@@ -1,0 +1,23 @@
+{
+  "validation-message": {
+    "not-a-excel": " is not an Excel file",
+    "not-an-email": "This field is not an email",
+    "hasnt-group-list": "You need to create group list first",
+    "required-field": "This field is required",
+    "exists-transfer": "Existing transaction that related to the selected payer. You can not delete permanently!",
+    "not-a-phone": "This field is not in phone number form",
+    "not-a-username": "This field is not in user id form",
+    "only-number": "This field is only numeric acceptance.",
+    "only-standard": "This field is only character and number(a-z A-Z 0-9).",
+    "passwordFormat": "Password must be at least 8 characters in length and consist of numbers, uppercase letters, lowercase letters, and other special characters",
+    "maxValue": "Maximum value is 5000",
+    "max-size": "Image must smaller than {{size}}MB!"
+  },
+  "message": {
+    "delete-permanent-warning": "Do you want to delete selected payer permanently?",
+    "reset-password": "Do you want reset password for this user?",
+    "menu-not-found": "Menu not found",
+    "not-allow-to-access-menu": "You do not have sufficient permissions to access this page.",
+    "extendToken": "Time login expired. Do you want to extend time?"
+  }
+}

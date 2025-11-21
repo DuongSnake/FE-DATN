@@ -1,0 +1,52 @@
+{
+  "auto-collection-consent-management": {
+    "title": "Thỏa thuận sử dụng dịch vụ",
+    "description": "Quản lý thỏa thuận sử dụng dịch vụ",
+    "search-form": {
+      "recall": "Thu hồi",
+      "view-document": "Xem Thỏa thuận",
+      "customer-number": "Service ID",
+      "customer-name": "Tên khách hàng",
+      "registered-account-number": "Số tài khoản đăng ký",
+      "approval-status": "Trạng thái",
+      "checked-box-doc": "Hiển thị thỏa thuận đã duyệt"
+    },
+    "table": {
+      "registered-date": "Ngày đăng ký"
+    },
+    "payer-information": "Thông tin người nộp tiền",
+    "consent-document": "Consent Document",
+    "form": {
+      "consent-Document": "Thỏa thuận sử dụng dịch vụ",
+      "reject-reason": "Lý do từ chối",
+      "reject-consent": "Từ chối Thỏa thuận sử dụng dịch vụ",
+      "approve-consent": "Phê duyệt Thỏa thuận sử dụng dịch vụ",
+      "note": "Ghi chú",
+      "reject": "Từ chối",
+      "recall": "Thu hồi",
+      "approve": "Phê duyệt"
+    },
+    "selected-value": {
+      "consent-document-approval-status": {
+        "confirmed": "Đã Phê duyệt",
+        "rejected": "Đã từ chối",
+        "in-progress": "Đã yêu cầu"
+      }
+    },
+    "notification": {
+      "view-consent": "Thỏa thuận sử dụng dịch vụ",
+      "confirm-reject": "Bạn có chắc chắn muốn từ chối duyệt Thỏa thuận sử dụng dịch vụ?",
+      "reject-reason": "Lý do từ chối",
+      "reject-success": "Từ chối duyệt Thỏa thuận sử dụng dịch vụ thành công",
+      "reject-failed": "Từ chối duyệt Thỏa thuận sử dụng dịch vụ thất bại",
+      "confirm-recall": "Bạn có chắc chắn muốn to thu hồi Thỏa thuận sử dụng dịch vụ?",
+      "recall-reason": "Lý do thu hồi",
+      "recall-success": "Thu hồi Thỏa thuận sử dụng dịch vụ thành công",
+      "recall-failed": "Thu hồi Thỏa thuận sử dụng dịch vụ thất bại",
+      "please-select": "Vui lòng chọn Thỏa thuận sử dụng dịch vụ",
+      "confirm-approve": "Bạn có chắc chắn muốn phê duyệt Thỏa thuận sử dụng dịch vụ?",
+      "approve-success": "Phê duyệt Thỏa thuận sử dụng dịch vụ thành công",
+      "approve-failed": "Phê duyệt Thỏa thuận sử dụng dịch vụ thất bại"
+    }
+  }
+}

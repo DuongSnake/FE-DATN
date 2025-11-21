@@ -1,0 +1,65 @@
+{
+  "bankCodeManagement": {
+    "heading": "Bank code management",
+    "description": "Bank code management",
+    "button": "Search",
+    "search": {
+      "bankCode": "Bank code",
+      "bankName": "Bank name",
+      "openApiBankCd": "Open api bank code",
+      "status": "Status"
+    },
+    "table": {
+      "bankCode": "Bank code",
+      "bankName": "Bank name",
+      "openApiBankCd": "Open api bank code",
+      "baseUrl": "Base url",
+      "regTm": "Registration date time",
+      "status": "Status"
+    },
+    "bankCode": "Bank code",
+    "bankName": "Bank name",
+    "openApiBankCd": "Open api bank code",
+    "baseUrl": "Base url",
+    "regTm": "Registration date time",
+    "status": "Status",
+    "active": "Active",
+    "in-active": "In active",
+    "success": "Success",
+    "fail": "Fail",
+    "register": {
+      "title": " Register bank code",
+      "editTitle": "Edit Bank code",
+      "registrationDate": "Registration date",
+      "registrationTime": "Registration time"
+    }
+  },
+  "actionManagement": {
+    "heading": "Bank code management",
+    "description": "Bank code management",
+    "button": "Search",
+    "search": {
+      "actionCode": "Action code",
+      "actionName": "Action name",
+      "status": "Status"
+    },
+    "table": {
+      "actionCode": "Action code",
+      "actionName": "Action name",
+      "regTm": "Registration date time",
+      "status": "Status"
+    },
+    "actionCode": "Action code",
+    "actionName": "Action name",
+    "regTm": "Registration date time",
+    "status": "Status",
+    "active": "Active",
+    "in-active": "In active",
+    "register": {
+      "title": " Register action code",
+      "editTitle": "Edit Action code",
+      "registrationDate": "Registration date",
+      "registrationTime": "Registration time"
+    }
+  }
+}

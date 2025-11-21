@@ -1,0 +1,45 @@
+{
+  "transferRecon": {
+    "title": "Recon management",
+    "description": "Recon transfer",
+    "general": {
+      "serial": "No.",
+      "reconDate": "Recon date",
+      "transferExecutionDate": "Transfer execution date",
+      "transferType": "Transfer type",
+      "executionResult": "Execution result",
+      "totalCount": "Total count",
+      "totalAmount": "Total amount"
+    },
+    "table": {
+      "bankStatus": "Bank status",
+      "companyName": "Company name",
+      "bankAccount": "Bank account",
+      "withDrawlAccount": "Withdrawal account number",
+      "withDrawlRemark": "Note on withdrawal account",
+      "beneficiaryBank": "Beneficiary bank",
+      "branch": "Branch",
+      "beneficiaryAccount": "Beneficiary account number",
+      "beneficiaryName": "Beneficiary account holder name",
+      "beneficiaryRemark": "Beneficiary account remark",
+      "transactionAmount": "Transaction amount",
+      "transactionFee": "Transaction fee",
+      "transactionId": "Transaction ID",
+      "transactionNumber": "Transaction number",
+      "traceId": "Trace ID",
+      "groupId": "Group ID",
+      "groupTransId": "Group trans ID",
+      "remark": "Transaction remark",
+      "transactionDateTime": "Transaction date time",
+      "bankResult": "Bank result"
+    },
+    "status": {
+      "pending": "Pending",
+      "success": "Success",
+      "timeout": "Timeout",
+      "failed": "Failed",
+      "noProcess": "No processing",
+      "pendingNextDay": "After the COT"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+pipeline {
+  agent {
+    label 'BUILT-IN'
+  }
+  environment {
+    DEPLOYMENT_NAME = 'infocms-ocms'
+    DOCKER_IMAGE = "registry-devops.infocms.com.vn/opencms/uat/admin-web:latest"
+    DOCKER_FILE = './k8s/Dockerfile_uat'
+    GIT_REPO = 'gitlab-devops.infocms.com.vn/manifest-k8s/opencms.git'
+    CREDENTIALS_ID = 'phongdth-gitlabdevops'
+    GIT_BRANCH = 'uat'
+    DEST_DIR = 'opencms'
+    DOCKER_IMAGE_CD = "registry-devops.infocms.com.vn/opencms/uat/admin-web"
+  }
+  stages {
+    stage('Login-CMC') {
+      steps {
+        script {
+          // Login to Docker Hub using Jenkins global credentials
+          withCredentials([usernamePassword(
+            credentialsId: 'repo-cmc-cloud-ocms', // Use the Global credentials ID
+            usernameVariable: 'DOCKERHUB_USERNAME',
+            passwordVariable: 'DOCKERHUB_PASSWORD'
+          )]) {
+            sh "docker login https://registry-devops.infocms.com.vn -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+          }
+        }
+      }
+    }
+    stage('Build') {
+      steps {
+        script {
+          // Login to Docker Hub using Jenkins global credentials
+          withCredentials([usernamePassword(
+            credentialsId: 'phongdth-gitlabdevops', // Use the Global credentials ID
+            usernameVariable: 'GIT_USER',
+            passwordVariable: 'GIT_TOKEN'
+          )]) {
+        echo 'Building..'
+                            sh """
+                        if [ -d '${DEST_DIR}' ]; then
+                            rm -rf ${DEST_DIR}
+                        fi
+                        """
+        sh "pwd"
+        sh "ls -al"
+        sh "git clone -b ${GIT_BRANCH} https://${GIT_USER}:${GIT_TOKEN}@${GIT_REPO}"
+        sh "ls -al"
+        sh 'date +"%d-%m-%Y--%H-%M-%S" > ${WORKSPACE}/${DEST_DIR}/tagnumber.txt'
+        def tagNumber = readFile('/var/jenkins_home/workspace/OPEN_CMS/OpenCms-UAT/01-CMS-Admin-Frontend/opencms/tagnumber.txt').trim()
+        echo "Tag Number: ${tagNumber}"
+        sh "sed -i \"s/admin-web:.*/admin-web:${tagNumber}/\" ${WORKSPACE}/${DEST_DIR}/Infocms-admin-web/deployment.yaml"
+
+        sh "docker build --cache-from {DOCKER_IMAGE} -t ${DOCKER_IMAGE} --security-opt=seccomp=unconfined -f ${DOCKER_FILE} ."
+        sh "docker tag $DOCKER_IMAGE $DOCKER_IMAGE_CD:${tagNumber}"
+        sh "docker push $DOCKER_IMAGE_CD:${tagNumber}"
+        echo 'Build Done..'
+          }
+        }
+      }
+    }
+
+stage('Git') {
+    steps {
+        script {
+            dir('/var/jenkins_home/workspace/OPEN_CMS/OpenCms-UAT/01-CMS-Admin-Frontend/opencms/') {
+                withCredentials([usernamePassword(
+                    credentialsId: 'phongdth-gitlabdevops', // Sử dụng credentials ID trong Jenkins (Global credentials)
+                    usernameVariable: 'GIT_USER',
+                    passwordVariable: 'GIT_TOKEN'
+                )]) {
+
+                    sh "git status"
+
+
+                    sh "git config --global user.email 'phongdht@infoplusvn.com'"
+
+
+                    sh "git status"
+
+
+                    sh "git add ."
+
+                    sh "git status"
+
+                    def tagNumber = readFile('/var/jenkins_home/workspace/OPEN_CMS/OpenCms-UAT/01-CMS-Admin-Frontend/opencms/tagnumber.txt').trim()
+
+
+                    sh "git commit -m 'add ${tagNumber}' || echo 'No changes to commit'"
+
+
+                    sh "git push https://${GIT_USER}:${GIT_TOKEN}@${GIT_REPO} ${GIT_BRANCH}"
+
+
+                    echo 'Build Done..'
+                }
+            }
+        }
+    }
+}
+    stage('Deploy') {
+      steps {
+        echo 'Deploying....'
+        echo 'Use ArgoCD to deploy'
+      }
+    }
+  }
+    post {
+        always {
+            script {
+                // Get the current status of the build process
+                def status = currentBuild.currentResult
+
+                // Check if the status is FAILURE or ABORTED
+                if (status == 'FAILURE' || status == 'ABORTED') {
+                    def buildStatus = "Build Status: [${status}]"
+
+                    mail(
+                            from: 'infocms_develop@infoplusvn.com',
+                            to: 'phongdht@infoplusvn.com,phongpv@infoplusvn.com,yenpq@infoplusvn.com', // Correctly formatted recipient list
+                            subject: "${buildStatus} Jenkins CI: ${env.JOB_NAME}",
+                            body: """
+                                        <b>InfoCMS - Jenkins</b><br>
+                                        Project: ${env.JOB_NAME}<br>
+                                        Build Number: ${env.BUILD_NUMBER}<br>
+                                        Build URL: ${env.BUILD_URL}<br>
+                                        ${buildStatus}
+                                    """,
+                            charset: 'UTF-8',
+                            mimeType: 'text/html'
+                    )
+                }
+            }
+        }
+    }
+}
+
+

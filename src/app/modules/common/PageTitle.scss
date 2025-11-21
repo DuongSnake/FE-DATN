@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+.top-page {
+  .title {
+    color: $primary-color;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  //background-color: $white;
+  //margin-top: 10px;
+  padding: 19px 0;
+  //border-bottom: 0.5px solid;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-color: $primary-color;
+}

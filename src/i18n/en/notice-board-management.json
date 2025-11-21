@@ -1,0 +1,43 @@
+{
+  "notice-board-management": {
+    "title": "Notice Board Management",
+    "description": "",
+    "search-form": {
+      "type": "Type",
+      "valid": "Valid",
+      "title": "Title",
+      "registor": "Registor",
+      "importance": "Importance",
+      "content": "Content",
+      "value-valid": "Valid",
+      "value-invalid": "Invalid"
+    },
+    "table": {
+      "valid-date-from": "Valid date from",
+      "valid-date-to": "Valid date to",
+      "registrated-date-time": "Registrated date time"
+    },
+    "form": {
+      "registrator": "Registrator",
+      "importance": "Importance"
+    },
+    "notification": {
+      "deleteUnSelected": "Please select a notice",
+      "confirmDelete": "Are you sure you want to delete?",
+      "addSuccess": "Save successfully",
+      "updateSuccess": "Save successfully",
+      "deleteSuccess": "Delete successfully"
+    },
+    "selected-value": {
+      "typeList": {
+        "common": "Customer",
+        "bank": "Internal"
+      },
+      "imList": {
+        "low": "Normal",
+        "medium": "Important",
+        "hight": "Urgent"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "validation-message": {
+    "not-a-excel": " không phải là file Excel",
+    "not-an-email": "Không đúng định dạng email",
+    "hasnt-group-list": "Bạn chưa có nhóm người nộp tiền",
+    "required-field": "Thông tin này là bắt buộc nhập",
+    "exists-transfer": "Không thể xóa người nộp tiền do tồn tại giao dịch",
+    "not-a-phone": "Không đúng định dạng số điện thoại",
+    "not-a-username": "Không đúng định dạng user id",
+    "only-number": "Chỉ chấp nhận chữ số.",
+    "only-standard": "Chỉ sử dụng chữ cái và số (a-z A-Z 0-9).",
+    "passwordFormat": "Mật khẩu phải dài ít nhất 8 ký tự và bao gồm số, chữ hoa, chữ thường và các ký tự đặc biệt khác",
+    "maxValue": "Giá trị giới hạn là 5000",
+    "max-size": "Dung lượng ảnh phải nhỏ hơn {{size}}MB!"
+  },
+  "message": {
+    "delete-permanent-warning": "Bạn có muốn xóa đối tượng đã chọn ra khỏi hệ thống?",
+    "reset-password": "Bạn có chắc chắn thiết lập lại mật khẩu cho user này?",
+    "menu-not-found": "Không tìm thấy menu này",
+    "not-allow-to-access-menu": "Không có quyền truy cập menu này",
+    "extendToken": "Thời gian đăng nhập đã hết. Bạn muốn gia hạn thời gian không?"
+  }
+}

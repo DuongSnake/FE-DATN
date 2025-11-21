@@ -1,0 +1,54 @@
+{
+  "settings": {
+    "services": {
+      "payerNumber": {
+        "menu": "Thiết lập mã E-Collection",
+        "heading": "Thiết lập mã E-Collection",
+        "description": "Thiết lập định dạng mã E-Collection",
+        "headingBlock": "Lựa chọn định dạng mã E-Collection",
+        "auto": "Dùng số điện thoại",
+        "manual": "Ngẫu nhiên",
+        "descriptionAuto": "Mã E-Collection sẽ được hệ thống tạo theo số điện thoại của người nộp tiền đã đăng ký.",
+        "descriptionManual": "Mã E-Collection được hệ thống tạo ngẫu nhiên."
+      },
+      "group": {
+        "menu": "Quản lý nhóm người nộp tiền",
+        "heading": "Quản lý nhóm người nộp tiền",
+        "description": "Tạo mới và quản lý nhóm người nộp tiền",
+        "table": {
+          "groupCode": "Mã nhóm",
+          "groupName": "Tên nhóm",
+          "total": "Tổng người nộp tiền",
+          "remark": "Ghi chú",
+          "service": "Dịch vụ",
+          "benerficiaryNumber": "Tài khoản"
+        },
+        "headingDetail": "Chi tiết người nộp tiền",
+        "descriptionDetail": "Chi tiết thông tin người nộp tiền",
+        "headingAdd": "Thêm nhóm người nộp tiền",
+        "descriptionAdd": "Thêm nhóm mới người nộp tiền",
+        "placeholder": {
+          "groupCode": "Nhập vào mã nhóm người nộp tiền",
+          "groupName": "Nhập vào tên nhóm người nộp tiền",
+          "remark": "Nhập vào ghi chú"
+        },
+        "validate": {
+          "grpCp": "Mã nhóm là bắt buộc",
+          "groupName": "Tên nhóm là bắt buộc",
+          "service": "Dịch vụ là bắt buộc",
+          "benerficiaryNumber": "Tài khoản là bắt buộc"
+        }
+      },
+      "eCollectionCode": {
+        "menu": "E-Collection code setting",
+        "heading": "E-Collection code format setting",
+        "description": "Setting generating method of e-collection code",
+        "headingContent": "Select auto-generating format",
+        "phone": "Phone number based",
+        "descriptionPhone": "E-Collection code will be generated automatically based on registered payer's phone number",
+        "random": "Random",
+        "descriptionRandom": "E-Collection code will be generated randomly by system"
+      }
+    }
+  }
+}

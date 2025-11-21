@@ -1,0 +1,64 @@
+{
+  "userManagement": {
+    "heading": "Quản lý người dùng",
+    "description": "Quản lý người dùng",
+    "button": "Tìm kiếm",
+    "search": {
+      "userID": "ID người dùng",
+      "userName": "Tên người dùng",
+      "department": "Phòng ban",
+      "userGroup": "Nhóm người dùng",
+      "userStatus": "Trạng thái"
+    },
+    "table": {
+      "department": "Phòng ban",
+      "userID": "ID người dùng",
+      "userName": "Tên người dùng",
+      "phoneNumber": "Số điện thoại",
+      "userGroup": "Nhóm người dùng",
+      "userStatus": "Trạng thái",
+      "lastLogin": "Lần đăng nhập cuối cùng",
+      "register": "Người tạo",
+      "registerDate": "Ngày tạo",
+      "staffCode": "Mã nhân viên"
+    },
+    "userRegis": "Đăng ký người dùng",
+    "userEdit": "Sửa người dùng",
+    "userId": "ID người dùng",
+    "userName": "Tên người dùng",
+    "department": "Phòng ban",
+    "userGroup": "Nhóm người dùng",
+    "userMobile": "Số điện thoại",
+    "userEmail": "E-mail",
+    "registrator": "Người tạo",
+    "registrationDate": "Ngày tạo",
+    "registrationTime": "Giờ tạo",
+    "note": "Ghi chú",
+    "cantDelete": "Bạn không thể xóa người dùng này do không đúng quyền hạn.",
+    "cantEdit": "Bạn không thể sửa thông tin người dùng này do không đúng quyền hạn."
+  },
+  "departmentManagement": {
+    "heading": "Quản lý phòng ban",
+    "description": "Quản lý phòng ban",
+    "button": "Tìm kiếm",
+    "search": {
+      "departmentCode": "Mã phòng ban",
+      "departmentName": "Tên phòng ban"
+    },
+    "table": {
+      "departmentCode": "Mã phòng ban",
+      "departmentName": "Tên phòng ban",
+      "totalMember": "Tổng số người dùng",
+      "registrator": "Người tạo",
+      "registerDate": "Ngày tạo",
+      "updateDate": "Ngày sửa"
+    },
+    "register": {
+      "title": "Đăng ký phòng ban",
+      "editTitle": "Sửa phòng ban",
+      "registrationDate": "Ngày đăng ký",
+      "registrationTime": "Thời gian đăng ký"
+    },
+    "groupCdExits": "Mã phòng ban đã được sử dụng"
+  }
+}

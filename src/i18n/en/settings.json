@@ -1,0 +1,54 @@
+{
+  "settings": {
+    "services": {
+      "payerNumber": {
+        "menu": "E-Collection code setting",
+        "heading": "E-Collection code format setting",
+        "description": "Setting generating method of e-collection code",
+        "headingBlock": "Select auto-generating format",
+        "auto": "Phone number based",
+        "manual": "Random",
+        "descriptionAuto": "E-Collection code will be generated automatically based on registered payer's phone number.",
+        "descriptionManual": "E-Collection code will be generated randomly by system."
+      },
+      "group": {
+        "menu": "Payer group management",
+        "heading": "Payer group management",
+        "description": "Managing member group information",
+        "table": {
+          "groupCode": "Payer group code",
+          "groupName": "Payer group name",
+          "total": "Total number of payers",
+          "remark": "Remark",
+          "service": "Service",
+          "benerficiaryNumber": "Benerficiary account number"
+        },
+        "headingDetail": "Detail payer group",
+        "descriptionDetail": "Detail payer group information",
+        "headingAdd": "Add payer group",
+        "descriptionAdd": "Add payer group information",
+        "placeholder": {
+          "groupCode": "Input payer code",
+          "groupName": "Input payer name",
+          "remark": "Input remark"
+        },
+        "validate": {
+          "grpCp": "Payer group code is required",
+          "groupName": "Payer group name is required",
+          "service": "Service is required",
+          "benerficiaryNumber": "Benerficiary account number is required"
+        }
+      },
+      "eCollectionCode": {
+        "menu": "E-Collection code setting",
+        "heading": "E-Collection code format setting",
+        "description": "Setting generating method of e-collection code",
+        "headingContent": "Select auto-generating format",
+        "phone": "Phone number based",
+        "descriptionPhone": "E-Collection code will be generated automatically based on registered payer's phone number",
+        "random": "Random",
+        "descriptionRandom": "E-Collection code will be generated randomly by system"
+      }
+    }
+  }
+}

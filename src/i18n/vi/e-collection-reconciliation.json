@@ -1,0 +1,42 @@
+{
+  "e-collection-reconciliation": {
+    "title": "Tra soát giao dịch E-collection",
+    "description": "",
+    "search-form": {
+      "recon-date": "Ngày đối soát",
+      "collection-date": "Ngày giao dịch",
+      "collection-time": "Giờ giao dịch",
+      "e-collection-code": "Mã E-Collection",
+      "account-holder-name": "Tên tài khoản",
+      "transaction-number": "Số giao dịch",
+      "trace-id": "Trace ID",
+      "transaction-amount": "Số tiền giao dịch",
+      "payer-group": "Nhóm người nộp tiền",
+      "bank-result": "Kết quả"
+    },
+    "pobup": {
+      "detail-pob": {
+        "title": "Tra soát giao dịch E-COLLECTION",
+        "description": "So sánh dữ liệu giữa cms và ngân hàng",
+        "cms": "CMS",
+        "bank": "Ngân hàng",
+        "different": "Khác nhau"
+      }
+    },
+    "table": {
+      "business-no": "Số đăng ký kinh doanh",
+      "req-status": "Trạng thái",
+      "drafter": "Người soạn",
+      "department": "Phòng ban",
+      "service-count": "Số lượng dịch vụ"
+    },
+    "selected-value": {
+      "bnk-result": {
+        "verified": "Đã xác nhận",
+        "not-verified": "Chưa xác nhận",
+        "not-exist-b": "Không tồn tại (Dữ liệu ngân hàng)",
+        "not-exist-cms": "Không tồn tại (Dữ liệu CMS)"
+      }
+    }
+  }
+}

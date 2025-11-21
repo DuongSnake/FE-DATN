@@ -1,0 +1,83 @@
+{
+  "request-approval": {
+    "title": "Requested approval",
+    "description": "",
+    "search-form": {
+      "request-date": "Request date",
+      "status": "Status",
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "table": {
+      "approval-type": "Approval objects",
+      "request-date-time": "Request date time",
+      "approver": "Approver",
+      "dept": "Department",
+      "approved-time": "Approved time"
+    },
+    "form": {
+      "approval-info-title": "Approval information",
+      "target-transaction": "Approval type",
+      "requester": "Requester",
+      "approver": "Approver",
+      "approval-status": "Approval status",
+      "request-date-time": "Request date time",
+      "approved-date-time": "Approved date time",
+      "requester-note": "Requester note",
+      "approver-note": "Approver note",
+      "customer-number": "Service ID",
+      "contract-no": "Contract number",
+      "contract-date": "Contract date",
+      "customer-name": "Customer name",
+      "master-id": "IB Master ID",
+      "business-no": "Business no",
+      "service-count": "Count of service account",
+      "customer-information-title": "Customer information",
+      "banking-info": "Internet Banking Information",
+      "contract-info": "Contract information",
+      "service-information": "Service information",
+      "registration-date": "Registration date",
+      "issued-date": "Issued date",
+      "issued-place": "Issued place",
+      "note": "Remarks",
+      "eccPrefix": "ECC Prefix"
+    },
+    "form-table": {
+      "acc-no": "Service account",
+      "ec-use": "E-collection use",
+      "ec-fee": "E-collection fee",
+      "ac-use": "Auto-collection use",
+      "ac-fee": "Auto-collection fee",
+      "transfer-use": "Transfer use"
+    },
+    "selected-value": {
+      "request-status": {
+        "draf": "Draft",
+        "pending": "Pending",
+        "recalled": "Recalled",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "completed": "Completed"
+      },
+      "request-type": {
+        "contract": "Contract",
+        "title": "Approve type",
+        "add-contract": "New Contract",
+        "edit-contract": "Edit Contract",
+        "ter-contract": "Termination Contract",
+        "new-ecollection": "New E-Collection Batch"
+      }
+    },
+    "notification": {
+      "reject-title": "Reject request",
+      "approve-title": "Approve request",
+      "note": "Note",
+      "unSelected": "Please select a request",
+      "checkPendingRequired": "Please select pending request only.",
+      "confirmReject": "Do you you want to reject request?",
+      "rejectSuccess": "Reject request successfully",
+      "confirmApprove": "Do you you want to Approve request?",
+      "approveSuccess": "Approve request successfully"
+    }
+  }
+}

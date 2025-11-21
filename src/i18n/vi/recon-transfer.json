@@ -1,0 +1,45 @@
+{
+  "transferRecon": {
+    "title": "",
+    "description": "",
+    "general": {
+      "serial": "STT",
+      "reconDate": "Ngày đối soát",
+      "transferExecutionDate": "Thời gian chuyển",
+      "transferType": "Loại chuyển khoản",
+      "executionResult": "Kết quả chuyển khoản",
+      "totalCount": "Tổng số giao dịch",
+      "totalAmount": "Tổng số tiền"
+    },
+    "table": {
+      "bankStatus": "Trạng thái đối soát",
+      "companyName": "Tên công ty",
+      "bankAccount": "Số tài khoản",
+      "withDrawlAccount": "Số tài khoản thanh toán",
+      "withDrawlRemark": "Ghi chú tài khoản",
+      "beneficiaryBank": "Tên ngân hàng",
+      "branch": "Phòng ban",
+      "beneficiaryAccount": "Số tài khoản thụ hưởng",
+      "beneficiaryName": "Tên tài khoản thụ hưởng",
+      "beneficiaryRemark": "Ghi chú tài khoản thụ hưởng",
+      "transactionAmount": "Số tiền giao dịch",
+      "transactionId": "Mã giao dịch",
+      "transactionFee": "Phí giao dịch",
+      "transactionNumber": "Số giao dịch",
+      "traceId": "Trace ID",
+      "groupId": "Mã nhóm giao dịch",
+      "groupTransId": "Group trans ID",
+      "remark": "Nội dung chuyển khoản",
+      "transactionDateTime": "Thời gian giao dịch",
+      "bankResult": "Kết quả chuyển khoản"
+    },
+    "status": {
+      "pending": "Chờ xử lý",
+      "success": "Thành công",
+      "timeout": "Hết phiên",
+      "failed": "Thất bại",
+      "noProcess": "Không xử lý",
+      "pendingNextDay": "Quá giờ COT"
+    }
+  }
+}

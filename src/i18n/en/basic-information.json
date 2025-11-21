@@ -1,0 +1,64 @@
+{
+  "userManagement": {
+    "heading": "User management",
+    "description": "User management",
+    "button": "Search",
+    "search": {
+      "userID": "User ID",
+      "userName": "User name",
+      "department": "Department",
+      "userGroup": "User group",
+      "userStatus": "User status"
+    },
+    "table": {
+      "department": "Department",
+      "userID": "User ID",
+      "userName": "User name",
+      "phoneNumber": "Mobile number",
+      "userGroup": "User group",
+      "userStatus": "User status",
+      "lastLogin": "Latest login date time",
+      "register": "Register",
+      "registerDate": "Registered date time",
+      "staffCode": "Staff code"
+    },
+    "userRegis": "User Registration",
+    "userEdit": "User Edit",
+    "userId": "User ID",
+    "userName": "User name",
+    "department": "Department",
+    "userGroup": "User group",
+    "userMobile": "User mobile",
+    "userEmail": "User email",
+    "registrator": "Registrator",
+    "registrationDate": "Registration date",
+    "registrationTime": "Registration time",
+    "note": "Note",
+    "cantDelete": "Can not delete user has same role with yours!",
+    "cantEdit": "Can not edit user has same role with yours!"
+  },
+  "departmentManagement": {
+    "heading": "Department management",
+    "description": "Department management",
+    "button": "Search",
+    "search": {
+      "departmentCode": "Department code",
+      "departmentName": "Department name"
+    },
+    "table": {
+      "departmentCode": "Department code",
+      "departmentName": "Department name",
+      "totalMember": "Total members",
+      "registrator": "Registrator",
+      "registerDate": "Registrated date",
+      "updateDate": "Updated date time"
+    },
+    "register": {
+      "title": "Department register",
+      "editTitle": "Department edit",
+      "registrationDate": "Registration date",
+      "registrationTime": "Registration time"
+    },
+    "groupCdExits": "Duplicate group code"
+  }
+}

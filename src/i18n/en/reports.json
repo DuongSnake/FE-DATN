@@ -1,0 +1,32 @@
+{
+  "reports": {
+    "title": "Daily report",
+    "titleMonth": "Monthly report",
+    "search": {
+      "collectionDate": "Collection date",
+      "department": "Department",
+      "customerNumber": "Customer name",
+      "status": "Status",
+      "success": "Success",
+      "fail": "Fail"
+    },
+    "table": {
+      "no": "No",
+      "month": "Month",
+      "date": "Date",
+      "department": "Department name",
+      "customerNo": "Service ID",
+      "customerName": "Customer name",
+      "eCollectionTransaction": "E-Collection transaction",
+      "eCollectionTransactionAmount": "E-Collection transaction amount",
+      "autoCollectionTransaction": "Auto Collection transaction",
+      "autoCollectionTransactionAmount": "Auto Collection transaction amount",
+      "totalTransaction": "Total transaction",
+      "totalAmount": "Total amount",
+      "successCnt": "Success transaction",
+      "successAmt": "Success amount",
+      "failCnt": "Fail transaction",
+      "failAmt": "Fail amount"
+    }
+  }
+}

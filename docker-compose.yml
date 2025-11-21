@@ -1,0 +1,17 @@
+version: '2'
+services:
+  infocmsadminfeservicevtbdev:
+    container_name: info_cmsadminfontend_bidv_dev
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    extra_hosts:
+      - 'localhost: 10.100.116.36'
+    ports:
+      - '28083:80'
+    networks:
+      - my_network
+    restart: always
+networks:
+  my_network:
+    driver: bridge

@@ -1,0 +1,250 @@
+.login-wrapper {
+  min-height: 100vh;
+
+  .container {
+    text-align: center;
+
+    .login-header {
+      padding-top: 80px;
+
+      .login-logo {
+
+        img {
+          min-width: 320px;
+          margin-bottom: 12px;
+        }
+      }
+    }
+
+    .login-body {
+      padding: 40px 30px;
+      background: #ffffff;
+      box-shadow: 0 12px 40px rgba(6, 21, 47, 0.1);
+      border-radius: 12px;
+      max-width: 440px;
+      margin: 0 auto 40px;
+
+
+      .info {
+          padding: 10px 15px;
+          width: fit-content;
+          margin: 0 auto;
+          border-radius: 4px;
+          text-transform: uppercase;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 22px;
+          line-height: 12px;
+          color: #1e4485;
+        }
+
+      .text {
+        text-align: left;
+        font-weight: 500;
+        font-style: italic;
+      }
+
+      img {
+        max-width: 222px;
+        text-align: center;
+        margin: 0 auto 40px;
+      }
+
+      .btn-login {
+        width: 100%;
+        background: #1e4485;
+        border-radius: 6px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #ffffff;
+        height: 40px;
+        border: none;
+
+        &:hover {
+          background: #b8060c;
+        }
+      }
+
+      .btn-send {
+        width: 40%;
+        background: #1e4485;
+        border-radius: 6px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #ffffff;
+        height: 40px;
+        border: none;
+
+        &:hover {
+          background: #b8060c;
+        }
+      }
+
+      .ant-form-item {
+        margin-bottom: 24px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &.login-password {
+          margin-bottom: 9px;
+        }
+
+        .ant-form-item-label {
+          padding: 0;
+          margin: 0;
+
+          label {
+            margin-bottom: 9px;
+
+            p {
+              padding: 0;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 16px;
+              color: #041722;
+              margin: 0;
+            }
+          }
+        }
+
+        .ant-form-item-control {
+          .ant-form-item-control-input {
+            input {
+              padding: 9px 16px;
+              background: #ffffff;
+              border: 1px solid #dedede;
+              border-radius: 4px;
+
+              &::placeholder {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 14px;
+                color: #737373;
+              }
+            }
+
+            .ant-input-password {
+              padding: 0 16px 0 0;
+
+              input {
+                border: none;
+              }
+            }
+          }
+        }
+
+        .ant-form-item-explain-error {
+          text-align: left;
+          margin-top: 5px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+
+      .form-action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        .form-forget {
+          .forget-password {
+            margin-bottom: 0;
+
+            a {
+              span {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 16px;
+                color: #444444;
+              }
+
+              &:hover {
+                span {
+                  color: #1e4485;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .login-language {
+      margin-bottom: 80px;
+
+      .ant-select {
+        min-width: 132px;
+
+        .ant-select-selector {
+          background: rgba(0, 0, 0, 0.8);
+          border: 1px solid #6c6c6c;
+          border-radius: 6px;
+
+          .ant-select-selection-item {
+            display: flex;
+            align-items: center;
+
+            img {
+              margin-right: 8.4px;
+            }
+
+            .language-name {
+              color: #ffffff;
+            }
+          }
+        }
+
+        .ant-select-arrow {
+          svg {
+            fill: #ffffff;
+          }
+        }
+      }
+    }
+
+    .login-footer {
+      padding-bottom: 16px;
+
+      img {
+        max-width: 55px;
+        margin-right: 10px;
+      }
+
+      span {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: #ffffff;
+        white-space: pre;
+      }
+    }
+  }
+}
+
+.ant-select-item-option-content {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 8.4px;
+  }
+}
+
+.form-reset__actions {
+  margin-top: 25px;
+}

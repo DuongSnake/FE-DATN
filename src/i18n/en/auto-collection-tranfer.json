@@ -1,0 +1,61 @@
+{
+  "auto-collection-tranfer": {
+    "title": "Auto-collection & Transfer",
+    "description": "",
+    "search-form": {
+      "tranfer-date": "Transfer execution date",
+      "approval-status": "Approval status",
+      "approval-type": "Transfer type",
+      "execution-result": "Execution result"
+    },
+    "table": {
+      "service-type": "Service type",
+      "beneficiary-bank": "Beneficiary bank",
+      "branch": "Branch",
+      "beneficiary-account-number": "Beneficiary account number",
+      "beneficiary-account-holder-name": "Beneficiary account holder name",
+      "transaction-amount": "Transaction amount",
+      "transfer-date": "Transfer date",
+      "transaction-fee": "Transaction fee",
+      "beneficiary-account-remarks": "Beneficiary account remarks",
+      "withdrawal-account-remarks": "Withdrawal account remarks",
+      "transaction-number": "Transaction number",
+      "trace-id": "Trace ID",
+      "group-id": "Group ID",
+      "bank-result": "Bank result"
+    },
+    "pobup": {
+      "detail-pob": {
+        "title": "RECONCILIATION",
+        "description": "Compare data between bank and cms",
+        "cms": "CMS",
+        "bank": "Bank",
+        "different": "Different"
+      }
+    },
+    "selected-value": {
+      "approve-status": {
+        "approval-in-progress": "Approval in progress",
+        "approval-completed": "Approval completed (waiting to transfer)",
+        "transfer-in-progress": "Transfer in progress",
+        "transfer-completed": "Transfer completed"
+      },
+      "tranfer-type": {
+        "auto-collection": "Auto Collection",
+        "single-transfer": "Single Transfer",
+        "multi-transfer": "Multi Transfer",
+        "pay-roll-transfer": "Pay-roll Transfer"
+      },
+      "bnk-result": {
+        "verified": "Verified",
+        "not-verified": "Not verify",
+        "not-exist-b": "Not existed (From bank)",
+        "not-exist-cms": "Not existed (From CMS)"
+      },
+      "service-types": {
+        "a": "Auto Collection",
+        "t": "Transfer"
+      }
+    }
+  }
+}

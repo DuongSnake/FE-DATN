@@ -1,0 +1,28 @@
+{
+  "menu": {
+    "bankCodeManagement": "Bank Code Management",
+    "actionManagement": "Action Management",
+    "callbackUrl": "Callback Url Management",
+    "clientGateway": "Client Gateway Management",
+    "clientGatewayMap": "Client Gateway map Management",
+    "authentication": "Authentication Management",
+    "cmsAppUrl": "CMS App Url Management",
+    "cmsAppUrlMap": "Open Mapping API<Open CMS- CMS> Management",
+    "gateWayApi": "Gateway API Management",
+    "mgmtClientCallBack": "Client CallBack Management",
+    "menu": "Menu Management",
+    "menuGroup": "Menu Group Management",
+    "role": "Role Management",
+    "roleACtion": "Role Action Management",
+    "accessLog": "Access Log Management",
+    "eventKafkaLog": "Event Kafka Log Management",
+    "systemManagement": "System Log Management",
+    "user": "User Management",
+    "resource": "Resource Management",
+    "roleMap": "Map policy and resource",
+    "codeFromBank": "Code Magement",
+    "userMap": "User Map Role Magement",
+    "policyMapRole": "Policy Map Role Magement",
+    "scrapingLog": "Scraping Dozn Log Management"
+  }
+}

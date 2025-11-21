@@ -1,0 +1,60 @@
+{
+  "login": {
+    "text": {
+      "heading": "Support to collect money for businesses",
+      "content": "Reduce manual operations - Convenient - Fast - Accurate"
+    },
+    "validate": {
+      "username": {
+        "required": "Username cannot be left blank"
+      },
+      "password": {
+        "required": "Password cannot be left blank"
+      }
+    },
+    "form": {
+      "username": {
+        "label": "User ID",
+        "placeholder": "Enter user ID"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter password",
+        "forgot": "Forgot password?"
+      },
+      "button": "Login",
+      "remember": "Remember"
+    },
+    "messages": {
+      "error": {
+        "authentication": "<strong>Login failed!</strong> Please check your login information and try again."
+      }
+    }
+  },
+  "i18n": {
+    "vn": "Tiếng Việt",
+    "en": "English",
+    "ko": "한국어"
+  },
+  "forgotPassword": {
+    "email": "Email",
+    "validate": {
+      "email": "Please input your email",
+      "sameOldPassword": "New password not same as old password"
+    },
+    "title": "We will send to you a link to reset your password via your email if it match with our data.",
+    "form": {
+      "confirmPassword": {
+        "required": "Confirm password is required",
+        "match": "Confirm password not match",
+        "label": "Confirm password",
+        "placeholder": "Input confirm password"
+      }
+    }
+  },
+  "changePass": {
+    "currentPass": "Current password",
+    "newPass": "New password",
+    "reTypeNew": "Re-type new password"
+  }
+}

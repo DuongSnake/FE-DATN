@@ -1,0 +1,65 @@
+{
+  "bankCodeManagement": {
+    "heading": "Quản lý mã code",
+    "description": "Quản lý mã code",
+    "button": "Tìm kiếm",
+    "search": {
+      "bankCode": "Mã ngân hàng",
+      "bankName": "Tên ngân hàng",
+      "openApiBankCd": "Mã ngân hàng openApi",
+      "status": "Trạng thái"
+    },
+    "table": {
+      "bankCode": "Mã ngân hàng",
+      "bankName": "Tên ngân hàng",
+      "openApiBankCd": "Mã ngân hàng openApi",
+      "baseUrl": "Đường dẫn cơ sở",
+      "regTm": "Ngày tạo",
+      "status": "Trạng thái"
+    },
+    "bankCode": "Mã ngân hàng",
+    "bankName": "Tên ngân hàng",
+    "openApiBankCd": "Mã ngân hàng openApi",
+    "baseUrl": "Đường dẫn cơ sở",
+    "regTm": "Ngày tạo",
+    "status": "Trạng thái",
+    "active": "Đang hoạt động",
+    "in-active": "Ngưng hoạt động",
+    "success": "Thành công",
+    "fail": "Thất bại",
+    "register": {
+      "title": "Đăng ký  mã ngân hàng",
+      "editTitle": "Sửa  mã ngân hàng",
+      "registrationDate": "Ngày tạo",
+      "registrationTime": "Giờ tạo"
+    }
+  },
+  "actionManagement": {
+    "heading": "Quản lý hành động",
+    "description": "Quản lý hành động",
+    "button": "Tìm kiếm",
+    "search": {
+      "actionCode": "Mã hành động",
+      "actionName": "Tên hành động",
+      "status": "Trạng thái"
+    },
+    "table": {
+      "actionCode": "Mã hành động",
+      "actionName": "Tên hành động",
+      "regTm": "Ngày tạo",
+      "status": "Trạng thái"
+    },
+    "actionCode": "Mã hành động",
+    "actionName": "Tên hành động",
+    "regTm": "Ngày tạo",
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "in-active": "Không hoạt động",
+    "register": {
+      "title": "Đăng ký hành động",
+      "editTitle": "Sửa hành động",
+      "registrationDate": "Ngày tạo",
+      "registrationTime": "Giờ tạo"
+    }
+  }
+}

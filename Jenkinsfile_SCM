@@ -1,0 +1,31 @@
+properties([disableConcurrentBuilds()])
+pipeline {
+  agent { label 'NodeHost' }
+  tools {
+    nodejs 'InfoCMS_NodeJS'
+  }
+  options {
+    skipDefaultCheckout(true)
+  }
+  stages {
+    stage('Clone SCM for sonar') {
+      steps {
+        // Clean before build
+        cleanWs()
+        git branch: 'develop',
+          credentialsId: 'e6ea4802-c969-46a7-88c0-32e874ce07ca',
+           url: 'http://10.100.116.37:8080/gitlab-instance-e16058bd/admin-web.git'
+      }
+    }
+    stage('SonarQube Analysis') {
+      steps {
+        script {
+          def scannerHome = tool 'SonarScanner';
+          withSonarQubeEnv() {
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=gitlab-instance-e16058bd_admin-web_AYd5P3r5DsEWo1VUdRzl -Dsonar.login=admin -Dsonar.password=infoplus@@"
+          }
+        }
+      }
+    }
+  }
+}

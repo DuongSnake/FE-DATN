@@ -1,0 +1,60 @@
+{
+  "login": {
+    "text": {
+      "heading": "Hỗ trợ thu tiền cho các Doanh nghiệp",
+      "content": "Giảm thao tác thủ công - Thuận tiện - Nhanh gọn - Chính xác"
+    },
+    "validate": {
+      "username": {
+        "required": "Tên đăng nhập không được bỏ trống"
+      },
+      "password": {
+        "required": "Mật khẩu không được bỏ trống"
+      }
+    },
+    "form": {
+      "username": {
+        "label": "Tài khoản",
+        "placeholder": "Nhập vào tài khoản"
+      },
+      "password": {
+        "label": "Mật khẩu",
+        "placeholder": "Nhập vào mật khẩu",
+        "forgot": "Quên mật khẩu?"
+      },
+      "button": "Đăng nhập",
+      "remember": "Ghi nhớ"
+    },
+    "messages": {
+      "error": {
+        "authentication": "<strong>Đăng nhập thất bại!</strong> Bạn vui lòng kiểm tra thông tin đăng nhập và thử lại."
+      }
+    }
+  },
+  "i18n": {
+    "vn": "Tiếng Việt",
+    "en": "English",
+    "ko": "한국어"
+  },
+  "forgotPassword": {
+    "email": "Email",
+    "validate": {
+      "email": "Vui lòng nhập thông tin email",
+      "sameOldPassword": "Mật khẩu mới không được trùng với mật khẩu cũ"
+    },
+    "title": "Chúng tôi sẽ gửi cho bạn đường dẫn để thiết lập lại mật khẩu thông qua e-mail trong trường hợp e-mail này tồn tại trên hệ thống.",
+    "form": {
+      "confirmPassword": {
+        "required": "Xác nhận mật khẩu là bắt buộc",
+        "match": "Xác nhận lại mật khẩu không trùng khớp",
+        "label": "Xác nhận lại mật khẩu",
+        "placeholder": "Nhập lại mật khẩu"
+      }
+    }
+  },
+  "changePass": {
+    "currentPass": "Mật khẩu hiện tại",
+    "newPass": "Mật khẩu mới",
+    "reTypeNew": "Nhập lại mật khẩu mới"
+  }
+}

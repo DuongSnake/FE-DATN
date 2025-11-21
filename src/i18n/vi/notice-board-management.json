@@ -1,0 +1,43 @@
+{
+  "notice-board-management": {
+    "title": "Quản lý bảng thông báo",
+    "description": "",
+    "search-form": {
+      "type": "Loại thông báo",
+      "valid": "Valid",
+      "title": "Tiêu đề",
+      "registor": "Người tạo",
+      "importance": "Mức độ quan trọng",
+      "content": "Nội dung",
+      "value-valid": "Còn hiệu lực",
+      "value-invalid": "Hết hiệu lực"
+    },
+    "table": {
+      "valid-date-from": "Hiệu lực từ",
+      "valid-date-to": "Hiệu lực đến",
+      "registrated-date-time": "Thời gian đăng ký"
+    },
+    "form": {
+      "registrator": "Người đăng ký",
+      "importance": "Mức độ quan trọng"
+    },
+    "notification": {
+      "deleteUnSelected": "Vui lòng chọn Thông báo để xóa",
+      "confirmDelete": "Bạn có chắc chắn muốn xóa?",
+      "addSuccess": "Lưu thông báo thành công",
+      "updateSuccess": "Lưu thông báo thành công",
+      "deleteSuccess": "Xóa thông báo thành công"
+    },
+    "selected-value": {
+      "typeList": {
+        "common": "Toàn hệ thống",
+        "bank": "Ngân hàng"
+      },
+      "imList": {
+        "low": "Thông thường",
+        "medium": "Quan trọng",
+        "hight": "Khẩn cấp"
+      }
+    }
+  }
+}

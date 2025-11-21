@@ -1,0 +1,38 @@
+{
+  "customer-management": {
+    "title": "Customer Management",
+    "description": "",
+    "merchant-id": "Merchant ID",
+    "service-id": "Service ID",
+    "provide-id": "Provide ID",
+    "customer-number": "Service ID",
+    "customer-name": "Company name",
+    "business-no": "Business number",
+    "registration-date": "Registration date",
+    "issued-date": "Issued date",
+    "issued-place": "Issued place",
+    "master-id": "Master ID",
+    "remarks": "Remarks",
+    "userNm": "Display name",
+    "management-branch-name": "Management branch name",
+    "email": "Email",
+    "phone": "Phone number",
+    "ib-master-id": "IB Master ID",
+    "list-master": "List Master ID",
+    "edit": "Edit",
+    "company-name": "Company name",
+    "company-logo": "Company logo",
+    "status-service": "Service status",
+    "active": "Active",
+    "terminate": "Terminate",
+    "no-service": "No service",
+    "input-customer-no": "Please input service ID",
+    "company-address": "Company address",
+    "registration": {
+      "button": "Registration",
+      "for-collection": "For collection",
+      "for-payment": "For payment",
+      "warning-description": "You must to fill in at least 1 field: Service ID or Merchant ID"
+    }
+  }
+}

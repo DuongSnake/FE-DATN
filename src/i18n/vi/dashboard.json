@@ -1,0 +1,35 @@
+{
+  "dashboard-notification": {
+    "heading": "Thông báo",
+    "types": {
+      "all": "Tất cả",
+      "bank": "Ngân hàng"
+    },
+    "popup": {
+      "title": "Thông tin thông báo"
+    }
+  },
+  "dashboard-my-request": {
+    "title": "Đề nghị phê duyệt của tôi",
+    "gotomenu": "Đi đến trang",
+    "request-date": "Ngày đề nghị",
+    "table": {
+      "request": "Đề nghị",
+      "request-time": "Thời gian đề nghị",
+      "request-status": "Trạng thái"
+    }
+  },
+  "dashboard-approved-req": {
+    "title": "Xử lý phê duyệt",
+    "gotomenu": "Đi đến trang",
+    "request-date": "Ngày đề nghị",
+    "table": {
+      "request": "Đề nghị",
+      "request-time": "Thời gian đề nghị",
+      "request-status": "Trạng thái"
+    }
+  },
+  "dashboard-calendar": {
+    "title": "Lịch"
+  }
+}
