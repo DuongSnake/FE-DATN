@@ -8,6 +8,7 @@ import {
   API_ADD_USER_ACCOUNT,
   API_DELETE_USER_ACCOUNT,
   API_GET_LIST_USER_ACCOUNT,
+  API_SELECT_ALL_ROLE,
   API_SELECT_ALL_USER_ACCOUNT,
   API_SELECT_USER_ACCOUNT,
   API_UPDATE_USER_ACCOUNT
@@ -62,8 +63,12 @@ export const selectAllBankCode = createAsyncThunk('api/v1/user/selectAll', async
   const response = await apiClient.post<IResponseCommon>(API_SELECT_ALL_USER_ACCOUNT, param);
   return response.data;
 });
+export const selectAllRole = createAsyncThunk('api/v1/user/selectAllRole', async () => {
+  const response = await apiClient.post<IResponseCommon>(API_SELECT_ALL_ROLE);
+  return response.data;
+});
 
-export const BankCodeManagementSlice = createSlice({
+export const UserManagementSlice = createSlice({
   name: 'api/v1/bankCode',
   initialState: initialState as BankCodeListState,
   reducers: {
@@ -157,6 +162,6 @@ export const BankCodeManagementSlice = createSlice({
   }
 });
 
-export const { resetDept, changeData } = BankCodeManagementSlice.actions;
+export const { resetDept, changeData } = UserManagementSlice.actions;
 
-export default BankCodeManagementSlice.reducer;
+export default UserManagementSlice.reducer;

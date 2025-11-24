@@ -3,7 +3,7 @@ import layout from '../layout/layout.reducer';
 import authentication from './authentication';
 import tabAction from '../layout/tab/tabs.reducer';
 import payerGroupSelect from '../../modules/common/selector/PayerGroupSelect.reducer';
-import bankCodeManagementReducer from '@/app/modules/bank-code-management/BankCodeManagement.reducer';
+import bankCodeManagementReducer from '@/app/modules/admin/user-management/UserManagement.reducer';
 import actionManagementReducer from '@/app/modules/action-management/ActionManagement.reducer';
 import callbackUrlManagementReducer from '@/app/modules/client-config/callback-url-management/CallbackUrlManagement.reducer';
 import clientGatewayManagementReducer from '@/app/modules/client-config/client-gateway-management/ClientGatewayManagement.reducer';
@@ -18,12 +18,6 @@ import roleActionManagementReducer from '@/app/modules/cms-config/role-action/Ro
 import accessManagementReducer from '@/app/modules/cms-config/access-log-management/AccessManagement.reducer';
 import eventKafkaManagementReducer from '@/app/modules/cms-config/event-kafka-log-management/EventKafkaManagement.reducer';
 import codeFromBankManagementReducer from '@/app/modules/code-from-bank-management/CodeFromBankManagement.reducer';
-import roleKeycloakManagementReducer from '@/app/modules/keycloak-authorization/role/RoleManagement.reducer';
-import userKeycloakManagementReducer from '@/app/modules/keycloak-authorization/user/UserManagement.reducer';
-import userMapRoleKeycloakManagementReducer from '@/app/modules/keycloak-authorization/user-map-role/UserMapRoleManagement.reducer';
-import resourceKeycloakManagementReducer from '@/app/modules/keycloak-authorization/resource/ResourceManagement.reducer';
-import policyKeycloakManagementReducer from '@/app/modules/keycloak-authorization/policy/PolicyManagement.reducer';
-import permissionKeycloakManagementReducer from '@/app/modules/keycloak-authorization/permission/PermissionManagement.reducer';
 import scrapingManagementReducer from '@/app/modules/cms-config/scraping-log-management/ScrapingLogManagement.reducer';
 
 const rootReducer = {
@@ -47,12 +41,6 @@ const rootReducer = {
   accessManagementReducer,
   eventKafkaManagementReducer,
   codeFromBankManagementReducer,
-  roleKeycloakManagementReducer,
-  userKeycloakManagementReducer,
-  userMapRoleKeycloakManagementReducer,
-  resourceKeycloakManagementReducer,
-  policyKeycloakManagementReducer,
-  permissionKeycloakManagementReducer,
   scrapingManagementReducer
 };
 

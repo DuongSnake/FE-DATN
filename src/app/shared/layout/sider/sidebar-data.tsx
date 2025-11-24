@@ -16,8 +16,8 @@ export const sidebarMenu = [
     icon: <MenuReportIcon />,
     items: [
       {
-        id: ID_MENU_TAB.Z001,
-        title: 'menu.bankCodeManagement',
+        id: ID_MENU_TAB.Z0016,
+        title: 'menu.user',
       },
       {
         id: ID_MENU_TAB.Z002,

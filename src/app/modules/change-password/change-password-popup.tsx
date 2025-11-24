@@ -4,7 +4,6 @@ import { CloseOutlined, SaveOutlined } from '@ant-design/icons';
 import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '../../config/redux/store';
 import { changeLoginPassword, logout, resetNeedChangePass } from '../../shared/reducers/authentication';
-import { resetPassword } from '../../modules/keycloak-authorization/user/UserManagement.reducer';
 import { createCommonIParamsListDuong } from '../../shared/model/common.model';
 import { checkSuccessDispatch } from '../../shared/util/global-function';
 import { openNotification } from '../..//shared/util/entity-utils';
@@ -28,20 +27,20 @@ const ChangePasswordPopup = ({ auto }: Props) => {
 
   const _onSubmit = () => {
     if (error == null) {
-      dispatch(
-        resetPassword(
-          createCommonIParamsListDuong({
-            userName: userNm,
-            newPassword,
-          })
-        )
-      ).then(res => {
-        if (checkSuccessDispatch(res)) {
-          openNotification(NOTIFICATION.SUCCESS, 'changePassword.success', '', 'Change password success');
-          _onClose();
-          dispatch(logout());
-        }
-      });
+      // dispatch(
+      //   resetPassword(
+      //     createCommonIParamsListDuong({
+      //       userName: userNm,
+      //       newPassword,
+      //     })
+      //   )
+      // ).then(res => {
+      //   if (checkSuccessDispatch(res)) {
+      //     openNotification(NOTIFICATION.SUCCESS, 'changePassword.success', '', 'Change password success');
+      //     _onClose();
+      //     dispatch(logout());
+      //   }
+      // });
     }
   };
   const _onClose = () => {

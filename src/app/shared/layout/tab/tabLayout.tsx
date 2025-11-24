@@ -10,7 +10,7 @@ import Dashboard from '../../../modules/dashboard/dashboard';
 import { changeTabActive, removeTab, reset, sortAgainTab, updateTabIsEditing } from './tabs.reducer';
 import TabItem from './tab-item';
 
-const BankCodeManagement = importedComponent(() => import('@/app/modules/bank-code-management/BankCodeManagement'), {
+const UserManagement = importedComponent(() => import('@/app/modules/admin/user-management/UserManagement'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
@@ -48,14 +48,6 @@ const MenuGroupManagement = importedComponent(() => import('@/app/modules/cms-co
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const RoleManagement = importedComponent(() => import('@/app/modules/keycloak-authorization/role/RoleManagement'), {
-  LoadingComponent: () => <Skeleton loading={true} active />,
-});
-
-const PermissionManagement = importedComponent(() => import('@/app/modules/keycloak-authorization/permission/PermissionManagement'), {
-  LoadingComponent: () => <Skeleton loading={true} active />,
-});
-
 const AccessManagement = importedComponent(() => import('@/app/modules/cms-config/access-log-management/AccessLogManagement'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
@@ -73,22 +65,6 @@ const CodeFromBank = importedComponent(() => import('@/app/modules/code-from-ban
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const UserManagement = importedComponent(() => import('@/app/modules/keycloak-authorization/user/UserManagement'), {
-  LoadingComponent: () => <Skeleton loading={true} active />,
-});
-
-const UserMapanagement = importedComponent(() => import('@/app/modules/keycloak-authorization/user-map-role/UserMapRoleManagement'), {
-  LoadingComponent: () => <Skeleton loading={true} active />,
-});
-
-const ResourceManagement = importedComponent(() => import('@/app/modules/keycloak-authorization/resource/ResourceManagement'), {
-  LoadingComponent: () => <Skeleton loading={true} active />,
-});
-
-const PolicyManagement = importedComponent(() => import('@/app/modules/keycloak-authorization/policy/PolicyManagement'), {
-  LoadingComponent: () => <Skeleton loading={true} active />,
-});
-
 const ScrapingLogManagement = importedComponent(() => import('@/app/modules/cms-config/scraping-log-management/ScrapingLogManagement'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
@@ -100,7 +76,7 @@ const listComponent = [
   },
   {
     id: ID_MENU_TAB.Z001,
-    panelComponent: <BankCodeManagement />,
+    panelComponent: <UserManagement />,
   },
   {
     id: ID_MENU_TAB.Z002,
@@ -131,14 +107,6 @@ const listComponent = [
     panelComponent: <MenuGroupManagement />,
   },
   {
-    id: ID_MENU_TAB.Z009,
-    panelComponent: <RoleManagement />,
-  },
-  {
-    id: ID_MENU_TAB.Z0018,
-    panelComponent: <PermissionManagement />,
-  },
-  {
     id: ID_MENU_TAB.Z0011,
     panelComponent: <GatewayApiManagement />,
   },
@@ -161,18 +129,6 @@ const listComponent = [
   {
     id: ID_MENU_TAB.Z0016,
     panelComponent: <UserManagement />,
-  },
-  {
-    id: ID_MENU_TAB.Z0017,
-    panelComponent: <ResourceManagement />,
-  },
-  {
-    id: ID_MENU_TAB.Z0019,
-    panelComponent: <UserMapanagement />,
-  },
-  {
-    id: ID_MENU_TAB.Z0020,
-    panelComponent: <PolicyManagement />,
   },
   {
     id: ID_MENU_TAB.Z0021,

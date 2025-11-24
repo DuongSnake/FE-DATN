@@ -18,7 +18,7 @@ import EditCmsAppUrl from './edit/EditCmsAppUrlManagement.tsx';
 import { checkSuccessDispatch } from '@/app/shared/util/global-function';
 import { BANK_CODE_STATUS } from '@/app/config/constant/enum';
 import { APP_DATE_FORMAT } from '@/app/config/constant/constants.ts';
-import { getListBankCode } from '../../bank-code-management/BankCodeManagement.reducer.ts';
+import { getListBankCode } from '../../admin/user-management/UserManagement.reducer.ts';
 import moment from 'moment';
 const { RangePicker } = DatePicker;
 const CmsAppUrl = () => {

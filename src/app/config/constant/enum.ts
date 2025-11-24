@@ -49,12 +49,12 @@ export const BANK_CODE_STATUS = [
 export const RESPONSE_CODE_STATUS = [
   {
     val: '1',
-    text: 'bankCodeManagement.success',
+    text: 'Đang hoạt động',
     textColor: '#28C76F',
   },
   {
-    val: '0',
-    text: 'bankCodeManagement.fail',
+    val: '99',
+    text: 'Tạm dừng',
     textColor: '#EA5455',
   },
 ];
@@ -966,3 +966,17 @@ export const STATUS_USE = [
     text: 'cms-common.notUse',
   },
 ];
+
+export const STATUS_ACTIVE = [
+  {
+    val: '1',
+    text: 'bankCodeManagement.active',
+    textColor: '#757575',
+  },
+  {
+    val: '99',
+    text: 'bankCodeManagement.in-active',
+    textColor: '#3babec',
+  },
+];
+

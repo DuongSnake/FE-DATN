@@ -6,17 +6,15 @@ import i18next from '@/i18n/i18n';
 
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
-import { createCommonIParams, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-import { deleteBankCode, getListBankCode, resetDept } from './BankCodeManagement.reducer';
+import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
+import { deleteBankCode, getListBankCode, resetDept, selectAllRole } from './UserManagement.reducer';
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
-
-import { cellIndexRender } from '../common/JSXFunction';
-import '../../shared/layout/content-task.scss';
-import EditBankCode from './edit/EditBankCodeManagement';
-import { checkSuccessDispatch } from '@/app/shared/util/global-function';
-import { RESPONSE_CODE_STATUS } from '@/app/config/constant/enum';
+import '../../../shared/layout/content-task.scss';
+import EditBankCode from './edit/EditUserManagement';
+import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
+import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
 
 const Demo1 = () => {
   const dispatch = useAppDispatch();
@@ -29,9 +27,11 @@ const Demo1 = () => {
   const [[phone], setPhone] = useState('');
   const [[identityCard], setIdentityCard] = useState('');
   const [fullName, setFullName] = useState('');
+  const [listRole, setListRole] = useState([]);
   const [status, setStatus] = useState('');
   const [listSelected, setListSelected] = useState([]);
   const [showForm, setShowForm] = useState('add');
+  const [listActionType, setListActionType] = useState(BANK_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
 
   const dataGridRef = useRef(null);
@@ -85,7 +85,6 @@ const Demo1 = () => {
     const listData = [];
     await dataGridRef.current.instance.getSelectedRowsData().then(list => {
       list.map(data => {
-    console.log("value object:"+JSON.stringify(list));
         listData.push(data);
       });
     });
@@ -110,7 +109,7 @@ const Demo1 = () => {
   const _onDelete = async () => {
     const listDelete = [];
 
-    listSelected.forEach(item => listDelete.push(item.bankCd));
+    listSelected.forEach(item => listDelete.push(item.id));
 
     dispatch(deleteBankCode(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
       if (checkSuccessDispatch(res)) {
@@ -147,9 +146,19 @@ const Demo1 = () => {
       _onSearchBankCode();
     }
   };
+  
+    const getAllRole = () => {
+      dispatch(selectAllRole()).then(res => {
+        if (checkSuccessDispatch(res)) {
+          const objectResponse: IParamCommonDuong = res.payload;
+          setListRole(objectResponse.data.data);
+        }
+      });
+    };
 
   useEffect(() => {
     _onSearchBankCode();
+    getAllRole();
     return () => {
       dispatch(resetDept());
     };
@@ -336,15 +345,6 @@ const Demo1 = () => {
                   }}
                 />
                 <Column
-                  dataField="majorName"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.openApiBankCd')}
-                  dataType="string"
-                  width={150}
-                />
-                <Column
                   dataField="createAt"
                   alignment="center"
                   allowFiltering={false}
@@ -362,6 +362,7 @@ const Demo1 = () => {
           isEdit={showForm === 'edit'}
           onSearch={_onSearchBankCode}
           selected={listSelected[0]}
+          listAllRole = {listRole}
           onChangeFormAdd={_onChangeFormAdd}
         />
       </div>

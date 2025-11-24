@@ -37,6 +37,7 @@ export const API_UPDATE_USER_ACCOUNT = PRE_FIX_API + 'user/update';
 export const API_DELETE_USER_ACCOUNT = PRE_FIX_API + 'user/delete';
 export const API_SELECT_USER_ACCOUNT = PRE_FIX_API + 'user/select';
 export const API_SELECT_ALL_USER_ACCOUNT = PRE_FIX_API + 'user/selectAll';
+export const API_SELECT_ALL_ROLE = PRE_FIX_API + 'user/selectAllRole';
 
 /**
  * Action management

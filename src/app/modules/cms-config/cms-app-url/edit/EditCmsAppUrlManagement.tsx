@@ -11,7 +11,7 @@ import { createCommonIParamsDuong, IParamCommonDuong } from '@/app/shared/model/
 import { checkSuccessDispatch } from '@/app/shared/util/global-function';
 import { insertCmsAppUrl, updateCmsAppUrl } from '../CmsAppUrlManagement.reducer';
 import { getListGatewayApi } from '../../gateway-api/GatewayApiManagement.reducer';
-import { getListBankCode } from '../../../bank-code-management/BankCodeManagement.reducer';
+import { getListBankCode } from '../../../admin/user-management/UserManagement.reducer';
 import '../edit/TableCmsAppUrl.scss'
 const EditCmsAppUrlManagement = ({ isEdit, onSearch, selected, onChangeFormAdd }) => {
   const dispatch = useAppDispatch();

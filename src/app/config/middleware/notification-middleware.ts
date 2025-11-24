@@ -17,7 +17,7 @@ export const notificationErrorAction = (responseCode, msg) => {
 
 export const notificationSuccessAction = (responseCode, msg) => {
   let type = 'success';
-  console.log("open notification action:");
+
   if (responseCode === '200000') {
     type = 'updated';
   } else if (responseCode === '300000') {
