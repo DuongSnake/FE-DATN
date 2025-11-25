@@ -162,7 +162,7 @@ const EditUserManagement = ({ isEdit, onSearch, selected, listAllRole, onChangeF
   return (
     <div className="insert edit-department">
       <div className="heading">
-        <h3>{i18next.t(`bankCodeManagement.register.${isEdit ? 'editTitle' : 'title'}`)}</h3>
+        <h3>{isEdit ? 'Chỉnh sửa người dùng' : 'Người dùng'}</h3>
       </div>
 
       <div className="content">
@@ -180,8 +180,7 @@ const EditUserManagement = ({ isEdit, onSearch, selected, listAllRole, onChangeF
 
           <Row align="middle" style={{ marginBottom: 12 }}>
             <Col xs={10} md={3}>
-              <span className="cms-search-label">id</span>
-              <span className="cms-required-field"> *</span>
+              <span className="cms-search-label">Mã người dùng</span>
             </Col>
 
             <Col xs={14} md={5}>

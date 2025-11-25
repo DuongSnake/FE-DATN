@@ -29,17 +29,6 @@ export const API_GET_LIST_GROUP = PRE_FIX_API + 'A002/selectList';
 export const API_GENERAL_INFORMATION_SELECT = PRE_FIX_API + 'C001/selectList';
 
 /**
- * Bank code Management
- */
-export const API_GET_LIST_USER_ACCOUNT = PRE_FIX_API + 'user/selectList';
-export const API_ADD_USER_ACCOUNT = PRE_FIX_API + 'user/insert';
-export const API_UPDATE_USER_ACCOUNT = PRE_FIX_API + 'user/update';
-export const API_DELETE_USER_ACCOUNT = PRE_FIX_API + 'user/delete';
-export const API_SELECT_USER_ACCOUNT = PRE_FIX_API + 'user/select';
-export const API_SELECT_ALL_USER_ACCOUNT = PRE_FIX_API + 'user/selectAll';
-export const API_SELECT_ALL_ROLE = PRE_FIX_API + 'user/selectAllRole';
-
-/**
  * Action management
  */
 export const API_ACTION_SELECTELIST = PRE_FIX_API + 'action/selectList';
@@ -220,3 +209,32 @@ export const CMS_KEYCLOAK_PERMISSION_UPDATE = PRE_FIX_API + 'keycloack/permissio
 export const CMS_KEYCLOAK_PERMISSION_DELETE = PRE_FIX_API + 'keycloack/permission/delete';
 export const CMS_KEYCLOAK_PERMISSION_FIND_RESOURCE = PRE_FIX_API + 'keycloack/permission/findResourceByPermissionId';
 export const CMS_KEYCLOAK_PERMISSION_FIND_POLICY = PRE_FIX_API + 'keycloack/permission/findAssociatedPolicies';
+
+/**
+ * User Management
+ */
+export const API_GET_LIST_USER_ACCOUNT = PRE_FIX_API + 'user/selectList';
+export const API_ADD_USER_ACCOUNT = PRE_FIX_API + 'user/insert';
+export const API_UPDATE_USER_ACCOUNT = PRE_FIX_API + 'user/update';
+export const API_DELETE_USER_ACCOUNT = PRE_FIX_API + 'user/delete';
+export const API_SELECT_USER_ACCOUNT = PRE_FIX_API + 'user/select';
+export const API_SELECT_ALL_USER_ACCOUNT = PRE_FIX_API + 'user/selectAll';
+export const API_SELECT_ALL_ROLE = PRE_FIX_API + 'user/selectAllRole';
+
+/**
+ * Major Management
+ */
+export const API_GET_LIST_MAJOR = PRE_FIX_API + 'major/selectList';
+export const API_ADD_MAJOR = PRE_FIX_API + 'major/insert';
+export const API_UPDATE_MAJOR = PRE_FIX_API + 'major/update';
+export const API_DELETE_MAJOR = PRE_FIX_API + 'major/delete';
+export const API_SELECT_MAJOR = PRE_FIX_API + 'major/select';
+
+/**
+ * Admission Period Management
+ */
+export const API_GET_LIST_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/selectList';
+export const API_ADD_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/insert';
+export const API_UPDATE_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/update';
+export const API_DELETE_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/delete';
+export const API_SELECT_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/select';

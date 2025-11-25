@@ -69,6 +69,14 @@ const ScrapingLogManagement = importedComponent(() => import('@/app/modules/cms-
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
+const MajorManagement = importedComponent(() => import('@/app/modules/admin/major/MajorManagement'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
+const AdmissionPeriodManagement = importedComponent(() => import('@/app/modules/admin/admission-period/AdmissionPeriodManagement'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
 const listComponent = [
   {
     id: 'dashboard',
@@ -133,6 +141,14 @@ const listComponent = [
   {
     id: ID_MENU_TAB.Z0021,
     panelComponent: <ScrapingLogManagement />,
+  },
+  {
+    id: ID_MENU_TAB.Z0022,
+    panelComponent: <MajorManagement />,
+  },
+  {
+    id: ID_MENU_TAB.Z0023,
+    panelComponent: <AdmissionPeriodManagement />,
   },
 ];
 

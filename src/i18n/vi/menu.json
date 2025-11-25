@@ -50,6 +50,7 @@
     "roleMap": "Liên kết giữa chính sách và đường dẫn",
     "userMap": "Liên kết giữa người dùng và quyền",
     "policyMapRole": "Quản lý chính sách quyền",
-    "scrapingLog": "Quản lý nhật ký Dozn"
+    "scrapingLog": "Quản lý nhật ký Dozn",
+    "majorManagement": "Quản lý chuyên ngành"
   }
 }

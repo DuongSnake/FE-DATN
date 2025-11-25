@@ -20,12 +20,12 @@ export const sidebarMenu = [
         title: 'menu.user',
       },
       {
-        id: ID_MENU_TAB.Z002,
-        title: 'menu.actionManagement',
+        id: ID_MENU_TAB.Z0022,
+        title: 'menu.majorManagement',
       },
       {
-        id: ID_MENU_TAB.Z0015,
-        title: 'menu.codeFromBank',
+        id: ID_MENU_TAB.Z0023,
+        title: 'Kỳ học',
       }
     ],
   },

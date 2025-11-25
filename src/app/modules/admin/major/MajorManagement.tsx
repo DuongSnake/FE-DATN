@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined, QuestionCircleOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Col, Input, Modal, Row, Spin, Select } from 'antd';
+import { Button, Col, Input, Modal, Row, Spin, Select, DatePicker } from 'antd';
 import { Column, DataGrid, Pager, Paging, Selection } from 'devextreme-react/data-grid';
 import React, { useEffect, useRef, useState } from 'react';
 import i18next from '@/i18n/i18n';
@@ -7,31 +7,31 @@ import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-import { deleteBankCode, getListBankCode, resetDept, selectAllRole } from './UserManagement.reducer';
+import { deleteMajor, getListMajor, resetDept} from './MajorManagement.reducer';
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../shared/layout/content-task.scss';
-import EditBankCode from './edit/EditUserManagement';
+import EditMajor from './edit/EditMajorManagement';
+import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
+import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
 import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
-
-const User = () => {
+const { RangePicker } = DatePicker;
+const Major = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(state => state.bankCodeManagementReducer.loading);
-  const loadingDelete = useAppSelector(state => state.bankCodeManagementReducer.loadingDelete);
-  const listBankCode = useAppSelector(state => state.bankCodeManagementReducer.listBankCode);
-  const [id, setId] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [[phone], setPhone] = useState('');
-  const [[identityCard], setIdentityCard] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [listRole, setListRole] = useState([]);
+  const loading = useAppSelector(state => state.majorManagementReducer.loading);
+  const loadingDelete = useAppSelector(state => state.majorManagementReducer.loadingDelete);
+  const listMajor = useAppSelector(state => state.majorManagementReducer.listMajor);
+  const [majorId, setMajorId] = useState('');
+  const [majorname, setMajorname] = useState('');
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [createUser, setCreateUser] = useState('');
   const [status, setStatus] = useState('');
   const [listSelected, setListSelected] = useState([]);
   const [showForm, setShowForm] = useState('add');
-  const [listActionType, setListActionType] = useState(BANK_CODE_STATUS);
+  const [listMajorType, setListMajorType] = useState(RESPONSE_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
 
   const dataGridRef = useRef(null);
@@ -42,9 +42,9 @@ const User = () => {
     onScrollToBottom();
   };
 
-  const _handleChangeId = e => {
+  const _handleChangeMajorId = e => {
     const { value } = e.target;
-    setId(value);
+    setMajorId(value);
   };
 
   const _onChangeShowForm = value => {
@@ -57,29 +57,21 @@ const User = () => {
     setShowForm('add');
   };
 
-  const _handleChangeUserName = e => {
+  const _handleChangeMajorName = e => {
     const { value } = e.target;
-    setUsername(value);
-  };
-
-  const _handleChangeEmail = e => {
-    const { value } = e.target;
-    setEmail(value);
-  };
-
-  const _handleChangePhone = e => {
-    const { value } = e.target;
-    setEmail(value);
-  };
-
-  const _handleChangeIdentityCard = e => {
-    const { value } = e.target;
-    setIdentityCard(value);
+    setMajorname(value);
   };
 
   const _handleChangeStatus = e => {
     setStatus(e);
   };
+
+  const onChangeDate = value => {
+    const majorFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
+    const majorToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
+    setFromDate(majorFromDt);
+    setToDate(majorToDt);
+    };
 
   const onSelectionChanged = async () => {
     const listData = [];
@@ -91,7 +83,7 @@ const User = () => {
     setListSelected(listData);
   };
 
-  const _onDeleteBankCode = () => {
+  const _onDeleteMajor = () => {
     Modal.confirm({
       title: i18next.t('confirm.title'),
       icon: <QuestionCircleOutlined />,
@@ -101,7 +93,7 @@ const User = () => {
       cancelText: i18next.t('button.close'),
       async onOk() {
         await _onDelete();
-        await _onSearchBankCode();
+        await _onSearchMajor();
       },
     });
   };
@@ -109,12 +101,12 @@ const User = () => {
   const _onDelete = async () => {
     const listDelete = [];
 
-    listSelected.forEach(item => listDelete.push(item.id));
+    listSelected.forEach(item => listDelete.push(item.majorId));
 
-    dispatch(deleteBankCode(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
+    dispatch(deleteMajor(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
       if (checkSuccessDispatch(res)) {
         onScrollToTop();
-        _onSearchBankCode();
+        _onSearchMajor();
       }
     });
   };
@@ -123,15 +115,15 @@ const User = () => {
     dataGridRef.current.instance.selectRowsByIndexes(e.rowIndex);
   };
 
-  const _onSearchBankCode = async () => {
+  const _onSearchMajor = async () => {
     setListSelected([]);
     dataGridRef.current.instance.clearSelection();
     let pageRequestDto = {
       pageNum: 0,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ id, username, email, phone, identityCard, fullName, status, pageRequestDto });
-    dispatch(getListBankCode(payload));
+    const payload = createCommonIParamsDuong({ majorId, majorname, fromDate, toDate, status, createUser, pageRequestDto });
+    dispatch(getListMajor(payload));
   };
 
   const _onDoubleClickRow = e => {
@@ -143,22 +135,12 @@ const User = () => {
 
   const _onEnter = e => {
     if (e.key === 'Enter') {
-      _onSearchBankCode();
+      _onSearchMajor();
     }
   };
-  
-    const getAllRole = () => {
-      dispatch(selectAllRole()).then(res => {
-        if (checkSuccessDispatch(res)) {
-          const objectResponse: IParamCommonDuong = res.payload;
-          setListRole(objectResponse.data.data);
-        }
-      });
-    };
 
   useEffect(() => {
-    _onSearchBankCode();
-    getAllRole();
+    _onSearchMajor();
     return () => {
       dispatch(resetDept());
     };
@@ -174,7 +156,7 @@ const User = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          {i18next.t('bankCodeManagement.heading')}
+          Chuyên ngành
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -183,59 +165,41 @@ const User = () => {
         <div className="page-search-template">
           <Row style={{ marginBottom: 18 }} align="middle">
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Mã người dùng</label>
+              <label className="cms-search-label label-padding-left">Mã chuyên ngành</label>
             </Col>
 
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={id}
-                onChange={_handleChangeId}
+                value={majorId}
+                onChange={_handleChangeMajorId}
                 maxLength={80}
                 onKeyPress={_onEnter}
-                placeholder={i18next.t('cms-common.please-input-infomation')}
+                placeholder="Nhập vào đi bạn"
               />
             </Col>
 
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Tên người dùng</label>
+              <label className="cms-search-label label-padding-left">Tên chuyên ngành</label>
             </Col>
 
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={username}
-                onChange={_handleChangeUserName}
+                value={majorname}
+                onChange={_handleChangeMajorName}
                 maxLength={60}
                 onKeyPress={_onEnter}
-                placeholder={i18next.t('cms-common.please-input-infomation')}
+                placeholder="Nhập vào đi bạn"
               />
             </Col>
-
-            <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Email</label>
-            </Col>
-
-            <Col xl={5} xxl={4}>
-              <Input
-                className="cms-form-control"
-                value={identityCard}
-                onChange={_handleChangeEmail}
-                maxLength={60}
-                onKeyPress={_onEnter}
-                placeholder={i18next.t('cms-common.please-input-infomation')}
-              />
-            </Col>
-          </Row>
-
-          <Row align="middle">
             <Col xl={3} xxl={3}>
               <label className="cms-search-label label-padding-left">Trạng thái</label>
             </Col>
             <Col xl={5} xxl={4}>
               <Select value={status} onChange={_handleChangeStatus} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
-                {listBankCodeType.map((obj, i) => {
+                {listMajorType.map((obj, i) => {
                   return (
                     <Select.Option key={i} value={obj.val}>
                       {i18next.t(obj.text)}
@@ -244,10 +208,19 @@ const User = () => {
                 })}
               </Select>
             </Col>
+          </Row>
+
+          <Row align="middle">
+            <Col xl={3} xxl={3}>
+                <label className="cms-search-label label-padding-left">Ngày đăng ký</label>
+            </Col>
+            <Col xl={5} xxl={4}>
+                    <RangePicker className="date" id="date" onChange={onChangeDate} />
+            </Col>
 
             <Col className="form-btn-search">
-              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchBankCode}>
-                {i18next.t('bankCodeManagement.button')}
+              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchMajor}>
+                Tìm kiếm
               </Button>
             </Col>
           </Row>
@@ -273,7 +246,7 @@ const User = () => {
               loading={loadingDelete}
               className="button-delete"
               icon={<DeleteOutlined />}
-              onClick={_onDeleteBankCode}
+              onClick={_onDeleteMajor}
             >
               {i18next.t('button.delete')}
             </Button>
@@ -283,9 +256,9 @@ const User = () => {
             <div className="table-data">
               <DataGrid
                 id="gridContainer"
-                dataSource={listBankCode}
+                dataSource={listMajor}
                 showBorders={true}
-                keyExpr="id"
+                keyExpr="majorId"
                 ref={dataGridRef}
                 allowColumnResizing={true}
                 columnResizingMode={'nextColumn'}
@@ -301,28 +274,20 @@ const User = () => {
                 <Paging defaultPageSize={10} enabled={true} />
                 <Pager visible={true} showNavigationButtons={true} />
                 <Column
-                  dataField="id"
+                  dataField="majorId"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Mã người dùng"
+                  caption="Mã chuyên ngành"
                   dataType="string"
                   width={150}
                 />
                 <Column
-                  dataField="username"
+                  dataField="majorName"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Tên đăng nhập"
-                  dataType="string"
-                />
-                <Column
-                  dataField="fullName"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Tên người dùng"
+                  caption="Tên chuyên ngành"
                   dataType="string"
                 />
                 <Column
@@ -349,7 +314,7 @@ const User = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.regTm')}
+                  caption="Ngày đăng ký"
                   dataType="string"
                   width={180}
                 />
@@ -358,15 +323,14 @@ const User = () => {
           </Spin>
         </div>
 
-        <EditBankCode
+        <EditMajor
           isEdit={showForm === 'edit'}
-          onSearch={_onSearchBankCode}
+          onSearch={_onSearchMajor}
           selected={listSelected[0]}
-          listAllRole = {listRole}
           onChangeFormAdd={_onChangeFormAdd}
         />
       </div>
     </div>
   );
 };
-export default User;
+export default Major;

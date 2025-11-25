@@ -20,6 +20,10 @@ import eventKafkaManagementReducer from '@/app/modules/cms-config/event-kafka-lo
 import codeFromBankManagementReducer from '@/app/modules/code-from-bank-management/CodeFromBankManagement.reducer';
 import scrapingManagementReducer from '@/app/modules/cms-config/scraping-log-management/ScrapingLogManagement.reducer';
 
+//Them moi
+import majorManagementReducer from '@/app/modules/admin/major/MajorManagement.reducer';
+import admissionPeriodManagementReducer from '@/app/modules/admin/admission-period/AdmissionPeriod.reducer';
+
 const rootReducer = {
   authentication,
   loadingBar,
@@ -42,6 +46,9 @@ const rootReducer = {
   eventKafkaManagementReducer,
   codeFromBankManagementReducer,
   scrapingManagementReducer
+
+  ,majorManagementReducer
+  ,admissionPeriodManagementReducer
 };
 
 export default rootReducer;
