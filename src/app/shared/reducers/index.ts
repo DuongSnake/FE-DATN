@@ -23,6 +23,8 @@ import scrapingManagementReducer from '@/app/modules/cms-config/scraping-log-man
 //Them moi
 import majorManagementReducer from '@/app/modules/admin/major/MajorManagement.reducer';
 import admissionPeriodManagementReducer from '@/app/modules/admin/admission-period/AdmissionPeriod.reducer';
+import periodAssignmentManagementReducer from '@/app/modules/admin/period-assignment/PeriodAssignment.reducer';
+
 
 const rootReducer = {
   authentication,
@@ -49,6 +51,7 @@ const rootReducer = {
 
   ,majorManagementReducer
   ,admissionPeriodManagementReducer
+  ,periodAssignmentManagementReducer
 };
 
 export default rootReducer;

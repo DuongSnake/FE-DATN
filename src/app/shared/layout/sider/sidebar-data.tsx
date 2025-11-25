@@ -12,7 +12,7 @@ import { ID_MENU_TAB } from '@/app/config/constant/enum';
 
 export const sidebarMenu = [
   {
-    title: 'menu.bankCodeManagement',
+    title: 'Quan ly chung',
     icon: <MenuReportIcon />,
     items: [
       {
@@ -30,12 +30,12 @@ export const sidebarMenu = [
     ],
   },
   {
-    title: 'menu.callbackUrl',
+    title: 'Quan ly thong tin do an',
     icon: <MenuSidebarBasicIcon />,
     items: [
       {
-        id: ID_MENU_TAB.Z004,
-        title: 'menu.clientGateway',
+        id: ID_MENU_TAB.Z0024,
+        title: 'Ky han lam do an',
       },
       {
         id: ID_MENU_TAB.Z005,

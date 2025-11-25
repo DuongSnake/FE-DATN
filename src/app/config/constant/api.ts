@@ -229,6 +229,7 @@ export const API_ADD_MAJOR = PRE_FIX_API + 'major/insert';
 export const API_UPDATE_MAJOR = PRE_FIX_API + 'major/update';
 export const API_DELETE_MAJOR = PRE_FIX_API + 'major/delete';
 export const API_SELECT_MAJOR = PRE_FIX_API + 'major/select';
+export const API_GET_ALL_SELECT_MAJOR_ACITVE = PRE_FIX_API + 'major/selectListAllActive';
 
 /**
  * Admission Period Management
@@ -238,3 +239,14 @@ export const API_ADD_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/insert';
 export const API_UPDATE_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/update';
 export const API_DELETE_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/delete';
 export const API_SELECT_ADMISSION_PERIOD = PRE_FIX_API + 'admissionPeriod/select';
+export const API_GET_ALL_SELECT_ADMISSION_PERIOD_ACITVE = PRE_FIX_API + 'admissionPeriod/selectListAllActive';
+
+/**
+ * Period Assignment Management
+ */
+export const API_GET_LIST_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/selectList';
+export const API_ADD_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/insert';
+export const API_UPDATE_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/update';
+export const API_DELETE_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/delete';
+export const API_SELECT_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/select';
+export const API_GET_ALL_PERIOD_ASSIGNMENT_ACITVE = PRE_FIX_API + 'periodAssignment/selectListAllActive';

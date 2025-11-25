@@ -9,7 +9,8 @@ import {
   API_DELETE_MAJOR,
   API_GET_LIST_MAJOR,
   API_SELECT_MAJOR,
-  API_UPDATE_MAJOR
+  API_UPDATE_MAJOR,
+  API_GET_ALL_SELECT_MAJOR_ACITVE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
 import { stringify } from 'querystring';
@@ -54,6 +55,12 @@ export const selectMajor = createAsyncThunk('api/v1/major/select', async (param:
 
 export const updateMajor = createAsyncThunk('api/v1/major/update', async (param: IParamCommon) => {
   const response = await apiClient.post<IResponseCommon>(API_UPDATE_MAJOR, param);
+
+  return response.data;
+});
+
+export const getAllMajorActive = createAsyncThunk('api/v1/major/selectListAllActive', async () => {
+  const response = await apiClient.post<IResponseCommon>(API_GET_ALL_SELECT_MAJOR_ACITVE, null);
 
   return response.data;
 });
@@ -144,6 +151,21 @@ export const MajorManagementSlice = createSlice({
       .addCase(updateMajor.pending, state => ({
         ...state,
         loadingUpdate: true
+      }))
+      .addCase(getAllMajorActive.fulfilled, (state, action) => {
+        return ({
+          ...state,
+          loading: false,
+          listMajor: (undefined === action.payload.data) ? null :  action.payload.data
+        })
+      })
+      .addCase(getAllMajorActive.rejected, state => ({
+        ...state,
+        loading: false
+      }))
+      .addCase(getAllMajorActive.pending, state => ({
+        ...state,
+        loading: true
       }));
   }
 });

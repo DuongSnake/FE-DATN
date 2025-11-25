@@ -9,7 +9,8 @@ import {
   API_DELETE_ADMISSION_PERIOD,
   API_GET_LIST_ADMISSION_PERIOD,
   API_SELECT_ADMISSION_PERIOD,
-  API_UPDATE_ADMISSION_PERIOD
+  API_UPDATE_ADMISSION_PERIOD,
+  API_GET_ALL_SELECT_ADMISSION_PERIOD_ACITVE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
 import { stringify } from 'querystring';
@@ -54,6 +55,12 @@ export const selectAdmissionPeriod = createAsyncThunk('api/v1/admissionPeriod/se
 
 export const updateAdmissionPeriod = createAsyncThunk('api/v1/admissionPeriod/update', async (param: IParamCommon) => {
   const response = await apiClient.post<IResponseCommon>(API_UPDATE_ADMISSION_PERIOD, param);
+
+  return response.data;
+});
+
+export const getAllAdmissionPeriodActive = createAsyncThunk('api/v1/admissionPeriod/selectListAllActive', async () => {
+  const response = await apiClient.post<IResponseCommon>(API_GET_ALL_SELECT_ADMISSION_PERIOD_ACITVE, null);
 
   return response.data;
 });
@@ -144,6 +151,23 @@ export const AdmissionPeriodManagementSlice = createSlice({
       .addCase(updateAdmissionPeriod.pending, state => ({
         ...state,
         loadingUpdate: true
+      }))
+      
+      
+      .addCase(getAllAdmissionPeriodActive.fulfilled, (state, action) => {
+        return ({
+          ...state,
+          loading: false,
+          listAdmissionPeriod: (undefined === action.payload.data) ? null :  action.payload.data
+        })
+      })
+      .addCase(getAllAdmissionPeriodActive.rejected, state => ({
+        ...state,
+        loading: false
+      }))
+      .addCase(getAllAdmissionPeriodActive.pending, state => ({
+        ...state,
+        loading: true
       }));
   }
 });

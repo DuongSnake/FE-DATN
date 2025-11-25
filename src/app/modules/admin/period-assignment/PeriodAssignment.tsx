@@ -3,36 +3,40 @@ import { Button, Col, Input, Modal, Row, Spin, Select, DatePicker } from 'antd';
 import { Column, DataGrid, Pager, Paging, Selection } from 'devextreme-react/data-grid';
 import React, { useEffect, useRef, useState } from 'react';
 import i18next from '@/i18n/i18n';
-
+import { getAllMajorActive} from '../major/MajorManagement.reducer';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-import { deleteAdmissionPeriod, getListAdmissionPeriod, resetDept} from './AdmissionPeriod.reducer';
-
+import { deletePeriodAssignment, getListPeriodAssignment, resetDept} from './PeriodAssignment.reducer';
+import { getAllAdmissionPeriodActive} from '../admission-period/AdmissionPeriod.reducer';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../shared/layout/content-task.scss';
-import EditAdmissionPeriod from './edit/EditAdmissionPeriod';
+import EditPeriodAssignment from './edit/EditPeriodAssignment';
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
 import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
 const { RangePicker } = DatePicker;
-const AdmissionPeriod = () => {
+const PeriodAssignment = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(state => state.admissionPeriodManagementReducer.loading);
-  const loadingDelete = useAppSelector(state => state.admissionPeriodManagementReducer.loadingDelete);
-  const listAdmissionPeriod = useAppSelector(state => state.admissionPeriodManagementReducer.listAdmissionPeriod);
-  const [admissionPeriodId, setAdmissionPeriodId] = useState('');
-  const [admissionPeriodName, setAdmissionPeriodname] = useState('');
+  const loading = useAppSelector(state => state.periodAssignmentManagementReducer.loading);
+  const loadingDelete = useAppSelector(state => state.periodAssignmentManagementReducer.loadingDelete);
+  const listPeriodAssignment = useAppSelector(state => state.periodAssignmentManagementReducer.listPeriodAssignment);
+  const [periodAssignmentId, setPeriodAssignmentId] = useState('');
+  const [periodAssignmentName, setPeriodAssignmentname] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [createUser, setCreateUser] = useState('');
   const [status, setStatus] = useState('');
+  const [admissionPeriodId, setAdmissionPeriodId] = useState('');
+  const [majorId, setMajorId] = useState('');
   const [listSelected, setListSelected] = useState([]);
   const [showForm, setShowForm] = useState('add');
-  const [listAdmissionPeriodType, setListAdmissionPeriodType] = useState(RESPONSE_CODE_STATUS);
+  const [listPeriodAssignmentType, setListPeriodAssignmentType] = useState(RESPONSE_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
+  const [listAdmissionPeriod, setlistAdmissionPeriod] = useState([]);
+  const [listMajor, setlistMajor] = useState([]);
 
   const dataGridRef = useRef(null);
 
@@ -42,9 +46,9 @@ const AdmissionPeriod = () => {
     onScrollToBottom();
   };
 
-  const _handleChangeAdmissionPeriodId = e => {
+  const _handleChangePeriodAssignmentId = e => {
     const { value } = e.target;
-    setAdmissionPeriodId(value);
+    setPeriodAssignmentId(value);
   };
 
   const _onChangeShowForm = value => {
@@ -57,20 +61,24 @@ const AdmissionPeriod = () => {
     setShowForm('add');
   };
 
-  const _handleChangeAdmissionPeriodName = e => {
+  const _handleChangePeriodAssignmentName = e => {
     const { value } = e.target;
-    setAdmissionPeriodname(value);
+    setPeriodAssignmentname(value);
   };
 
   const _handleChangeStatus = e => {
     setStatus(e);
   };
 
+  const _handleChangeAdmissionPeriod = e => {
+    setAdmissionPeriodId(e);
+  };
+
   const onChangeDate = value => {
-    const AdmissionPeriodFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
-    const AdmissionPeriodToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
-    setFromDate(AdmissionPeriodFromDt);
-    setToDate(AdmissionPeriodToDt);
+    const PeriodAssignmentFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
+    const PeriodAssignmentToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
+    setFromDate(PeriodAssignmentFromDt);
+    setToDate(PeriodAssignmentToDt);
     };
 
   const onSelectionChanged = async () => {
@@ -83,7 +91,7 @@ const AdmissionPeriod = () => {
     setListSelected(listData);
   };
 
-  const _onDeleteAdmissionPeriod = () => {
+  const _onDeletePeriodAssignment = () => {
     Modal.confirm({
       title: i18next.t('confirm.title'),
       icon: <QuestionCircleOutlined />,
@@ -93,7 +101,7 @@ const AdmissionPeriod = () => {
       cancelText: i18next.t('button.close'),
       async onOk() {
         await _onDelete();
-        await _onSearchAdmissionPeriod();
+        await _onSearchPeriodAssignment();
       },
     });
   };
@@ -101,12 +109,12 @@ const AdmissionPeriod = () => {
   const _onDelete = async () => {
     const listDelete = [];
 
-    listSelected.forEach(item => listDelete.push(item.admissionPeriodId));
+    listSelected.forEach(item => listDelete.push(item.periodAssignmentId));
 
-    dispatch(deleteAdmissionPeriod(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
+    dispatch(deletePeriodAssignment(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
       if (checkSuccessDispatch(res)) {
         onScrollToTop();
-        _onSearchAdmissionPeriod();
+        _onSearchPeriodAssignment();
       }
     });
   };
@@ -115,14 +123,15 @@ const AdmissionPeriod = () => {
     dataGridRef.current.instance.selectRowsByIndexes(e.rowIndex);
   };
 
-  const _onSearchAdmissionPeriod = async () => {
+  const _onSearchPeriodAssignment = async () => {
     setListSelected([]);
+    dataGridRef.current.instance.clearSelection();
     let pageRequestDto = {
       pageNum: 0,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ admissionPeriodId, admissionPeriodName, fromDate, toDate, status, createUser, pageRequestDto });
-    dispatch(getListAdmissionPeriod(payload));
+    const payload = createCommonIParamsDuong({ periodAssignmentId, admissionPeriodId, majorId, fromDate, toDate, status, pageRequestDto });
+    dispatch(getListPeriodAssignment(payload));
   };
 
   const _onDoubleClickRow = e => {
@@ -134,12 +143,33 @@ const AdmissionPeriod = () => {
 
   const _onEnter = e => {
     if (e.key === 'Enter') {
-      _onSearchAdmissionPeriod();
+      _onSearchPeriodAssignment();
     }
   };
 
+  const getAllPeriodAssignment  = () =>{
+    dispatch(getAllAdmissionPeriodActive()).then(res => {
+      if (checkSuccessDispatch(res)) {
+        const objectResponse: IParamCommonDuong = res.payload;
+        setlistAdmissionPeriod(objectResponse?.data.data ?? []);
+      }
+    });
+  };
+
+  const getAllMajor  = () =>{
+    dispatch(getAllMajorActive()).then(res => {
+      if (checkSuccessDispatch(res)) {
+        const objectResponse: IParamCommonDuong = res.payload;
+        setlistMajor(objectResponse?.data.data ?? []);
+      }
+    });
+  };
+
   useEffect(() => {
-    _onSearchAdmissionPeriod();
+    _onSearchPeriodAssignment();
+    //Select list assignment period
+    getAllPeriodAssignment();
+    getAllMajor();
     return () => {
       dispatch(resetDept());
     };
@@ -155,7 +185,7 @@ const AdmissionPeriod = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Kỳ học
+          Han lam do an
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -164,14 +194,14 @@ const AdmissionPeriod = () => {
         <div className="page-search-template">
           <Row style={{ marginBottom: 18 }} align="middle">
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Mã kỳ học</label>
+              <label className="cms-search-label label-padding-left">Mã han nop do an</label>
             </Col>
 
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={admissionPeriodId}
-                onChange={_handleChangeAdmissionPeriodId}
+                value={periodAssignmentId}
+                onChange={_handleChangePeriodAssignmentId}
                 maxLength={80}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
@@ -179,14 +209,14 @@ const AdmissionPeriod = () => {
             </Col>
 
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Tên kỳ học</label>
+              <label className="cms-search-label label-padding-left">Tên han nop do an</label>
             </Col>
 
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={admissionPeriodName}
-                onChange={_handleChangeAdmissionPeriodName}
+                value={periodAssignmentName}
+                onChange={_handleChangePeriodAssignmentName}
                 maxLength={60}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
@@ -198,7 +228,7 @@ const AdmissionPeriod = () => {
             <Col xl={5} xxl={4}>
               <Select value={status} onChange={_handleChangeStatus} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
-                {listAdmissionPeriodType.map((obj, i) => {
+                {listPeriodAssignmentType.map((obj, i) => {
                   return (
                     <Select.Option key={i} value={obj.val}>
                       {i18next.t(obj.text)}
@@ -216,9 +246,42 @@ const AdmissionPeriod = () => {
             <Col xl={5} xxl={4}>
                     <RangePicker className="date" id="date" onChange={onChangeDate} />
             </Col>
+            <Col xl={3} xxl={3}>
+              <label className="cms-search-label label-padding-left">Ky hoc</label>
+            </Col>
+            <Col xl={5} xxl={4}>
+              <Select value={status} onChange={_handleChangeAdmissionPeriod} placeholder={i18next.t('label.all')} allowClear>
+                <Select.Option value="">{i18next.t('label.all')}</Select.Option>
+                {Array.isArray(listAdmissionPeriod) &&
+                listAdmissionPeriod.map((obj, i) => {
+                  return (
+                    <Select.Option key={i} value={obj.admissionPeriodId}>
+                      {obj.admissionPeriodName}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
+            </Col>
+
+                        <Col xl={3} xxl={3}>
+              <label className="cms-search-label label-padding-left">Chuyen nganh</label>
+            </Col>
+            <Col xl={5} xxl={4}>
+              <Select value={status} onChange={_handleChangeAdmissionPeriod} placeholder={i18next.t('label.all')} allowClear>
+                <Select.Option value="">{i18next.t('label.all')}</Select.Option>
+                {Array.isArray(listMajor) &&
+                listMajor.map((obj, i) => {
+                  return (
+                    <Select.Option key={i} value={obj.majorId}>
+                      {obj.majorName}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
+            </Col>
 
             <Col className="form-btn-search">
-              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchAdmissionPeriod}>
+              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchPeriodAssignment}>
                 Tìm kiếm
               </Button>
             </Col>
@@ -245,7 +308,7 @@ const AdmissionPeriod = () => {
               loading={loadingDelete}
               className="button-delete"
               icon={<DeleteOutlined />}
-              onClick={_onDeleteAdmissionPeriod}
+              onClick={_onDeletePeriodAssignment}
             >
               {i18next.t('button.delete')}
             </Button>
@@ -255,9 +318,9 @@ const AdmissionPeriod = () => {
             <div className="table-data">
               <DataGrid
                 id="gridContainer"
-                dataSource={listAdmissionPeriod}
+                dataSource={listPeriodAssignment}
                 showBorders={true}
-                keyExpr="admissionPeriodId"
+                keyExpr="periodAssignmentId"
                 ref={dataGridRef}
                 allowColumnResizing={true}
                 columnResizingMode={'nextColumn'}
@@ -273,7 +336,7 @@ const AdmissionPeriod = () => {
                 <Paging defaultPageSize={10} enabled={true} />
                 <Pager visible={true} showNavigationButtons={true} />
                 <Column
-                  dataField="admissionPeriodId"
+                  dataField="periodAssignmentId"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
@@ -282,7 +345,7 @@ const AdmissionPeriod = () => {
                   width={150}
                 />
                 <Column
-                  dataField="admissionPeriodName"
+                  dataField="periodAssignmentName"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
@@ -338,9 +401,9 @@ const AdmissionPeriod = () => {
           </Spin>
         </div>
 
-        <EditAdmissionPeriod
+        <EditPeriodAssignment
           isEdit={showForm === 'edit'}
-          onSearch={_onSearchAdmissionPeriod}
+          onSearch={_onSearchPeriodAssignment}
           selected={listSelected[0]}
           onChangeFormAdd={_onChangeFormAdd}
         />
@@ -348,4 +411,4 @@ const AdmissionPeriod = () => {
     </div>
   );
 };
-export default AdmissionPeriod;
+export default PeriodAssignment;

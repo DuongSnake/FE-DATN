@@ -77,6 +77,10 @@ const AdmissionPeriodManagement = importedComponent(() => import('@/app/modules/
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
+const PeriodAssignmentManagement = importedComponent(() => import('@/app/modules/admin/period-assignment/PeriodAssignment'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
 const listComponent = [
   {
     id: 'dashboard',
@@ -149,6 +153,10 @@ const listComponent = [
   {
     id: ID_MENU_TAB.Z0023,
     panelComponent: <AdmissionPeriodManagement />,
+  },
+  {
+    id: ID_MENU_TAB.Z0024,
+    panelComponent: <PeriodAssignmentManagement />,
   },
 ];
 
