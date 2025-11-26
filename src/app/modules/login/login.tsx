@@ -59,7 +59,7 @@ export const Login = (props: any) => {
 
         <div className="login-body">
           <div className="login-logo">
-            <div className="info">Login</div>
+            <div className="info">Đăng nhập</div>
           </div>
           <Form name="login-form" className="login-form" layout="vertical" autoComplete="off" onFinish={_onLogin}>
 
@@ -91,7 +91,7 @@ export const Login = (props: any) => {
             </Form.Item>
 
             <div className="form-action">
-              <div className="form-remember">
+              {/* <div className="form-remember">
                 <Checkbox className="remember-me" onChange={_handleChangeRemember}>
                   {t('login.form.remember')}
                 </Checkbox>
@@ -102,7 +102,7 @@ export const Login = (props: any) => {
                     <span>{t('login.form.password.forgot')}</span>
                   </Link>
                 </p>
-              </div>
+              </div> */}
             </div>
 
             <Form.Item>

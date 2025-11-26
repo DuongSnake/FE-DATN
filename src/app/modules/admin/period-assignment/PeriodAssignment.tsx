@@ -24,7 +24,6 @@ const PeriodAssignment = () => {
   const loadingDelete = useAppSelector(state => state.periodAssignmentManagementReducer.loadingDelete);
   const listPeriodAssignment = useAppSelector(state => state.periodAssignmentManagementReducer.listPeriodAssignment);
   const [periodAssignmentId, setPeriodAssignmentId] = useState('');
-  const [periodAssignmentName, setPeriodAssignmentname] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [createUser, setCreateUser] = useState('');
@@ -61,17 +60,16 @@ const PeriodAssignment = () => {
     setShowForm('add');
   };
 
-  const _handleChangePeriodAssignmentName = e => {
-    const { value } = e.target;
-    setPeriodAssignmentname(value);
-  };
-
   const _handleChangeStatus = e => {
     setStatus(e);
   };
 
   const _handleChangeAdmissionPeriod = e => {
     setAdmissionPeriodId(e);
+  };
+
+  const _handleChangeMajorId = e => {
+    setMajorId(e);
   };
 
   const onChangeDate = value => {
@@ -194,7 +192,7 @@ const PeriodAssignment = () => {
         <div className="page-search-template">
           <Row style={{ marginBottom: 18 }} align="middle">
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Mã han nop do an</label>
+              <label className="cms-search-label label-padding-left">Mã hạn nộp đồ án</label>
             </Col>
 
             <Col xl={5} xxl={4}>
@@ -203,21 +201,6 @@ const PeriodAssignment = () => {
                 value={periodAssignmentId}
                 onChange={_handleChangePeriodAssignmentId}
                 maxLength={80}
-                onKeyPress={_onEnter}
-                placeholder="Nhập vào đi bạn"
-              />
-            </Col>
-
-            <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Tên han nop do an</label>
-            </Col>
-
-            <Col xl={5} xxl={4}>
-              <Input
-                className="cms-form-control"
-                value={periodAssignmentName}
-                onChange={_handleChangePeriodAssignmentName}
-                maxLength={60}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
               />
@@ -237,20 +220,20 @@ const PeriodAssignment = () => {
                 })}
               </Select>
             </Col>
-          </Row>
-
-          <Row align="middle">
             <Col xl={3} xxl={3}>
                 <label className="cms-search-label label-padding-left">Ngày đăng ký</label>
             </Col>
             <Col xl={5} xxl={4}>
                     <RangePicker className="date" id="date" onChange={onChangeDate} />
             </Col>
+          </Row>
+
+          <Row align="middle">
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Ky hoc</label>
+              <label className="cms-search-label label-padding-left">Kỳ học</label>
             </Col>
             <Col xl={5} xxl={4}>
-              <Select value={status} onChange={_handleChangeAdmissionPeriod} placeholder={i18next.t('label.all')} allowClear>
+              <Select value={admissionPeriodId} onChange={_handleChangeAdmissionPeriod} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
                 {Array.isArray(listAdmissionPeriod) &&
                 listAdmissionPeriod.map((obj, i) => {
@@ -264,10 +247,10 @@ const PeriodAssignment = () => {
             </Col>
 
                         <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Chuyen nganh</label>
+              <label className="cms-search-label label-padding-left">Chuyên ngành</label>
             </Col>
             <Col xl={5} xxl={4}>
-              <Select value={status} onChange={_handleChangeAdmissionPeriod} placeholder={i18next.t('label.all')} allowClear>
+              <Select value={majorId} onChange={_handleChangeMajorId} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
                 {Array.isArray(listMajor) &&
                 listMajor.map((obj, i) => {
@@ -340,24 +323,16 @@ const PeriodAssignment = () => {
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Mã kỳ học"
+                  caption="Mã hạn làm báo cáo"
                   dataType="string"
                   width={150}
-                />
-                <Column
-                  dataField="periodAssignmentName"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Tên kỳ học"
-                  dataType="string"
                 />
                 <Column
                   dataField="startPeriod"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Ngày bắt đầu kỳ học"
+                  caption="Ngày bắt đầu hạn làm báo cáo"
                   dataType="string"
                 />
                 <Column
@@ -365,7 +340,23 @@ const PeriodAssignment = () => {
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Ngày kết thúc kỳ học"
+                  caption="Ngày kết thúc hạn làm báo cáo"
+                  dataType="string"
+                />
+                <Column
+                  dataField="admissionPeriodIdName"
+                  alignment="left"
+                  allowFiltering={false}
+                  allowSorting={true}
+                  caption="Kỳ học"
+                  dataType="string"
+                />
+                <Column
+                  dataField="majorName"
+                  alignment="left"
+                  allowFiltering={false}
+                  allowSorting={true}
+                  caption="Chuyên ngành"
                   dataType="string"
                 />
                 <Column
@@ -388,6 +379,14 @@ const PeriodAssignment = () => {
                   }}
                 />
                 <Column
+                  dataField="note"
+                  alignment="left"
+                  allowFiltering={false}
+                  allowSorting={true}
+                  caption="Ghi chú"
+                  dataType="string"
+                />
+                <Column
                   dataField="createAt"
                   alignment="center"
                   allowFiltering={false}
@@ -405,6 +404,8 @@ const PeriodAssignment = () => {
           isEdit={showForm === 'edit'}
           onSearch={_onSearchPeriodAssignment}
           selected={listSelected[0]}
+          listMajor={listMajor}
+          listAdmissionPeriod={listAdmissionPeriod}
           onChangeFormAdd={_onChangeFormAdd}
         />
       </div>

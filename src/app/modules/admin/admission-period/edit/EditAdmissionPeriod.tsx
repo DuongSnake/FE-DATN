@@ -96,13 +96,16 @@ const EditAdmissionPeriodManagement = ({ isEdit, onSearch, selected, onChangeFor
             formRegis.setFieldsValue({
                 ...selected
             });
+            
+            //Set default value date for form regis and variable fromDate and toDate
       formRegis.setFieldsValue({
         date: [
           dayjs(selected.startPeriod, APP_DATE_FORMAT),
           dayjs(selected.endPeriod, APP_DATE_FORMAT),
         ],
       });
-
+        setFromDate(selected.startPeriod);
+        setToDate(selected.endPeriod);
         }
     }, [isEdit, selected]);
 

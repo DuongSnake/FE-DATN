@@ -113,7 +113,6 @@ export const login: (userName: string, password: string, isRemember: string) => 
     const auth = await dispatch(authenticate({ userName, password}));
     const payload = auth.payload as AxiosResponse;
     if (payload?.data) {
-      console.log("payload.data:"+payload.data);
       const { token, username } = payload.data;
       Storage.session.set(ACCESS_TOKEN, token);
       // Storage.session.set(REFRESH_TOKEN, username);

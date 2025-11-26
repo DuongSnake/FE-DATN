@@ -12,7 +12,7 @@ import { ID_MENU_TAB } from '@/app/config/constant/enum';
 
 export const sidebarMenu = [
   {
-    title: 'Quan ly chung',
+    title: 'Quản lý chung',
     icon: <MenuReportIcon />,
     items: [
       {
@@ -30,16 +30,16 @@ export const sidebarMenu = [
     ],
   },
   {
-    title: 'Quan ly thong tin do an',
+    title: 'Quản lý thông tin đồ án',
     icon: <MenuSidebarBasicIcon />,
     items: [
       {
         id: ID_MENU_TAB.Z0024,
-        title: 'Ky han lam do an',
+        title: 'Kỳ hạn đồ án',
       },
       {
         id: ID_MENU_TAB.Z005,
-        title: 'menu.clientGatewayMap',
+        title: 'Map giáo viên và kỳ hạn đồ án',
       },
       {
         id: ID_MENU_TAB.Z0014,
