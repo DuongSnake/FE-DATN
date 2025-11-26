@@ -115,7 +115,7 @@ const EditPeriodAssignmentManagement = ({ isEdit, onSearch, selected, listMajor,
             });
         setFromDate(selected.startPeriod);
         setToDate(selected.endPeriod);
-        setAdmissionPeriodId(selected.setAdmissionPeriodId);
+        setAdmissionPeriodId(selected.admissionPeriodId);
         setMajorId(selected.setMajorId);
         }
     }, [isEdit, selected]);
@@ -235,7 +235,6 @@ const EditPeriodAssignmentManagement = ({ isEdit, onSearch, selected, listMajor,
                             icon={<SaveOutlined />}>
                             {i18next.t('button.save')}
                         </Button>
-                        {/* <Form.Item name="majorId"></Form.Item> */}
                     </Row>
                 </Form>
             </div>

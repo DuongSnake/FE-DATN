@@ -81,6 +81,10 @@ const PeriodAssignmentManagement = importedComponent(() => import('@/app/modules
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
+const InstructorMapPeriodAssignment = importedComponent(() => import('@/app/modules/admin/instructor-map-period-assignment/InstructorMapPeriodAssignment'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
 const listComponent = [
   {
     id: 'dashboard',
@@ -157,6 +161,10 @@ const listComponent = [
   {
     id: ID_MENU_TAB.Z0024,
     panelComponent: <PeriodAssignmentManagement />,
+  },
+  {
+    id: ID_MENU_TAB.Z0025,
+    panelComponent: <InstructorMapPeriodAssignment />,
   },
 ];
 

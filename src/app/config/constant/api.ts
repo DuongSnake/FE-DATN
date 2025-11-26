@@ -220,6 +220,7 @@ export const API_DELETE_USER_ACCOUNT = PRE_FIX_API + 'user/delete';
 export const API_SELECT_USER_ACCOUNT = PRE_FIX_API + 'user/select';
 export const API_SELECT_ALL_USER_ACCOUNT = PRE_FIX_API + 'user/selectAll';
 export const API_SELECT_ALL_ROLE = PRE_FIX_API + 'user/selectAllRole';
+export const API_SELECT_ALL_INSTRUCTOR_ACTIVE = PRE_FIX_API + 'user/selectAllInstructor';
 
 /**
  * Major Management
@@ -250,3 +251,13 @@ export const API_UPDATE_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/upda
 export const API_DELETE_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/delete';
 export const API_SELECT_PERIOD_ASSIGNMENT = PRE_FIX_API + 'periodAssignment/select';
 export const API_GET_ALL_PERIOD_ASSIGNMENT_ACITVE = PRE_FIX_API + 'periodAssignment/selectListAllActive';
+
+/**
+ * Instructor Map Period Assignment Management
+ */
+export const API_GET_LIST_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/selectList';
+export const API_ADD_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/insert';
+export const API_UPDATE_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/update';
+export const API_DELETE_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/delete';
+export const API_SELECT_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/select';
+export const API_INSERT_LIST_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/insertListInstructorMapPeriodAssignment';

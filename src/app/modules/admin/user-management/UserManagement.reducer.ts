@@ -11,7 +11,8 @@ import {
   API_SELECT_ALL_ROLE,
   API_SELECT_ALL_USER_ACCOUNT,
   API_SELECT_USER_ACCOUNT,
-  API_UPDATE_USER_ACCOUNT
+  API_UPDATE_USER_ACCOUNT,
+  API_SELECT_ALL_INSTRUCTOR_ACTIVE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
 import { stringify } from 'querystring';
@@ -26,13 +27,15 @@ const initialState = {
   listBankCode: [],
   listAllBankCode: [],
   data: {},
-  validateError: []
+  validateError: [],
+  totalRecord: 0
 };
 
 export type BankCodeListState = Readonly<typeof initialState>;
 
 export const getListBankCode = createAsyncThunk('api/v1/user/selectList', async (param: IParamCommonDuong) => {
   const response = await apiClient.post<IResponseCommon>(API_GET_LIST_USER_ACCOUNT, param);
+  console.log()
   return response.data.data;
 });
 
@@ -67,9 +70,13 @@ export const selectAllRole = createAsyncThunk('api/v1/user/selectAllRole', async
   const response = await apiClient.post<IResponseCommon>(API_SELECT_ALL_ROLE);
   return response.data;
 });
+export const selectAllInstructorActive = createAsyncThunk('api/v1/user/selectAllInstructor', async () => {
+  const response = await apiClient.post<IResponseCommon>(API_SELECT_ALL_INSTRUCTOR_ACTIVE);
+  return response.data;
+});
 
 export const UserManagementSlice = createSlice({
-  name: 'api/v1/bankCode',
+  name: 'api/v1/user',
   initialState: initialState as BankCodeListState,
   reducers: {
     resetDept() {
@@ -91,7 +98,8 @@ export const UserManagementSlice = createSlice({
         return ({
           ...state,
           loading: false,
-          listBankCode: (undefined === action.payload.data) ? null :  action.payload.data
+          listBankCode: (undefined === action.payload.data) ? null :  action.payload.data,
+          totalRecord: (undefined === action.payload.totalRecord) ? null :  action.payload.totalRecord
         })
       })
       .addCase(getListBankCode.rejected, state => ({
@@ -157,7 +165,23 @@ export const UserManagementSlice = createSlice({
       }))
       .addCase(selectAllBankCode.fulfilled, (state, action) => ({
         ...state,
-        listAllBankCode: (undefined === action.payload.data) ? null :  action.payload.data.listData
+        listAllBankCode: (undefined === action.payload.data) ? null :  action.payload.data.listData,
+        totalRecord: (undefined === action.payload.totalRecord) ? null :  action.payload.totalRecord
+      }))
+      .addCase(selectAllInstructorActive.fulfilled, (state, action) => {
+        return ({
+          ...state,
+          loading: false,
+          listBankCode: (undefined === action.payload.data) ? null :  action.payload.data
+        })
+      })
+      .addCase(selectAllInstructorActive.rejected, state => ({
+        ...state,
+        loading: false
+      }))
+      .addCase(selectAllInstructorActive.pending, state => ({
+        ...state,
+        loading: true
       }));
   }
 });

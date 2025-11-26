@@ -24,9 +24,6 @@ const EditAdmissionPeriodManagement = ({ isEdit, onSearch, selected, onChangeFor
     const { loadingAdd, validateError, loadingUpdate } = useAppSelector(state => state.admissionPeriodManagementReducer);
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [listRoleSelected, setListRoleSelected] = useState([]);
-    const [listRoleSelectedFirst, setListRoleSelectedFirst] = useState([]);
-    const [listUnCheck, setListUnCheck] = useState([]);
     const [formRegis] = Form.useForm();
 
     const _onSuccess = () => {
@@ -49,7 +46,7 @@ const EditAdmissionPeriodManagement = ({ isEdit, onSearch, selected, onChangeFor
             return;
         } else {
             const payload = createCommonIParamsDuong({
-                admissionPeriodName: values.admissionPeriodName
+                admissionPeriodName: values.admissionPeriodName,startPeriod:fromDate ,endPeriod:toDate
             });
             dispatch(insertAdmissionPeriod(payload)).then(res => {
                 if (checkSuccessDispatch(res)) {

@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined, QuestionCircleOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Col, Input, Modal, Row, Spin, Select } from 'antd';
+import { Button, Col, Input, Modal, Row, Spin, Select, Pagination } from 'antd';
 import { Column, DataGrid, Pager, Paging, Selection } from 'devextreme-react/data-grid';
 import React, { useEffect, useRef, useState } from 'react';
 import i18next from '@/i18n/i18n';
@@ -33,9 +33,12 @@ const User = () => {
   const [showForm, setShowForm] = useState('add');
   const [listActionType, setListActionType] = useState(BANK_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
-
+  const totalRecord = useAppSelector(state => state.bankCodeManagementReducer.totalRecord);
+  const [pager, setPager] = useState({
+      pageNum: 1,
+      pageSize: 10,
+    });
   const dataGridRef = useRef(null);
-
   const scrollToBottom = () => {
     setShowForm('add');
 
@@ -101,7 +104,7 @@ const User = () => {
       cancelText: i18next.t('button.close'),
       async onOk() {
         await _onDelete();
-        await _onSearchBankCode();
+        await _onSearchBankCode(pager.pageNum, pager.pageSize);
       },
     });
   };
@@ -114,7 +117,7 @@ const User = () => {
     dispatch(deleteBankCode(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
       if (checkSuccessDispatch(res)) {
         onScrollToTop();
-        _onSearchBankCode();
+        _onSearchBankCode(pager.pageNum, pager.pageSize);
       }
     });
   };
@@ -123,13 +126,24 @@ const User = () => {
     dataGridRef.current.instance.selectRowsByIndexes(e.rowIndex);
   };
 
-  const _onSearchBankCode = async () => {
+  const _onSearchBankCode = async (pageNum, pageSize) => {
     setListSelected([]);
     dataGridRef.current.instance.clearSelection();
-    let pageRequestDto = {
-      pageNum: 0,
-      pageSize: 10,
-    };
+      let pageRequestDto = {
+        pageNum: pageNum,
+        pageSize: pageSize,
+      };
+    const payload = createCommonIParamsDuong({ id, username, email, phone, identityCard, fullName, status, pageRequestDto });
+    dispatch(getListBankCode(payload));
+  };
+
+    const _onSearchBankCode2 = async () => {
+    setListSelected([]);
+    dataGridRef.current.instance.clearSelection();
+      let pageRequestDto = {
+        pageNum: 1,
+        pageSize: 10,
+      };
     const payload = createCommonIParamsDuong({ id, username, email, phone, identityCard, fullName, status, pageRequestDto });
     dispatch(getListBankCode(payload));
   };
@@ -143,11 +157,15 @@ const User = () => {
 
   const _onEnter = e => {
     if (e.key === 'Enter') {
-      _onSearchBankCode();
+      _onSearchBankCode(pager.pageNum, pager.pageSize);
     }
   };
+  const _onChangePagination = (page, pageSize) => {
+    setPager({ ...pager, pageNum: page });
+    _onSearchBankCode(page, pageSize);
+  };
   
-    const getAllRole = () => {
+  const getAllRole = () => {
       dispatch(selectAllRole()).then(res => {
         if (checkSuccessDispatch(res)) {
           const objectResponse: IParamCommonDuong = res.payload;
@@ -157,7 +175,7 @@ const User = () => {
     };
 
   useEffect(() => {
-    _onSearchBankCode();
+    _onSearchBankCode(pager.pageNum, pager.pageSize);
     getAllRole();
     return () => {
       dispatch(resetDept());
@@ -246,7 +264,7 @@ const User = () => {
             </Col>
 
             <Col className="form-btn-search">
-              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchBankCode}>
+              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchBankCode2}>
                 {i18next.t('bankCodeManagement.button')}
               </Button>
             </Col>
@@ -285,21 +303,20 @@ const User = () => {
                 id="gridContainer"
                 dataSource={listBankCode}
                 showBorders={true}
-                keyExpr="id"
-                ref={dataGridRef}
-                allowColumnResizing={true}
-                columnResizingMode={'nextColumn'}
-                columnMinWidth={50}
-                allowColumnReordering={true}
                 onSelectionChanged={onSelectionChanged}
                 wordWrapEnabled={true}
                 hoverStateEnabled={true}
-                onRowDblClick={_onDoubleClickRow}
+                keyExpr="id"
                 onRowClick={_onRowClick}
+                onRowDblClick={_onDoubleClickRow}
+                ref={dataGridRef}
+                allowColumnResizing={true}
+                allowColumnReordering={true}
+                columnResizingMode={'nextColumn'}
+                columnMinWidth={50}
               >
                 <Selection mode="multiple" showCheckBoxesMode={'always'} deferred={true} />
-                <Paging defaultPageSize={10} enabled={true} />
-                <Pager visible={true} showNavigationButtons={true} />
+                <Pager visible={false} showNavigationButtons={false} />
                 <Column
                   dataField="id"
                   alignment="left"
@@ -354,6 +371,16 @@ const User = () => {
                   width={180}
                 />
               </DataGrid>
+              <div className="pagination-bottom">
+                <Pagination
+                  showSizeChanger={false}
+                  pageSize={pager.pageSize}
+                  defaultCurrent={pager.pageNum}
+                  current={pager.pageNum}
+                  total={totalRecord}
+                  onChange={_onChangePagination}
+                />
+              </div>
             </div>
           </Spin>
         </div>

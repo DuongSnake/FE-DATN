@@ -38,8 +38,8 @@ export const sidebarMenu = [
         title: 'Kỳ hạn đồ án',
       },
       {
-        id: ID_MENU_TAB.Z005,
-        title: 'Map giáo viên và kỳ hạn đồ án',
+        id: ID_MENU_TAB.Z0025,
+        title: 'Map giáo viên và chuyên ngành',
       },
       {
         id: ID_MENU_TAB.Z0014,
