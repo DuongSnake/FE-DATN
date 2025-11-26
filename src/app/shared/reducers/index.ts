@@ -25,7 +25,8 @@ import majorManagementReducer from '@/app/modules/admin/major/MajorManagement.re
 import admissionPeriodManagementReducer from '@/app/modules/admin/admission-period/AdmissionPeriod.reducer';
 import periodAssignmentManagementReducer from '@/app/modules/admin/period-assignment/PeriodAssignment.reducer';
 import instructorMapPeriodAssignment from '@/app/modules/admin/instructor-map-period-assignment/InstructorMapPeriodAssignment.reducer';
-
+import studentMapInstructor from '@/app/modules/admin/student-map-instructor/StudentMapInstructor.reducer';
+import assignmentStudentRegister from '@/app/modules/admin/assignment-student-register/AssignmentStudentRegister.reducer';
 const rootReducer = {
   authentication,
   loadingBar,
@@ -53,6 +54,8 @@ const rootReducer = {
   ,admissionPeriodManagementReducer
   ,periodAssignmentManagementReducer
   ,instructorMapPeriodAssignment
+  ,studentMapInstructor
+  ,assignmentStudentRegister
 };
 
 export default rootReducer;

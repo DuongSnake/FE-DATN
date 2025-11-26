@@ -221,6 +221,7 @@ export const API_SELECT_USER_ACCOUNT = PRE_FIX_API + 'user/select';
 export const API_SELECT_ALL_USER_ACCOUNT = PRE_FIX_API + 'user/selectAll';
 export const API_SELECT_ALL_ROLE = PRE_FIX_API + 'user/selectAllRole';
 export const API_SELECT_ALL_INSTRUCTOR_ACTIVE = PRE_FIX_API + 'user/selectAllInstructor';
+export const API_SELECT_ALL_STUDENT_ACTIVE = PRE_FIX_API + 'user/selectAllStudent';
 
 /**
  * Major Management
@@ -261,3 +262,22 @@ export const API_UPDATE_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instru
 export const API_DELETE_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/delete';
 export const API_SELECT_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/select';
 export const API_INSERT_LIST_INSTRUCTOR_MAP_PERIOD_ASSIGNMENT = PRE_FIX_API + 'instructorMapPeriodAssignment/insertListInstructorMapPeriodAssignment';
+
+/**
+ * Student map Instructor Management
+ */
+export const API_GET_LIST_STUDENT_MAP_INSTRUCTOR = PRE_FIX_API + 'studentMapInstructor/selectList';
+export const API_ADD_STUDENT_MAP_INSTRUCTOR = PRE_FIX_API + 'studentMapInstructor/insert';
+export const API_UPDATE_STUDENT_MAP_INSTRUCTOR = PRE_FIX_API + 'studentMapInstructor/update';
+export const API_DELETE_STUDENT_MAP_INSTRUCTOR = PRE_FIX_API + 'studentMapInstructor/delete';
+export const API_SELECT_STUDENT_MAP_INSTRUCTOR = PRE_FIX_API + 'studentMapInstructor/select';
+export const API_GET_ALL_STUDENT_MAP_INSTRUCTOR_ACTIVE = PRE_FIX_API + 'studentMapInstructor/selectListAllActive';
+
+/**
+ * Assignment Student Register Management
+ */
+export const API_GET_LIST_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/selectList';
+export const API_ADD_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/insert';
+export const API_UPDATE_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/update';
+export const API_DELETE_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/delete';
+export const API_SELECT_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/select';

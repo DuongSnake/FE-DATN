@@ -12,7 +12,8 @@ import {
   API_SELECT_ALL_USER_ACCOUNT,
   API_SELECT_USER_ACCOUNT,
   API_UPDATE_USER_ACCOUNT,
-  API_SELECT_ALL_INSTRUCTOR_ACTIVE
+  API_SELECT_ALL_INSTRUCTOR_ACTIVE,
+  API_SELECT_ALL_STUDENT_ACTIVE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
 import { stringify } from 'querystring';
@@ -72,6 +73,10 @@ export const selectAllRole = createAsyncThunk('api/v1/user/selectAllRole', async
 });
 export const selectAllInstructorActive = createAsyncThunk('api/v1/user/selectAllInstructor', async () => {
   const response = await apiClient.post<IResponseCommon>(API_SELECT_ALL_INSTRUCTOR_ACTIVE);
+  return response.data;
+});
+export const selectAllStudentActive = createAsyncThunk('api/v1/user/selectAllStudent', async () => {
+  const response = await apiClient.post<IResponseCommon>(API_SELECT_ALL_STUDENT_ACTIVE);
   return response.data;
 });
 
@@ -180,6 +185,21 @@ export const UserManagementSlice = createSlice({
         loading: false
       }))
       .addCase(selectAllInstructorActive.pending, state => ({
+        ...state,
+        loading: true
+      }))
+      .addCase(selectAllStudentActive.fulfilled, (state, action) => {
+        return ({
+          ...state,
+          loading: false,
+          listBankCode: (undefined === action.payload.data) ? null :  action.payload.data
+        })
+      })
+      .addCase(selectAllStudentActive.rejected, state => ({
+        ...state,
+        loading: false
+      }))
+      .addCase(selectAllStudentActive.pending, state => ({
         ...state,
         loading: true
       }));

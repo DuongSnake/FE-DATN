@@ -42,13 +42,17 @@ export const sidebarMenu = [
         title: 'Map giáo viên và chuyên ngành',
       },
       {
-        id: ID_MENU_TAB.Z0014,
-        title: 'menu.mgmtClientCallBack',
+        id: ID_MENU_TAB.Z0026,
+        title: 'Map sinh viên và giáo viên',
+      },
+      {
+        id: ID_MENU_TAB.Z0027,
+        title: 'Đăng ký đề tài',
       },
     ],
   },
   {
-    title: 'menu.cmsAppUrl',
+    title: 'Điểm và tệp tin đồ án',
     icon: <MenuSidebarCodeIcon />,
     items: [
       {

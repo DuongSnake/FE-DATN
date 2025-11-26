@@ -6,36 +6,36 @@ import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-import { deleteInstructorMapPeriodAssignment, getListInstructorMapPeriodAssignment, resetDept} from './InstructorMapPeriodAssignment.reducer';
-import { getAllPeriodAssignmentActive} from '../period-assignment/PeriodAssignment.reducer';
-import { selectAllInstructorActive} from '../user-management/UserManagement.reducer';
+import { deleteStudentMapInstructor, getListStudentMapInstructor, resetDept} from './StudentMapInstructor.reducer';
+
+import { selectAllInstructorActive, selectAllStudentActive} from '../user-management/UserManagement.reducer';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../shared/layout/content-task.scss';
-import EditInstructorMapPeriodAssignment from './edit/EditInstructorMapPeriodAssignment';
+import EditStudentMapInstructor from './edit/EditStudentMapInstructor';
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
 import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
 const { RangePicker } = DatePicker;
-const InstructorMapPeriodAssignment = () => {
+const StudentMapInstructor = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(state => state.instructorMapPeriodAssignment.loading);
-  const loadingDelete = useAppSelector(state => state.instructorMapPeriodAssignment.loadingDelete);
-  const listInstructorMapPeriodAssignment = useAppSelector(state => state.instructorMapPeriodAssignment.listInstructorMapPeriodAssignment);
-  const totalRecord = useAppSelector(state => state.instructorMapPeriodAssignment.totalRecord);
-  const [instructorMapPeriodAssignmentId, setInstructorMapPeriodAssignmentId] = useState('');
+  const loading = useAppSelector(state => state.studentMapInstructor.loading);
+  const loadingDelete = useAppSelector(state => state.studentMapInstructor.loadingDelete);
+  const listStudentMapInstructor = useAppSelector(state => state.studentMapInstructor.listStudentMapInstructor);
+  const totalRecord = useAppSelector(state => state.studentMapInstructor.totalRecord);
+  const [studentMapInstructorId, setStudentMapInstructorId] = useState('');
   const [instructorId, setInstructorId] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-  const [periodAssignmentId, setPeriodAssignmentId] = useState('');
+  const [studentId, setStudentId] = useState('');
   const [status, setStatus] = useState('');
   const [listSelected, setListSelected] = useState([]);
   const [showForm, setShowForm] = useState('add');
-  const [listInstructorMapPeriodAssignmentType, setListInstructorMapPeriodAssignmentType] = useState(RESPONSE_CODE_STATUS);
+  const [listStudentMapInstructorType, setListStudentMapInstructorType] = useState(RESPONSE_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
   const [listInstructor, setListInstructor] = useState([]);
-  const [listPeriodAssignment, setListPeriodAssignment] = useState([]);
+  const [listStudent, setListStudent] = useState([]);
   const [pager, setPager] = useState({
     pageNum: 1,
     pageSize: 10,
@@ -48,9 +48,9 @@ const InstructorMapPeriodAssignment = () => {
     onScrollToBottom();
   };
 
-  const _handleChangeInstructorMapPeriodAssignmentId = e => {
+  const _handleChangeStudentMapInstructorId = e => {
     const { value } = e.target;
-    setInstructorMapPeriodAssignmentId(value);
+    setStudentMapInstructorId(value);
   };
 
   const _onChangeShowForm = value => {
@@ -67,8 +67,8 @@ const InstructorMapPeriodAssignment = () => {
     setInstructorId(e);
   };
 
-  const _handleChangePeriodAssignmentId = e => {
-    setPeriodAssignmentId(e);
+  const _handleChangeStudentId = e => {
+    setStudentId(e);
   };
 
   const _handleChangeStatus = e => {
@@ -76,37 +76,37 @@ const InstructorMapPeriodAssignment = () => {
   };
   const _onChangePagination = (page, pageSize) => {
     setPager({ ...pager, pageNum: page });
-    _onSearchInstructorMapPeriodAssignment(page, pageSize);
+    _onSearchStudentMapInstructor(page, pageSize);
   };
 
-    const _onSearchInstructorMapPeriodAssignment = async (pageNum, pageSize) => {
+    const _onSearchStudentMapInstructor = async (pageNum, pageSize) => {
       setListSelected([]);
       dataGridRef.current.instance.clearSelection();
       let pageRequestDto = {
         pageNum: pageNum,
         pageSize: pageSize,
       };
-    const payload = createCommonIParamsDuong({ instructorMapPeriodAssignmentId, instructorId, fromDate, toDate, status, periodAssignmentId, pageRequestDto });
-    dispatch(getListInstructorMapPeriodAssignment(payload));
+    const payload = createCommonIParamsDuong({ studentMapInstructorId, instructorId, fromDate, toDate, status, studentId, pageRequestDto });
+    dispatch(getListStudentMapInstructor(payload));
     };
   
     ///For search button
-    const _onSearchInstructorMapPeriodAssignment2 = async () => {
+    const _onSearchStudentMapInstructor2 = async () => {
     setListSelected([]);
     dataGridRef.current.instance.clearSelection();
     let pageRequestDto = {
       pageNum: 1,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ instructorMapPeriodAssignmentId, instructorId, fromDate, toDate, status, periodAssignmentId, pageRequestDto });
-    dispatch(getListInstructorMapPeriodAssignment(payload));
+    const payload = createCommonIParamsDuong({ studentMapInstructorId, instructorId, fromDate, toDate, status, studentId, pageRequestDto });
+    dispatch(getListStudentMapInstructor(payload));
     };
 
-  const getAllPeriodAssignment = () => {
-   dispatch(getAllPeriodAssignmentActive()).then(res => {
+  const getAllStudent = () => {
+   dispatch(selectAllStudentActive()).then(res => {
       if (checkSuccessDispatch(res)) {
         const objectResponse: IParamCommonDuong = res.payload;
-        setListPeriodAssignment(objectResponse?.data.data ?? []);
+        setListStudent(objectResponse?.data ?? []);
       }
     });
   };
@@ -121,10 +121,10 @@ const InstructorMapPeriodAssignment = () => {
   };
 
   const onChangeDate = value => {
-    const InstructorMapPeriodAssignmentFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
-    const InstructorMapPeriodAssignmentToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
-    setFromDate(InstructorMapPeriodAssignmentFromDt);
-    setToDate(InstructorMapPeriodAssignmentToDt);
+    const StudentMapInstructorFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
+    const StudentMapInstructorToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
+    setFromDate(StudentMapInstructorFromDt);
+    setToDate(StudentMapInstructorToDt);
     };
 
   const onSelectionChanged = async () => {
@@ -137,7 +137,7 @@ const InstructorMapPeriodAssignment = () => {
     setListSelected(listData);
   };
 
-  const _onDeleteInstructorMapPeriodAssignment = () => {
+  const _onDeleteStudentMapInstructor = () => {
     Modal.confirm({
       title: i18next.t('confirm.title'),
       icon: <QuestionCircleOutlined />,
@@ -147,18 +147,18 @@ const InstructorMapPeriodAssignment = () => {
       cancelText: i18next.t('button.close'),
       async onOk() {
         await _onDelete();
-        await _onSearchInstructorMapPeriodAssignment(pager.pageNum, pager.pageSize);
+        await _onSearchStudentMapInstructor(pager.pageNum, pager.pageSize);
       },
     });
   };
 
   const _onDelete = async () => {
     const listDelete = [];
-    listSelected.forEach(item => listDelete.push(item.instructorMapPeriodAssignmentId));
-    dispatch(deleteInstructorMapPeriodAssignment(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
+    listSelected.forEach(item => listDelete.push(item.studentMapInstructorId));
+    dispatch(deleteStudentMapInstructor(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
       if (checkSuccessDispatch(res)) {
         onScrollToTop();
-        _onSearchInstructorMapPeriodAssignment(pager.pageNum, pager.pageSize);
+        _onSearchStudentMapInstructor(pager.pageNum, pager.pageSize);
       }
     });
   };
@@ -176,14 +176,14 @@ const InstructorMapPeriodAssignment = () => {
 
   const _onEnter = e => {
     if (e.key === 'Enter') {
-      _onSearchInstructorMapPeriodAssignment(pager.pageNum, pager.pageSize);
+      _onSearchStudentMapInstructor(pager.pageNum, pager.pageSize);
     }
   };
 
   useEffect(() => {
-    _onSearchInstructorMapPeriodAssignment(pager.pageNum, pager.pageSize);
-    //Get all list intructor and period assignment
-    getAllPeriodAssignment();
+    _onSearchStudentMapInstructor(pager.pageNum, pager.pageSize);
+    //Get all list intructor and period 
+    getAllStudent();
     getAllIntructor();
     return () => {
       dispatch(resetDept());
@@ -215,8 +215,8 @@ const InstructorMapPeriodAssignment = () => {
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={instructorMapPeriodAssignmentId}
-                onChange={_handleChangeInstructorMapPeriodAssignmentId}
+                value={studentMapInstructorId}
+                onChange={_handleChangeStudentMapInstructorId}
                 maxLength={80}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
@@ -246,7 +246,7 @@ const InstructorMapPeriodAssignment = () => {
             <Col xl={5} xxl={4}>
               <Select value={status} onChange={_handleChangeStatus} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
-                {listInstructorMapPeriodAssignmentType.map((obj, i) => {
+                {listStudentMapInstructorType.map((obj, i) => {
                   return (
                     <Select.Option key={i} value={obj.val}>
                       {i18next.t(obj.text)}
@@ -260,17 +260,17 @@ const InstructorMapPeriodAssignment = () => {
           <Row align="middle">
 
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Loại kỳ hạn</label>
+              <label className="cms-search-label label-padding-left">Tên sinh viên</label>
             </Col>
 
             <Col xl={5} xxl={4}>
-              <Select value={periodAssignmentId} onChange={_handleChangePeriodAssignmentId} placeholder={i18next.t('label.all')} allowClear>
+              <Select value={studentId} onChange={_handleChangeStudentId} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
-                {Array.isArray(listPeriodAssignment) &&
-                listPeriodAssignment.map((obj, i) => {
+                {Array.isArray(listStudent) &&
+                listStudent.map((obj, i) => {
                   return (
-                    <Select.Option key={i} value={obj.periodAssignmentId}>
-                      {obj.admissionPeriodIdName}
+                    <Select.Option key={i} value={obj.id}>
+                      {obj.fullName}
                     </Select.Option>
                   );
                 })}
@@ -284,7 +284,7 @@ const InstructorMapPeriodAssignment = () => {
             </Col>
 
             <Col className="form-btn-search">
-              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchInstructorMapPeriodAssignment2}>
+              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchStudentMapInstructor2}>
                 Tìm kiếm
               </Button>
             </Col>
@@ -311,7 +311,7 @@ const InstructorMapPeriodAssignment = () => {
               loading={loadingDelete}
               className="button-delete"
               icon={<DeleteOutlined />}
-              onClick={_onDeleteInstructorMapPeriodAssignment}
+              onClick={_onDeleteStudentMapInstructor}
             >
               {i18next.t('button.delete')}
             </Button>
@@ -321,9 +321,9 @@ const InstructorMapPeriodAssignment = () => {
             <div className="table-data">
               <DataGrid
                 id="gridContainer"
-                dataSource={listInstructorMapPeriodAssignment}
+                dataSource={listStudentMapInstructor}
                 showBorders={true}
-                keyExpr="instructorMapPeriodAssignmentId"
+                keyExpr="studentMapInstructorId"
                 ref={dataGridRef}
                 allowColumnResizing={true}
                 columnResizingMode={'nextColumn'}
@@ -338,29 +338,13 @@ const InstructorMapPeriodAssignment = () => {
                 <Selection mode="multiple" showCheckBoxesMode={'always'} deferred={true} />
                 <Pager visible={false} showNavigationButtons={false} />
                 <Column
-                  dataField="instructorMapPeriodAssignmentId"
+                  dataField="studentMapInstructorId"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Mã giáo viên - kỳ hạn"
+                  caption="Mã giáo viên - sinh viên"
                   dataType="string"
                   width={150}
-                />
-                <Column
-                  dataField="instructorMapPeriodAssignmentId"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Mã kỳ hạn làm đồ án"
-                  dataType="string"
-                />
-                <Column
-                  dataField="majorName"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Tên chuyên ngành"
-                  dataType="string"
                 />
                 <Column
                   dataField="instructorName"
@@ -368,6 +352,14 @@ const InstructorMapPeriodAssignment = () => {
                   allowFiltering={false}
                   allowSorting={true}
                   caption="Tên giáo viên"
+                  dataType="string"
+                />
+                <Column
+                  dataField="studentName"
+                  alignment="left"
+                  allowFiltering={false}
+                  allowSorting={true}
+                  caption="Tên sinh viên"
                   dataType="string"
                 />
                 <Column
@@ -413,16 +405,16 @@ const InstructorMapPeriodAssignment = () => {
           </Spin>
         </div>
 
-        <EditInstructorMapPeriodAssignment
+        <EditStudentMapInstructor
           isEdit={showForm === 'edit'}
-          onSearch={_onSearchInstructorMapPeriodAssignment}
+          onSearch={_onSearchStudentMapInstructor}
           selected={listSelected[0]}
           onChangeFormAdd={_onChangeFormAdd}
           listInstructor = {listInstructor}
-          listPeriodAssignment = {listPeriodAssignment}
+          listStudent = {listStudent}
         />
       </div>
     </div>
   );
 };
-export default InstructorMapPeriodAssignment;
+export default StudentMapInstructor;

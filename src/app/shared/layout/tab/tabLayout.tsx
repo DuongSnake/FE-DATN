@@ -85,6 +85,14 @@ const InstructorMapPeriodAssignment = importedComponent(() => import('@/app/modu
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
+const StudentMapInstructor = importedComponent(() => import('@/app/modules/admin/student-map-instructor/StudentMapInstructor'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
+const AssignmentStudentRegister = importedComponent(() => import('@/app/modules/admin/assignment-student-register/AssignmentStudentRegister'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
 const listComponent = [
   {
     id: 'dashboard',
@@ -165,6 +173,14 @@ const listComponent = [
   {
     id: ID_MENU_TAB.Z0025,
     panelComponent: <InstructorMapPeriodAssignment />,
+  },
+  {
+    id: ID_MENU_TAB.Z0026,
+    panelComponent: <StudentMapInstructor />,
+  },
+  {
+    id: ID_MENU_TAB.Z0027,
+    panelComponent: <AssignmentStudentRegister />,
   },
 ];
 
