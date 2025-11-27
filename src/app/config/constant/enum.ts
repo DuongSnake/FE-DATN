@@ -54,7 +54,7 @@ export const RESPONSE_CODE_STATUS = [
   },
   {
     val: '99',
-    text: 'Tạm dừng',
+    text: 'Đã xóa',
     textColor: '#EA5455',
   },
 ];
@@ -1008,5 +1008,22 @@ export const STATUS_ACTIVE = [
     text: 'bankCodeManagement.in-active',
     textColor: '#3babec',
   },
-];
+]
+export const APPROVE_ASSIGNMENT_REGISTER_STATUS = [
+  {
+    val: 0,
+    text: 'Chưa duyệt',
+    textColor: '#000000ff',
+  },
+  {
+    val: 1,
+    text: 'Đã duyệt',
+    textColor: '#28C76F',
+  },
+  {
+    val: 2,
+    text: 'Bảo lưu',
+    textColor: '#EA5455',
+  },
+];;
 

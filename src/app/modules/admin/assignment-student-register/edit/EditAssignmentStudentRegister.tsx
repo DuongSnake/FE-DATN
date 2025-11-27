@@ -1,12 +1,10 @@
-import { ClearOutlined, SaveOutlined, ToTopOutlined } from '@ant-design/icons';
+import { ClearOutlined, SaveOutlined, ToTopOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, Row, Select, Upload } from 'antd';
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import i18next from '@/i18n/i18n';
-import { APP_DATE_FORMAT } from '@/app/config/constant/constants';
+import { UploadFile } from 'antd/es/upload/interface';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToTop } from '@/app/shared/helpers/cms-helper';
-import { createCommonIParamsDuong, IParamCommonDuong } from '@/app/shared/model/common.model';
 import { checkSuccessDispatch } from '@/app/shared/util/global-function';
 import { insertAssignmentStudentRegister, updateAssignmentStudentRegister, selectAssignmentStudentRegister } from '../AssignmentStudentRegister.reducer';
 const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFormAdd, listStudentMapInstructor }) => {
@@ -14,11 +12,18 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
   const { loadingAdd, validateError, loadingUpdate } = useAppSelector(state => state.assignmentStudentRegister);
   const [formRegis] = Form.useForm();
   const [studentMapInstructorId, setStudentMapInstructorId] = useState('');
+  const [fileList, setFileList] = useState<any[]>([]);
   const _onSuccess = () => {
     _onResetForm();
     onSearch();
     onChangeFormAdd();
     onScrollToTop();
+  };
+  const handleChange = (info) => {
+    console.log(info);
+    let fileList = [...info.fileList];
+    fileList = fileList.slice(-1);
+    setFileList(fileList);
   };
 
   const _onSubmit = async (values: any) => {
@@ -26,10 +31,14 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
       _onUpdateAssignmentStudentRegister(values);
       return;
     } else {
-      const payload = createCommonIParamsDuong({
-       assignmentStudentRegisterName: values.assignmentStudentRegisterName, studentMapInstructorId: values.studentMapInstructorId
-      });
-      dispatch(insertAssignmentStudentRegister(payload)).then(res => {
+    const formData = new FormData();
+    if(fileList[0].url != ""){
+    formData.append("fileUpload", fileList[0].originFileObj);
+    }
+    formData.append("assignmentStudentRegisterId", values.assignmentStudentRegisterId);
+    formData.append("assignmentStudentRegisterName", values.assignmentStudentRegisterName);
+    formData.append("studentMapInstructorId", values.studentMapInstructorId);
+      dispatch(insertAssignmentStudentRegister(formData)).then(res => {
         if (checkSuccessDispatch(res)) {
           _onSuccess();
         }
@@ -37,24 +46,25 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
     }
   };
   const _onUpdateAssignmentStudentRegister = (values: any) => {
-      console.log("Value file:"+JSON.stringify(values.contentAssignment));
-    const payload = createCommonIParamsDuong({
-      assignmentStudentRegisterId: values.assignmentStudentRegisterId , assignmentStudentRegisterName: values.assignmentStudentRegisterName, studentMapInstructorId: values.studentMapInstructorId
-    });
-    dispatch(updateAssignmentStudentRegister(payload)).then(res => {
+    const formData = new FormData();
+    if(fileList[0].url != ""){
+    formData.append("fileUpload", fileList[0].originFileObj);
+    }
+    formData.append("assignmentStudentRegisterId", values.assignmentStudentRegisterId);
+    formData.append("assignmentStudentRegisterName", values.assignmentStudentRegisterName);
+    formData.append("studentMapInstructorId", values.studentMapInstructorId);
+    dispatch(updateAssignmentStudentRegister(formData)).then(res => {
       if (checkSuccessDispatch(res)) {
         _onSuccess();
       }
     });
   }
+
   const _onResetForm = () => {
     if (isEdit) return;
 
+    setFileList([]);
     formRegis.resetFields();
-    formRegis.setFieldsValue({
-      regDate: moment().format(APP_DATE_FORMAT),
-      regTime: moment().format('HH:mm')
-    });
   };
   const _handleChangeStudentMapInstructorId = e => {
     setStudentMapInstructorId(e);
@@ -84,6 +94,14 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
       formRegis.setFieldsValue({
         studentMapInstructorId: selected.studentMapInstructorId
       });
+      const defaultFile: UploadFile = {
+        uid: '-1',
+        name: selected.fileName,
+        status: 'done',
+        url: '', // optional: link to file if available
+      };
+      setFileList([defaultFile]);
+
     }
   }, [isEdit, selected]);
 
@@ -126,7 +144,7 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
             <Col xs={14} md={5}>
               <Form.Item name="assignmentStudentRegisterName"
                 rules={[{ required: true, message: i18next.t('validation-message.required-field') }]}>
-                <Input className="cms-form-control" maxLength={255}/>
+                <Input className="cms-form-control" maxLength={255} />
               </Form.Item>
             </Col>
 
@@ -137,9 +155,18 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
 
             <Col xs={14} md={5}>
               <Form.Item name="contentAssignment">
-                <Upload>
-                  <Button>Tài file lên</Button>
+                <Upload
+                  beforeUpload={() => false}
+                  onChange={handleChange}
+                  fileList={fileList}
+                  multiple={false}
+                  showUploadList={false} // hide default file list display
+                >
+                  <Button icon={<UploadOutlined />}>
+                    {fileList.length > 0 ? fileList[0].name : 'Click to Upload'}
+                  </Button>
                 </Upload>
+
               </Form.Item>
             </Col>
           </Row>

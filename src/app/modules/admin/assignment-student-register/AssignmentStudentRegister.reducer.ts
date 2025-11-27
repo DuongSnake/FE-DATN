@@ -35,12 +35,6 @@ export const getListAssignmentStudentRegister = createAsyncThunk('api/v1/assignm
   return response.data.data;
 });
 
-export const insertAssignmentStudentRegister = createAsyncThunk('api/v1/assignmentStudentRegister/insert', async (param: IParamCommon) => {
-  const response = await apiClient.post<IResponseCommon>(API_ADD_ASSIGNMENT_STUDENT_REGISTER, param);
-
-  return response.data;
-});
-
 export const deleteAssignmentStudentRegister = createAsyncThunk('api/v1/assignmentStudentRegister/delete', async (param: IParamCommon) => {
   const response = await apiClient.post<any>(API_DELETE_ASSIGNMENT_STUDENT_REGISTER, param);
 
@@ -52,12 +46,31 @@ export const selectAssignmentStudentRegister = createAsyncThunk('api/v1/assignme
 
   return response.data;
 });
+export const updateAssignmentStudentRegister = createAsyncThunk(
+  'api/v1/assignmentStudentRegister/update',
+  async (params: any) => {
+    const response = await apiClient.post<any>(API_UPDATE_ASSIGNMENT_STUDENT_REGISTER, params, {
+      headers: {
+        lang: 'vi',
+      },
+    });
 
-export const updateAssignmentStudentRegister = createAsyncThunk('api/v1/assignmentStudentRegister/update', async (param: IParamCommon) => {
-  const response = await apiClient.post<IResponseCommon>(API_UPDATE_ASSIGNMENT_STUDENT_REGISTER, param);
+    return response.data;
+  },
+);
 
-  return response.data;
-});
+export const insertAssignmentStudentRegister = createAsyncThunk(
+  'api/v1/assignmentStudentRegister/insert',
+  async (params: any) => {
+    const response = await apiClient.post<any>(API_ADD_ASSIGNMENT_STUDENT_REGISTER, params, {
+      headers: {
+        lang: 'vi',
+      },
+    });
+
+    return response.data;
+  },
+);
 
 export const AssignmentStudentRegisterSlice = createSlice({
   name: 'api/v1/assignmentStudentRegister',

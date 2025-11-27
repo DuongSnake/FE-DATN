@@ -16,7 +16,7 @@ import EditAssignmentStudentRegister from './edit/EditAssignmentStudentRegister'
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
-import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
+import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS,APPROVE_ASSIGNMENT_REGISTER_STATUS } from '@/app/config/constant/enum';
 const { RangePicker } = DatePicker;
 const AssignmentStudentRegister = () => {
   const dispatch = useAppDispatch();
@@ -33,8 +33,8 @@ const AssignmentStudentRegister = () => {
   const [status, setStatus] = useState('');
   const [listSelected, setListSelected] = useState([]);
   const [showForm, setShowForm] = useState('add');
-  const [listAssignmentStudentRegisterType, setListAssignmentStudentRegisterType] = useState(RESPONSE_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
+  const [listApproveType, setListApproveType] = useState(APPROVE_ASSIGNMENT_REGISTER_STATUS);
   const [listStudentMapInstructor, setListStudentMapInstructor] = useState([]);
   const [pager, setPager] = useState({
     pageNum: 1,
@@ -233,12 +233,12 @@ const AssignmentStudentRegister = () => {
               />
             </Col>
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Trạng thái</label>
+              <label className="cms-search-label label-padding-left">Trạng thái xóa</label>
             </Col>
             <Col xl={5} xxl={4}>
               <Select value={status} onChange={_handleChangeStatus} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
-                {listAssignmentStudentRegisterType.map((obj, i) => {
+                {listBankCodeType.map((obj, i) => {
                   return (
                     <Select.Option key={i} value={obj.val}>
                       {i18next.t(obj.text)}
@@ -250,6 +250,7 @@ const AssignmentStudentRegister = () => {
           </Row>
 
           <Row align="middle">
+
             <Col xl={3} xxl={3}>
                 <label className="cms-search-label label-padding-left">Ngày đăng ký</label>
             </Col>
@@ -357,7 +358,26 @@ const AssignmentStudentRegister = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.status')}
+                  caption="Trạng thái duyệt "
+                  dataType="string"
+                  width={120}
+                  cellRender={row => {
+                    if (!row.data.status) {
+                      return <>{row.data.status}</>;
+                    }
+                    const requestStatusData = listApproveType.find(obj => obj.val === row.data.isApproved);
+
+                    if (requestStatusData) {
+                      return <>{i18next.t(requestStatusData.text)}</>;
+                    }
+                  }}
+                />
+                <Column
+                  dataField="status"
+                  alignment="center"
+                  allowFiltering={false}
+                  allowSorting={true}
+                  caption="Trạng thái xóa "
                   dataType="string"
                   width={120}
                   cellRender={row => {
