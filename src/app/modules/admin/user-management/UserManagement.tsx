@@ -18,9 +18,9 @@ import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enu
 
 const User = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(state => state.bankCodeManagementReducer.loading);
-  const loadingDelete = useAppSelector(state => state.bankCodeManagementReducer.loadingDelete);
-  const listBankCode = useAppSelector(state => state.bankCodeManagementReducer.listBankCode);
+  const loading = useAppSelector(state => state.userManagement.loading);
+  const loadingDelete = useAppSelector(state => state.userManagement.loadingDelete);
+  const listBankCode = useAppSelector(state => state.userManagement.listBankCode);
   const [id, setId] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ const User = () => {
   const [showForm, setShowForm] = useState('add');
   const [listActionType, setListActionType] = useState(BANK_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
-  const totalRecord = useAppSelector(state => state.bankCodeManagementReducer.totalRecord);
+  const totalRecord = useAppSelector(state => state.userManagement.totalRecord);
   const [pager, setPager] = useState({
       pageNum: 1,
       pageSize: 10,
@@ -211,7 +211,7 @@ const User = () => {
                 onChange={_handleChangeId}
                 maxLength={80}
                 onKeyPress={_onEnter}
-                placeholder={i18next.t('cms-common.please-input-infomation')}
+                placeholder="Nhập vào đi bạn"
               />
             </Col>
 
@@ -226,7 +226,7 @@ const User = () => {
                 onChange={_handleChangeUserName}
                 maxLength={60}
                 onKeyPress={_onEnter}
-                placeholder={i18next.t('cms-common.please-input-infomation')}
+                placeholder="Nhập vào đi bạn"
               />
             </Col>
 
@@ -241,7 +241,7 @@ const User = () => {
                 onChange={_handleChangeEmail}
                 maxLength={60}
                 onKeyPress={_onEnter}
-                placeholder={i18next.t('cms-common.please-input-infomation')}
+                placeholder="Nhập vào đi bạn"
               />
             </Col>
           </Row>
@@ -265,7 +265,7 @@ const User = () => {
 
             <Col className="form-btn-search">
               <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchBankCode2}>
-                {i18next.t('bankCodeManagement.button')}
+                Tìm kiếm
               </Button>
             </Col>
           </Row>
@@ -347,7 +347,7 @@ const User = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.status')}
+                  caption="Trạng thái"
                   dataType="string"
                   width={120}
                   cellRender={row => {
@@ -366,7 +366,7 @@ const User = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.regTm')}
+                  caption="Ngày đăng ký"
                   dataType="string"
                   width={180}
                 />

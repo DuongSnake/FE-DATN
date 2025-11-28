@@ -11,7 +11,7 @@ import { checkSuccessDispatch } from '@/app/shared/util/global-function';
 import { insertBankCode, updateBankCode, selectBankCode } from '../UserManagement.reducer';
 const EditUserManagement = ({ isEdit, onSearch, selected, listAllRole, onChangeFormAdd }) => {
   const dispatch = useAppDispatch();
-  const { loadingAdd, validateError, loadingUpdate } = useAppSelector(state => state.bankCodeManagementReducer);
+  const { loadingAdd, validateError, loadingUpdate } = useAppSelector(state => state.userManagement);
 
   const [listRoleSelected, setListRoleSelected] = useState([]);
   const [listRoleSelectedFirst, setListRoleSelectedFirst] = useState([]);
@@ -285,26 +285,6 @@ const EditUserManagement = ({ isEdit, onSearch, selected, listAllRole, onChangeF
                 );
               })}
             </Col>
-          </Row>
-
-          <Row align="middle" style={{ marginBottom: 12 }}>
-
-            {isEdit ? (
-              <>
-                <Col xs={10} md={3}>
-                  <span className="cms-search-label">{i18next.t('bankCodeManagement.regTm')}</span>
-                </Col>
-
-                <Col xs={14} md={5}>
-                  <Form.Item name="createAt">
-                    <Input disabled
-                      className="cms-form-control" maxLength={30} />
-                  </Form.Item>
-                </Col>
-              </>
-            ) : (
-              <></>
-            )}
           </Row>
 
           <Row className="form__action-footer">
