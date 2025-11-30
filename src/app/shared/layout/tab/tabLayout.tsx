@@ -10,31 +10,31 @@ import Dashboard from '../../../modules/dashboard/dashboard';
 import { changeTabActive, removeTab, reset, sortAgainTab, updateTabIsEditing } from './tabs.reducer';
 import TabItem from './tab-item';
 
-const UserManagement = importedComponent(() => import('@/app/modules/admin/user-management/UserManagement'), {
+const UserManagement = importedComponent(() => import('@/app/modules/admin-side/user-management/UserManagement'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const MajorManagement = importedComponent(() => import('@/app/modules/admin/major/MajorManagement'), {
+const MajorManagement = importedComponent(() => import('@/app/modules/admin-side/major/MajorManagement'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const AdmissionPeriodManagement = importedComponent(() => import('@/app/modules/admin/admission-period/AdmissionPeriodManagement'), {
+const AdmissionPeriodManagement = importedComponent(() => import('@/app/modules/admin-side/admission-period/AdmissionPeriodManagement'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const PeriodAssignmentManagement = importedComponent(() => import('@/app/modules/admin/period-assignment/PeriodAssignment'), {
+const PeriodAssignmentManagement = importedComponent(() => import('@/app/modules/admin-side/period-assignment/PeriodAssignment'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const InstructorMapPeriodAssignment = importedComponent(() => import('@/app/modules/admin/instructor-map-period-assignment/InstructorMapPeriodAssignment'), {
+const InstructorMapPeriodAssignment = importedComponent(() => import('@/app/modules/admin-side/instructor-map-period-assignment/InstructorMapPeriodAssignment'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const StudentMapInstructor = importedComponent(() => import('@/app/modules/admin/student-map-instructor/StudentMapInstructor'), {
+const StudentMapInstructor = importedComponent(() => import('@/app/modules/admin-side/student-map-instructor/StudentMapInstructor'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
-const AssignmentStudentRegister = importedComponent(() => import('@/app/modules/admin/assignment-student-register/AssignmentStudentRegister'), {
+const AssignmentStudentRegister = importedComponent(() => import('@/app/modules/admin-side/assignment-student-register/AssignmentStudentRegister'), {
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
