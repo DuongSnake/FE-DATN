@@ -8,7 +8,7 @@ const Routes = () => {
   return (
     <>
       <RoutesRoute>
-        <Route path="/account/login" element={<Login />} />
+        <Route path="/admin/login" element={<Login />} />
         <Route path="/" element={<PrivateSite />} />
         <Route path="*" element={<PageNotFound />} />
       </RoutesRoute>

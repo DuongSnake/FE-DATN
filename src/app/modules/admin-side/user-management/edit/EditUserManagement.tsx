@@ -271,8 +271,8 @@ const EditUserManagement = ({ isEdit, onSearch, selected, listAllRole, onChangeF
               {listAllRole.map((role, i) => {
                 const isSelected = listRoleSelected.some(selected => (selected.id == role.id));
                 return (
-                  <div key={role.name}>
-                    <label htmlFor={role.name} className="cms-search-label">{role.name}</label>
+                  <div key={role.id}>
+                    <label htmlFor={role.id} className="cms-search-label">{role.roleDisplayName}</label>
                     <input
                       id={role.id}
                       type="checkbox"

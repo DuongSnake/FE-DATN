@@ -83,7 +83,7 @@ const PrivateSite = () => {
         !accessToken && (
           <Navigate
             to={{
-              pathname: '/account/login'
+              pathname: '/admin/login'
             }}
           />
         )
