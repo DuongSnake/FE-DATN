@@ -109,7 +109,8 @@ export const ID_MENU_TAB = {
   Z0025: 'instructorMapPeriodAssignment',
   Z0026: 'studentMapInstructor',
   Z0027: 'assignmentStudentRegister',
-  Z0028: 'registerAssignmentStudent'
+  Z0028: 'registerAssignmentStudent',
+  Z0029: 'registerAssignmentStudent'
 };
 
 export const MENU_PRIVILEGES = [
@@ -223,6 +224,10 @@ export const MENU_PRIVILEGES = [
   },
   {
     tabId: ID_MENU_TAB.Z0028,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0029,
     userGroup: [USER_TYPE.S, USER_TYPE.B],
   },
 ];

@@ -10,8 +10,8 @@ import { deleteRegisterAssignmentStudent, getListRegisterAssignmentStudent, rese
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
-import '../../../shared/layout/content-task.scss';
-import EditRegisterAssignmentStudent from './edit/EditRegisterAssignmentStudent';
+import '../../../../shared/layout/content-task.scss';
+// import EditRegisterAssignmentStudent from './edit/EditRegisterAssignmentStudent';
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
@@ -403,13 +403,13 @@ const RegisterAssignmentStudent = () => {
           </Spin>
         </div>
 
-        <EditRegisterAssignmentStudent
+        {/* <EditRegisterAssignmentStudent
           isEdit={showForm === 'edit'}
           onSearch={_onSearchRegisterAssignmentStudent}
           selected={listSelected[0]}
           onChangeFormAdd={_onChangeFormAdd}
           listStudentMapInstructor = {listStudentMapInstructor}
-        />
+        /> */}
       </div>
     </div>
   );

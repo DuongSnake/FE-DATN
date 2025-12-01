@@ -10,7 +10,7 @@ import logoHeader from '@/content/images/logo/logo_header.svg';
 import logoInfo from '@/content/images/login/logoInfo.svg';
 import { useTranslation } from 'react-i18next';
 
-import './login.scss';
+import '../../login/login.scss';
 
 import vnPath from '@/content/images/icons/vietnamese.svg';
 import enPath from '@/content/images/icons/english.svg';
@@ -24,24 +24,12 @@ export const Login = (props: any) => {
   const loading = useAppSelector(state => state.authentication.loading);
   const [langActive, setLangActive] = useState(locate || DEFAULT_LOCALE);
   const [remember, setRemember] = useState<string>('N');
-
-  const _handleChangeLanguage = (key: string) => {
-    setLangActive(key);
-    Storage.local.set(LOCALE, key);
-    window.location.reload();
-  };
-
-  const _handleChangeRemember = (e: CheckboxChangeEvent) => {
-    const { checked } = e.target;
-    setRemember(checked ? 'Y' : 'N');
-  };
-
   const _onLogin = async ({ userId, password }) => {
     dispatch(login(userId, password, remember));
   };
 
   const { location = {} } = props;
-  const { from } = (location.state as any) || { from: { pathname: '/admin', search: location.search } };
+  const { from } = (location.state as any) || { from: { pathname: '/user', search: location.search } };
 
   if (isAuthenticated) {
     return <Navigate to={from} />;
@@ -59,7 +47,7 @@ export const Login = (props: any) => {
 
         <div className="login-body">
           <div className="login-logo">
-            <div className="info">Đăng nhập</div>
+            <div className="info">Đăng nhập user</div>
           </div>
           <Form name="login-form" className="login-form" layout="vertical" autoComplete="off" onFinish={_onLogin}>
 

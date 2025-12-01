@@ -1,12 +1,6 @@
 import React from 'react';
 import {
   MenuReportIcon,
-  MenuSidebarApprovalIcon,
-  MenuSidebarBasicIcon,
-  MenuSidebarCodeIcon,
-  MenuSidebarContractIcon,
-  MenuSidebarReconIcon,
-  MenuSidebarServicesIcon,
 } from '@/app/shared/components';
 import { ID_MENU_TAB } from '@/app/config/constant/enum';
 
@@ -16,11 +10,11 @@ export const sidebarMenu = [
     icon: <MenuReportIcon />,
     items: [
       {
-        id: ID_MENU_TAB.Z0016,
+        id: ID_MENU_TAB.Z0028,
         title: 'Đăng ký đồ án',
       },
       {
-        id: ID_MENU_TAB.Z0022,
+        id: ID_MENU_TAB.Z0029,
         title: 'Quản lý tệp tin đồ án',
       },
       {
