@@ -6,12 +6,12 @@ import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-import { deleteRegisterAssignmentStudent, getListRegisterAssignmentStudent, resetDept} from './RegisterAssignmentStudent.reducer';
+import { deleteRegisterAssignmentStudent, getListRegisterAssignmentStudent, resetDept, sendRequestAssignmentStudent} from './RegisterAssignmentStudent.reducer';
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../../shared/layout/content-task.scss';
-// import EditRegisterAssignmentStudent from './edit/EditRegisterAssignmentStudent';
+import EditAssignmentStudentRegister from './edit/EditRegisterAssignmentStudent';
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
@@ -23,7 +23,7 @@ const RegisterAssignmentStudent = () => {
   const loadingDelete = useAppSelector(state => state.registerAssignmentStudent.loadingDelete);
   const listRegisterAssignmentStudent = useAppSelector(state => state.registerAssignmentStudent.listRegisterAssignmentStudent);
   const totalRecord = useAppSelector(state => state.registerAssignmentStudent.totalRecord);
-  const [RegisterAssignmentStudentId, setRegisterAssignmentStudentId] = useState('');
+  const [registerAssignmentStudentId, setRegisterAssignmentStudentId] = useState('');
   const [RegisterAssignmentStudentName, setRegisterAssignmentStudentName] = useState('');
   const [instructorId, setInstructorId] = useState('');
   const [fromDate, setFromDate] = useState('');
@@ -31,6 +31,7 @@ const RegisterAssignmentStudent = () => {
   const [studentId, setStudentId] = useState('');
   const [status, setStatus] = useState('');
   const [listSelected, setListSelected] = useState([]);
+  const [requestId, setRequestId] = useState('');
   const [showForm, setShowForm] = useState('add');
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
   const [listApproveType, setListApproveType] = useState(APPROVE_ASSIGNMENT_REGISTER_STATUS);
@@ -63,6 +64,16 @@ const RegisterAssignmentStudent = () => {
     setShowForm(value);
   };
 
+  const _onChangeSendRequest = value => {
+    console.log("Request id:"+requestId);
+    dispatch(sendRequestAssignmentStudent(createCommonIParamsDuong({ requestId }))).then(res => {
+      if (checkSuccessDispatch(res)) {
+        onScrollToTop();
+        _onSearchRegisterAssignmentStudent(pager.pageNum, pager.pageSize);
+      }
+    });
+  };
+
   const _onChangeFormAdd = () => {
     setShowForm('add');
   };
@@ -90,7 +101,7 @@ const RegisterAssignmentStudent = () => {
         pageNum: pageNum,
         pageSize: pageSize,
       };
-    const payload = createCommonIParamsDuong({ RegisterAssignmentStudentId, RegisterAssignmentStudentName, fromDate, toDate, status, pageRequestDto });
+    const payload = createCommonIParamsDuong({ registerAssignmentStudentId, RegisterAssignmentStudentName, fromDate, toDate, status, pageRequestDto });
     dispatch(getListRegisterAssignmentStudent(payload));
     };
   
@@ -102,7 +113,7 @@ const RegisterAssignmentStudent = () => {
       pageNum: 1,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ RegisterAssignmentStudentId, RegisterAssignmentStudentName, instructorId, fromDate, toDate, status, pageRequestDto });
+    const payload = createCommonIParamsDuong({ registerAssignmentStudentId, RegisterAssignmentStudentName, instructorId, fromDate, toDate, status, pageRequestDto });
     dispatch(getListRegisterAssignmentStudent(payload));
     };
 
@@ -118,6 +129,7 @@ const RegisterAssignmentStudent = () => {
     await dataGridRef.current.instance.getSelectedRowsData().then(list => {
       list.map(data => {
         listData.push(data);
+        setRequestId(data.assignmentRegisterId);
       });
     });
     setListSelected(listData);
@@ -151,6 +163,12 @@ const RegisterAssignmentStudent = () => {
 
   const _onRowClick = e => {
     dataGridRef.current.instance.selectRowsByIndexes(e.rowIndex);
+    
+    dataGridRef.current.instance.getSelectedRowsData().then(list => {
+      list.map(data => {
+    setRequestId(data.assignmentRegisterId);
+      });
+    });
   };
 
   const _onDoubleClickRow = e => {
@@ -183,7 +201,7 @@ const RegisterAssignmentStudent = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Map giáo viên và kỳ hạn của chuyên ngành
+          Danh sach đồ án đăng ký
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -198,7 +216,7 @@ const RegisterAssignmentStudent = () => {
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={RegisterAssignmentStudentId}
+                value={registerAssignmentStudentId}
                 onChange={_handleChangeRegisterAssignmentStudentId}
                 maxLength={80}
                 onKeyPress={_onEnter}
@@ -270,6 +288,15 @@ const RegisterAssignmentStudent = () => {
             </Button>
 
             <Button
+              disabled={listSelected.length !== 1}
+              className="button-edit"
+              icon={<EditOutlined />}
+              onClick={() => _onChangeSendRequest(listSelected)}
+            >
+              Gửi duyệt đồ án
+            </Button>
+
+            <Button
               disabled={listSelected.length === 0}
               loading={loadingDelete}
               className="button-delete"
@@ -286,7 +313,7 @@ const RegisterAssignmentStudent = () => {
                 id="gridContainer"
                 dataSource={listRegisterAssignmentStudent}
                 showBorders={true}
-                keyExpr="RegisterAssignmentStudentId"
+                keyExpr="assignmentRegisterId"
                 ref={dataGridRef}
                 allowColumnResizing={true}
                 columnResizingMode={'nextColumn'}
@@ -301,7 +328,7 @@ const RegisterAssignmentStudent = () => {
                 <Selection mode="multiple" showCheckBoxesMode={'always'} deferred={true} />
                 <Pager visible={false} showNavigationButtons={false} />
                 <Column
-                  dataField="RegisterAssignmentStudentId"
+                  dataField="assignmentRegisterId"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
@@ -310,7 +337,7 @@ const RegisterAssignmentStudent = () => {
                   width={150}
                 />
                 <Column
-                  dataField="RegisterAssignmentStudentName"
+                  dataField="assignmentRegisterName"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
@@ -326,19 +353,11 @@ const RegisterAssignmentStudent = () => {
                   dataType="string"
                 />
                 <Column
-                  dataField="studentName"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Tên sinh viên"
-                  dataType="string"
-                />
-                <Column
                   dataField="instructorName"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Tên giáo viên"
+                  caption="Tên giáo viên hướng dẫn"
                   dataType="string"
                 />
                 <Column
@@ -403,13 +422,13 @@ const RegisterAssignmentStudent = () => {
           </Spin>
         </div>
 
-        {/* <EditRegisterAssignmentStudent
+        <EditAssignmentStudentRegister
           isEdit={showForm === 'edit'}
           onSearch={_onSearchRegisterAssignmentStudent}
           selected={listSelected[0]}
           onChangeFormAdd={_onChangeFormAdd}
           listStudentMapInstructor = {listStudentMapInstructor}
-        /> */}
+        />
       </div>
     </div>
   );

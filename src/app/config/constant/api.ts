@@ -92,10 +92,21 @@ export const API_SELECT_STUDENT_MAP_INSTRUCTOR = PRE_FIX_API + 'studentMapInstru
 export const API_GET_ALL_STUDENT_MAP_INSTRUCTOR_ACTIVE = PRE_FIX_API + 'studentMapInstructor/selectListAllActive';
 
 /**
- * Assignment Student Register Management
+ * Assignment Student Register Management(cai nay sau se bo)
  */
 export const API_GET_LIST_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/selectList';
 export const API_ADD_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/insert';
 export const API_UPDATE_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/update';
 export const API_DELETE_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/delete';
 export const API_SELECT_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/select';
+
+/**
+ * Student side
+ */
+export const API_GET_LIST_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/selectList';
+export const API_ADD_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/insert';
+export const API_UPDATE_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/update';
+export const API_DELETE_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/delete';
+export const API_SELECT_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/select';
+export const API_RESERVE_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/reserveListAssignment';
+export const API_SEND_REQUEST_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/sendRequestAssignment';

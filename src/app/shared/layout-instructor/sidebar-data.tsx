@@ -27,4 +27,18 @@ export const sidebarMenu = [
       }
     ],
   },
+    {
+    title: 'Quản lý thông tin đồ án-Giao vien phan bien',
+    icon: <MenuReportIcon />,
+    items: [
+      {
+        id: ID_MENU_TAB.Z0034,
+        title: 'Danh sach do an da duyet phan bien',
+      },
+      {
+        id: ID_MENU_TAB.Z0035,
+        title: 'Quan ly diem do an phan bien',
+      }
+    ],
+  },
 ];

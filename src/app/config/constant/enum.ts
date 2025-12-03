@@ -110,7 +110,7 @@ export const ID_MENU_TAB = {
   Z0026: 'studentMapInstructor',
   Z0027: 'assignmentStudentRegister',
   Z0028: 'registerAssignmentStudent',
-  Z0029: 'registerAssignmentStudent',
+  Z0029: 'demo',
   Z0030: 'progressAssignmentApprove',
   Z0031: 'searchScoreAssignment',
   Z0032: 'assignmentApprove',
@@ -233,10 +233,6 @@ export const MENU_PRIVILEGES = [
     userGroup: [USER_TYPE.S, USER_TYPE.B],
   },
   {
-    tabId: ID_MENU_TAB.Z0029,
-    userGroup: [USER_TYPE.S, USER_TYPE.B],
-  },
-    {
     tabId: ID_MENU_TAB.Z0029,
     userGroup: [USER_TYPE.S, USER_TYPE.B],
   },
@@ -1061,11 +1057,16 @@ export const APPROVE_ASSIGNMENT_REGISTER_STATUS = [
   },
   {
     val: 1,
+    text: 'Chờ duyệt',
+    textColor: '#EA5455',
+  },
+  {
+    val: 1,
     text: 'Đã duyệt',
     textColor: '#28C76F',
   },
   {
-    val: 2,
+    val: 3,
     text: 'Bảo lưu',
     textColor: '#EA5455',
   },

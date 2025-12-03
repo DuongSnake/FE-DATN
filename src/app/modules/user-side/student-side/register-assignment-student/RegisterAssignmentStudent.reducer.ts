@@ -5,11 +5,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { IParamCommon, IResponseCommon, IParamCommonDuong } from '@/app/shared/model/common.model';
 import { apiClient } from '@/app/config/interceptor/axios-interceptor';
 import {
-  API_ADD_ASSIGNMENT_STUDENT_REGISTER,
-  API_DELETE_ASSIGNMENT_STUDENT_REGISTER,
-  API_GET_LIST_ASSIGNMENT_STUDENT_REGISTER,
-  API_SELECT_ASSIGNMENT_STUDENT_REGISTER,
-  API_UPDATE_ASSIGNMENT_STUDENT_REGISTER
+  API_ADD_ASSIGNMENT_STUDENT_USER_SIDE,
+  API_DELETE_ASSIGNMENT_STUDENT_USER_SIDE,
+  API_GET_LIST_ASSIGNMENT_STUDENT_USER_SIDE,
+  API_SELECT_ASSIGNMENT_STUDENT_USER_SIDE,
+  API_UPDATE_ASSIGNMENT_STUDENT_USER_SIDE,
+  API_SEND_REQUEST_ASSIGNMENT_STUDENT_USER_SIDE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
 import { stringify } from 'querystring';
@@ -30,26 +31,32 @@ const initialState = {
 
 export type RegisterAssignmentStudentListState = Readonly<typeof initialState>;
 
-export const getListRegisterAssignmentStudent = createAsyncThunk('api/v1/registerAssignmentStudent/selectList', async (param: IParamCommonDuong) => {
-  const response = await apiClient.post<IResponseCommon>(API_GET_LIST_ASSIGNMENT_STUDENT_REGISTER, param);
+export const getListRegisterAssignmentStudent = createAsyncThunk('api/v1/assignmentRegister/selectList', async (param: IParamCommonDuong) => {
+  const response = await apiClient.post<IResponseCommon>(API_GET_LIST_ASSIGNMENT_STUDENT_USER_SIDE, param);
   return response.data.data;
 });
 
-export const deleteRegisterAssignmentStudent = createAsyncThunk('api/v1/registerAssignmentStudent/delete', async (param: IParamCommon) => {
-  const response = await apiClient.post<any>(API_DELETE_ASSIGNMENT_STUDENT_REGISTER, param);
+export const deleteRegisterAssignmentStudent = createAsyncThunk('api/v1/assignmentRegister/delete', async (param: IParamCommon) => {
+  const response = await apiClient.post<any>(API_DELETE_ASSIGNMENT_STUDENT_USER_SIDE, param);
 
   return response.data;
 });
 
-export const selectRegisterAssignmentStudent = createAsyncThunk('api/v1/registerAssignmentStudent/select', async (param: IParamCommon) => {
-  const response = await apiClient.post<IResponseCommon>(API_SELECT_ASSIGNMENT_STUDENT_REGISTER, param);
+export const selectRegisterAssignmentStudent = createAsyncThunk('api/v1/assignmentRegister/select', async (param: IParamCommon) => {
+  const response = await apiClient.post<IResponseCommon>(API_SELECT_ASSIGNMENT_STUDENT_USER_SIDE, param);
+
+  return response.data;
+});
+
+export const sendRequestAssignmentStudent = createAsyncThunk('api/v1/sendRequestAssignment/sendRequestAssignment', async (param: IParamCommonDuong) => {
+  const response = await apiClient.post<IResponseCommon>(API_SEND_REQUEST_ASSIGNMENT_STUDENT_USER_SIDE, param);
 
   return response.data;
 });
 export const updateRegisterAssignmentStudent = createAsyncThunk(
-  'api/v1/registerAssignmentStudent/update',
+  'api/v1/assignmentRegister/update',
   async (params: any) => {
-    const response = await apiClient.post<any>(API_UPDATE_ASSIGNMENT_STUDENT_REGISTER, params, {
+    const response = await apiClient.post<any>(API_UPDATE_ASSIGNMENT_STUDENT_USER_SIDE, params, {
       headers: {
         lang: 'vi',
       },
@@ -62,7 +69,7 @@ export const updateRegisterAssignmentStudent = createAsyncThunk(
 export const insertRegisterAssignmentStudent = createAsyncThunk(
   'api/v1/registerAssignmentStudent/insert',
   async (params: any) => {
-    const response = await apiClient.post<any>(API_ADD_ASSIGNMENT_STUDENT_REGISTER, params, {
+    const response = await apiClient.post<any>(API_ADD_ASSIGNMENT_STUDENT_USER_SIDE, params, {
       headers: {
         lang: 'vi',
       },
@@ -159,6 +166,18 @@ export const RegisterAssignmentStudentSlice = createSlice({
       .addCase(updateRegisterAssignmentStudent.pending, state => ({
         ...state,
         loadingUpdate: true
+      }))
+      .addCase(sendRequestAssignmentStudent.fulfilled, state => ({
+        ...state,
+        loadingDelete: false
+      }))
+      .addCase(sendRequestAssignmentStudent.rejected, state => ({
+        ...state,
+        loadingDelete: false
+      }))
+      .addCase(sendRequestAssignmentStudent.pending, state => ({
+        ...state,
+        loadingDelete: true
       }));
   }
 });

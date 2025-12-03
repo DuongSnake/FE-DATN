@@ -29,7 +29,7 @@ export const Login = (props: any) => {
   };
 
   const { location = {} } = props;
-  const { from } = (location.state as any) || { from: { pathname: '/user', search: location.search } };
+  const { from } = (location.state as any) || { from: { pathname: '/student', search: location.search } };
 
   if (isAuthenticated) {
     return <Navigate to={from} />;
@@ -47,7 +47,7 @@ export const Login = (props: any) => {
 
         <div className="login-body">
           <div className="login-logo">
-            <div className="info">Đăng nhập user</div>
+            <div className="info">Đăng nhập sinh vien</div>
           </div>
           <Form name="login-form" className="login-form" layout="vertical" autoComplete="off" onFinish={_onLogin}>
 

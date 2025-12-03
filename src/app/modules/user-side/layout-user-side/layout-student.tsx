@@ -73,7 +73,7 @@ const StudentSite = () => {
         !accessToken && (
           <Navigate
             to={{
-              pathname: '/user/login'
+              pathname: '/student/login'
             }}
           />
         )
