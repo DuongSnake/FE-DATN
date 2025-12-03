@@ -110,7 +110,13 @@ export const ID_MENU_TAB = {
   Z0026: 'studentMapInstructor',
   Z0027: 'assignmentStudentRegister',
   Z0028: 'registerAssignmentStudent',
-  Z0029: 'registerAssignmentStudent'
+  Z0029: 'registerAssignmentStudent',
+  Z0030: 'progressAssignmentApprove',
+  Z0031: 'searchScoreAssignment',
+  Z0032: 'assignmentApprove',
+  Z0033: 'listStudentMapInstructor',
+  Z0034: 'listAssgignmentApprove',
+  Z0035: 'scoreAssigmentManagement'
 };
 
 export const MENU_PRIVILEGES = [
@@ -228,6 +234,34 @@ export const MENU_PRIVILEGES = [
   },
   {
     tabId: ID_MENU_TAB.Z0029,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+    {
+    tabId: ID_MENU_TAB.Z0029,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0030,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0031,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0032,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0033,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0034,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0035,
     userGroup: [USER_TYPE.S, USER_TYPE.B],
   },
 ];

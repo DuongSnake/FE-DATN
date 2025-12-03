@@ -10,16 +10,20 @@ export const sidebarMenu = [
     icon: <MenuReportIcon />,
     items: [
       {
-        id: ID_MENU_TAB.Z0028,
-        title: 'Đăng ký đồ án',
+        id: ID_MENU_TAB.Z0032,
+        title: 'Danh sach do an yeu cau duyet',
       },
       {
-        id: ID_MENU_TAB.Z0029,
-        title: 'Quản lý tệp tin đồ án',
+        id: ID_MENU_TAB.Z0033,
+        title: 'Danh sach sinh vien duoc map',
       },
       {
-        id: ID_MENU_TAB.Z0030,
-        title: 'Tra cứu điểm dồ án',
+        id: ID_MENU_TAB.Z0034,
+        title: 'Danh sach do an da duyet',
+      },
+      {
+        id: ID_MENU_TAB.Z0035,
+        title: 'Quan ly diem do an',
       }
     ],
   },

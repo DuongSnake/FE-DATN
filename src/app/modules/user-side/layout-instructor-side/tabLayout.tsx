@@ -20,15 +20,19 @@ const listComponent = [
     panelComponent: <Dashboard />,
   },
   {
-    id: ID_MENU_TAB.Z0028,
+    id: ID_MENU_TAB.Z0032,
     panelComponent: <RegisterAssignmentStudent />,
   },
-    {
-    id: ID_MENU_TAB.Z0029,
+  {
+    id: ID_MENU_TAB.Z0033,
     panelComponent: <RegisterAssignmentStudent />,
   },
-    {
-    id: ID_MENU_TAB.Z0030,
+  {
+    id: ID_MENU_TAB.Z0034,
+    panelComponent: <RegisterAssignmentStudent />,
+  },
+  {
+    id: ID_MENU_TAB.Z0035,
     panelComponent: <RegisterAssignmentStudent />,
   },
 ];
