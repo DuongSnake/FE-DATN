@@ -101,7 +101,7 @@ export const API_DELETE_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentS
 export const API_SELECT_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/select';
 
 /**
- * Student side
+ * List Assignment register
  */
 export const API_GET_LIST_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/selectList';
 export const API_ADD_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/insert';
@@ -110,3 +110,11 @@ export const API_DELETE_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignment
 export const API_SELECT_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/select';
 export const API_RESERVE_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/reserveListAssignment';
 export const API_SEND_REQUEST_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/sendRequestAssignment';
+
+/**
+ * List Assignment register approve
+ */
+export const API_GET_LIST_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/selectListAssApprove';
+export const API_GET_LIST_FILE_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/selectListFileAss';
+export const API_ADD_LIST_FILE_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/insertListFileAssignment';
+export const API_UPDATE_LIST_FILE_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/updateListFileAssignment';

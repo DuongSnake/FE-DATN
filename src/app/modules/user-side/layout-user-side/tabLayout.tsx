@@ -14,6 +14,10 @@ const RegisterAssignmentStudent = importedComponent(() => import('@/app/modules/
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
+const FileUploadAssignmentApprove = importedComponent(() => import('@/app/modules/user-side/student-side/file-upload-assignment-approve/FileUploadAssignmentApprove'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
 const listComponent = [
   {
     id: 'dashboard',
@@ -25,7 +29,7 @@ const listComponent = [
   },
     {
     id: ID_MENU_TAB.Z0029,
-    panelComponent: <RegisterAssignmentStudent />,
+    panelComponent: <FileUploadAssignmentApprove />,
   },
     {
     id: ID_MENU_TAB.Z0030,

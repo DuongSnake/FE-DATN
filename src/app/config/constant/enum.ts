@@ -1061,7 +1061,7 @@ export const APPROVE_ASSIGNMENT_REGISTER_STATUS = [
     textColor: '#EA5455',
   },
   {
-    val: 1,
+    val: 2,
     text: 'Đã duyệt',
     textColor: '#28C76F',
   },

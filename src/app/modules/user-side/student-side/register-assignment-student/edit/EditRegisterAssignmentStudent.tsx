@@ -7,11 +7,11 @@ import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { checkSuccessDispatch } from '@/app/shared/util/global-function';
 import { insertRegisterAssignmentStudent, updateRegisterAssignmentStudent, selectRegisterAssignmentStudent } from '../RegisterAssignmentStudent.reducer';
-const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFormAdd, listStudentMapInstructor }) => {
+const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFormAdd, listPeriodAssignment }) => {
   const dispatch = useAppDispatch();
   const { loadingAdd, validateError, loadingUpdate } = useAppSelector(state => state.assignmentStudentRegister);
   const [formRegis] = Form.useForm();
-  const [studentMapInstructorId, setStudentMapInstructorId] = useState('');
+  const [periodAssignmentId, setPeriodAssignmentId] = useState('');
   const [fileList, setFileList] = useState<any[]>([]);
   const _onSuccess = () => {
     _onResetForm();
@@ -32,12 +32,12 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
       return;
     } else {
     const formData = new FormData();
-    if(fileList[0].url != ""){
+    if(fileList[0] != undefined && fileList[0].url != ""){
     formData.append("fileUpload", fileList[0].originFileObj);
     }
     formData.append("assignmentStudentRegisterId", values.assignmentStudentRegisterId);
     formData.append("assignmentRegisterName", values.assignmentRegisterName);
-    formData.append("studentMapInstructorId", values.studentMapInstructorId);
+    formData.append("periodAssignmentId", values.periodAssignmentId);
       dispatch(insertRegisterAssignmentStudent(formData)).then(res => {
         if (checkSuccessDispatch(res)) {
           _onSuccess();
@@ -47,7 +47,7 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
   };
   const _onUpdateAssignmentStudentRegister = (values: any) => {
     const formData = new FormData();
-    if(fileList[0].url != ""){
+    if(fileList[0] != undefined && fileList[0].url != ""){
     formData.append("fileUpload", fileList[0].originFileObj);
     }
     formData.append("assignmentRegisterId", values.assignmentRegisterId);
@@ -57,7 +57,10 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
         _onSuccess();
       }
     });
-  }
+  };
+  const _handlePeriodAssignmentId = e => {
+    setPeriodAssignmentId(e);
+  };
 
   const _onResetForm = () => {
     if (isEdit) return;
@@ -65,8 +68,8 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
     setFileList([]);
     formRegis.resetFields();
   };
-  const _handleChangeStudentMapInstructorId = e => {
-    setStudentMapInstructorId(e);
+  const _handleChangePeriodAssignmentId = e => {
+    setPeriodAssignmentId(e);
   };
 
   useEffect(() => {
@@ -91,7 +94,7 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
       });
       //Set default value date for form regis and variable fromDate and toDate
       formRegis.setFieldsValue({
-        studentMapInstructorId: selected.studentMapInstructorId
+        periodAssignmentId: selected.periodAssignmentId
       });
       const defaultFile: UploadFile = {
         uid: '-1',
@@ -166,6 +169,29 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
                   </Button>
                 </Upload>
 
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+                        <Col xs={10} md={3}>
+              <span className="cms-search-label">Loại kỳ hạn đồ án</span>
+              <span className="cms-required-field"> *</span>
+            </Col>
+
+            <Col xs={14} md={8}>
+              <Form.Item name="periodAssignmentId"
+                rules={[{ required: true, message: i18next.t('validation-message.required-field') }]}>
+                <Select value={periodAssignmentId} onChange={_handlePeriodAssignmentId} placeholder={i18next.t('label.all')} allowClear>
+                  <Select.Option value="">{i18next.t('label.all')}</Select.Option>
+                  {Array.isArray(listPeriodAssignment) &&
+                    listPeriodAssignment.map((obj, i) => {
+                      return (
+                        <Select.Option key={i} value={obj.periodAssignmentId}>
+                          {obj.admissionPeriodIdName} - {obj.majorName}
+                        </Select.Option>
+                      );
+                    })}
+                </Select>
               </Form.Item>
             </Col>
           </Row>

@@ -32,7 +32,7 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
       return;
     } else {
     const formData = new FormData();
-    if(fileList[0].url != ""){
+    if(fileList[0] != undefined && fileList[0].url != ""){
     formData.append("fileUpload", fileList[0].originFileObj);
     }
     formData.append("assignmentStudentRegisterId", values.assignmentStudentRegisterId);
@@ -47,7 +47,7 @@ const EditAssignmentStudentRegister = ({ isEdit, onSearch, selected, onChangeFor
   };
   const _onUpdateAssignmentStudentRegister = (values: any) => {
     const formData = new FormData();
-    if(fileList[0].url != ""){
+    if(fileList[0] != undefined && fileList[0].url != ""){
     formData.append("fileUpload", fileList[0].originFileObj);
     }
     formData.append("assignmentStudentRegisterId", values.assignmentStudentRegisterId);

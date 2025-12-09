@@ -6,27 +6,26 @@ import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-import { deleteRegisterAssignmentStudent, getListRegisterAssignmentStudent, resetDept, sendRequestAssignmentStudent} from './RegisterAssignmentStudent.reducer';
+import { selectFileUploadAssignmentApprove, getListFileUploadAssignmentApprove, resetDept, updateFileUploadAssignmentApprove, insertFileUploadAssignmentApprove} from './FileUploadAssignmentApprove.reducer';
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../../shared/layout/content-task.scss';
-import EditAssignmentStudentRegister from './edit/EditRegisterAssignmentStudent';
+import EditAssignmentStudentRegister from './edit/EditFileUploadAssignmentApprove';
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
-import { getAllPeriodAssignmentActive} from '../../../admin-side/period-assignment/PeriodAssignment.reducer';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
 import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS,APPROVE_ASSIGNMENT_REGISTER_STATUS } from '@/app/config/constant/enum';
 const { RangePicker } = DatePicker;
-const RegisterAssignmentStudent = () => {
+const FileUploadAssignmentApprove = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(state => state.registerAssignmentStudent.loading);
-  const loadingDelete = useAppSelector(state => state.registerAssignmentStudent.loadingDelete);
-  const listRegisterAssignmentStudent = useAppSelector(state => state.registerAssignmentStudent.listRegisterAssignmentStudent);
-  const totalRecord = useAppSelector(state => state.registerAssignmentStudent.totalRecord);
-  const [registerAssignmentStudentId, setRegisterAssignmentStudentId] = useState('');
-  const [RegisterAssignmentStudentName, setRegisterAssignmentStudentName] = useState('');
-  const [instructorId, setInstructorId] = useState('');
+  const loading = useAppSelector(state => state.fileUploadAssignmentApprove.loading);
+  const loadingDelete = useAppSelector(state => state.fileUploadAssignmentApprove.loadingDelete);
+  const listFileUploadAssignmentApprove = useAppSelector(state => state.fileUploadAssignmentApprove.listFileUploadAssignmentApprove);
+  const totalRecord = useAppSelector(state => state.fileUploadAssignmentApprove.totalRecord);
+  const [assignmentRegisterId, setaAsignmentRegisterId] = useState('');
+  const [assignmentRegisterName, setAssignmentRegisterName] = useState('');
+  const [periodAssignmentId, setPeriodAssignmentId] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [studentId, setStudentId] = useState('');
@@ -36,7 +35,6 @@ const RegisterAssignmentStudent = () => {
   const [showForm, setShowForm] = useState('add');
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
   const [listApproveType, setListApproveType] = useState(APPROVE_ASSIGNMENT_REGISTER_STATUS);
-  const [listPeriodAssignment, setListPeriodAssignment] = useState([]);
   const [pager, setPager] = useState({
     pageNum: 1,
     pageSize: 10,
@@ -49,24 +47,14 @@ const RegisterAssignmentStudent = () => {
     onScrollToBottom();
   };
 
-  const _handleChangeRegisterAssignmentStudentId = e => {
+  const _handleChangeFileUploadAssignmentApproveId = e => {
     const { value } = e.target;
-    setRegisterAssignmentStudentId(value);
+    setaAsignmentRegisterId(value);
   };
 
-
-  const getAllPeriodAssignment = () => {
-   dispatch(getAllPeriodAssignmentActive()).then(res => {
-      if (checkSuccessDispatch(res)) {
-        const objectResponse: IParamCommonDuong = res.payload;
-        setListPeriodAssignment(objectResponse?.data.data ?? []);
-      }
-    });
-  };
-
-  const _handleChangeRegisterAssignmentStudentName = e => {
+  const _handleChangeFileUploadAssignmentApproveName = e => {
     const { value } = e.target;
-    setRegisterAssignmentStudentName(value);
+    setAssignmentRegisterName(value);
   };
 
   const _onChangeShowForm = value => {
@@ -75,22 +63,12 @@ const RegisterAssignmentStudent = () => {
     setShowForm(value);
   };
 
-  const _onChangeSendRequest = value => {
-    console.log("Request id:"+requestId);
-    dispatch(sendRequestAssignmentStudent(createCommonIParamsDuong({ requestId }))).then(res => {
-      if (checkSuccessDispatch(res)) {
-        onScrollToTop();
-        _onSearchRegisterAssignmentStudent(pager.pageNum, pager.pageSize);
-      }
-    });
-  };
-
   const _onChangeFormAdd = () => {
     setShowForm('add');
   };
 
-  const _handleChangeInstructorId = e => {
-    setInstructorId(e);
+  const _handleChangePeriodAssignmentId = e => {
+    setPeriodAssignmentId(e);
   };
 
   const _handleChangeStudentId = e => {
@@ -102,37 +80,37 @@ const RegisterAssignmentStudent = () => {
   };
   const _onChangePagination = (page, pageSize) => {
     setPager({ ...pager, pageNum: page });
-    _onSearchRegisterAssignmentStudent(page, pageSize);
+    _onSearchFileUploadAssignmentApprove(page, pageSize);
   };
 
-    const _onSearchRegisterAssignmentStudent = async (pageNum, pageSize) => {
+    const _onSearchFileUploadAssignmentApprove = async (pageNum, pageSize) => {
       setListSelected([]);
       dataGridRef.current.instance.clearSelection();
       let pageRequestDto = {
         pageNum: pageNum,
         pageSize: pageSize,
       };
-    const payload = createCommonIParamsDuong({ registerAssignmentStudentId, RegisterAssignmentStudentName, fromDate, toDate, status, pageRequestDto });
-    dispatch(getListRegisterAssignmentStudent(payload));
+    const payload = createCommonIParamsDuong({ assignmentRegisterId, assignmentRegisterName, periodAssignmentId, fromDate, toDate, status, pageRequestDto });
+    dispatch(getListFileUploadAssignmentApprove(payload));
     };
   
     ///For search button
-    const _onSearchRegisterAssignmentStudent2 = async () => {
+    const _onSearchFileUploadAssignmentApprove2 = async () => {
     setListSelected([]);
     dataGridRef.current.instance.clearSelection();
     let pageRequestDto = {
       pageNum: 1,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ registerAssignmentStudentId, RegisterAssignmentStudentName, instructorId, fromDate, toDate, status, pageRequestDto });
-    dispatch(getListRegisterAssignmentStudent(payload));
+    const payload = createCommonIParamsDuong({ assignmentRegisterId, assignmentRegisterName, periodAssignmentId, fromDate, toDate, status, pageRequestDto });
+    dispatch(getListFileUploadAssignmentApprove(payload));
     };
 
   const onChangeDate = value => {
-    const RegisterAssignmentStudentFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
-    const RegisterAssignmentStudentToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
-    setFromDate(RegisterAssignmentStudentFromDt);
-    setToDate(RegisterAssignmentStudentToDt);
+    const FileUploadAssignmentApproveFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
+    const FileUploadAssignmentApproveToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
+    setFromDate(FileUploadAssignmentApproveFromDt);
+    setToDate(FileUploadAssignmentApproveToDt);
     };
 
   const onSelectionChanged = async () => {
@@ -144,32 +122,6 @@ const RegisterAssignmentStudent = () => {
       });
     });
     setListSelected(listData);
-  };
-
-  const _onDeleteRegisterAssignmentStudent = () => {
-    Modal.confirm({
-      title: i18next.t('confirm.title'),
-      icon: <QuestionCircleOutlined />,
-      content: i18next.t('confirm.description'),
-      okText: i18next.t('button.delete'),
-      wrapClassName: 'cms-confirm-modal',
-      cancelText: i18next.t('button.close'),
-      async onOk() {
-        await _onDelete();
-        await _onSearchRegisterAssignmentStudent(pager.pageNum, pager.pageSize);
-      },
-    });
-  };
-
-  const _onDelete = async () => {
-    const listDelete = [];
-    listSelected.forEach(item => listDelete.push(item.RegisterAssignmentStudentId));
-    dispatch(deleteRegisterAssignmentStudent(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
-      if (checkSuccessDispatch(res)) {
-        onScrollToTop();
-        _onSearchRegisterAssignmentStudent(pager.pageNum, pager.pageSize);
-      }
-    });
   };
 
   const _onRowClick = e => {
@@ -191,13 +143,12 @@ const RegisterAssignmentStudent = () => {
 
   const _onEnter = e => {
     if (e.key === 'Enter') {
-      _onSearchRegisterAssignmentStudent(pager.pageNum, pager.pageSize);
+      _onSearchFileUploadAssignmentApprove(pager.pageNum, pager.pageSize);
     }
   };
 
   useEffect(() => {
-    _onSearchRegisterAssignmentStudent(pager.pageNum, pager.pageSize);
-    getAllPeriodAssignment();
+    _onSearchFileUploadAssignmentApprove(pager.pageNum, pager.pageSize);
     return () => {
       dispatch(resetDept());
     };
@@ -213,7 +164,7 @@ const RegisterAssignmentStudent = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Danh sach đồ án đăng ký
+          Danh sach do an da duyet
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -228,8 +179,8 @@ const RegisterAssignmentStudent = () => {
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={registerAssignmentStudentId}
-                onChange={_handleChangeRegisterAssignmentStudentId}
+                value={assignmentRegisterId}
+                onChange={_handleChangeFileUploadAssignmentApproveId}
                 maxLength={80}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
@@ -243,8 +194,8 @@ const RegisterAssignmentStudent = () => {
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={RegisterAssignmentStudentName}
-                onChange={_handleChangeRegisterAssignmentStudentId}
+                value={assignmentRegisterName}
+                onChange={_handleChangeFileUploadAssignmentApproveId}
                 maxLength={80}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
@@ -277,7 +228,7 @@ const RegisterAssignmentStudent = () => {
             </Col>
 
             <Col className="form-btn-search">
-              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchRegisterAssignmentStudent2}>
+              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchFileUploadAssignmentApprove2}>
                 Tìm kiếm
               </Button>
             </Col>
@@ -286,10 +237,6 @@ const RegisterAssignmentStudent = () => {
 
         <div className="page-table-template">
           <div className="table-actions">
-            <Button className="button-add" icon={<PlusOutlined />} onClick={scrollToBottom}>
-              {i18next.t('button.register')}
-            </Button>
-
             <Button
               disabled={listSelected.length !== 1}
               className="button-edit"
@@ -298,32 +245,13 @@ const RegisterAssignmentStudent = () => {
             >
               {i18next.t('button.edit')}
             </Button>
-
-            <Button
-              disabled={listSelected.length !== 1}
-              className="button-edit"
-              icon={<EditOutlined />}
-              onClick={() => _onChangeSendRequest(listSelected)}
-            >
-              Gửi duyệt đồ án
-            </Button>
-
-            <Button
-              disabled={listSelected.length === 0}
-              loading={loadingDelete}
-              className="button-delete"
-              icon={<DeleteOutlined />}
-              onClick={_onDeleteRegisterAssignmentStudent}
-            >
-              {i18next.t('button.delete')}
-            </Button>
           </div>
 
           <Spin spinning={loading} tip={i18next.t('getData')}>
             <div className="table-data">
               <DataGrid
                 id="gridContainer"
-                dataSource={listRegisterAssignmentStudent}
+                dataSource={listFileUploadAssignmentApprove}
                 showBorders={true}
                 keyExpr="assignmentRegisterId"
                 ref={dataGridRef}
@@ -337,7 +265,7 @@ const RegisterAssignmentStudent = () => {
                 onRowDblClick={_onDoubleClickRow}
                 onRowClick={_onRowClick}
               >
-                <Selection mode="multiple" showCheckBoxesMode={'always'} deferred={true} />
+                <Selection mode="single" showCheckBoxesMode={'always'} deferred={true} />
                 <Pager visible={false} showNavigationButtons={false} />
                 <Column
                   dataField="assignmentRegisterId"
@@ -354,14 +282,6 @@ const RegisterAssignmentStudent = () => {
                   allowFiltering={false}
                   allowSorting={true}
                   caption="Tên đề tài"
-                  dataType="string"
-                />
-                <Column
-                  dataField="studentMapInstructorId"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Mã sinh viên map giáo viên"
                   dataType="string"
                 />
                 <Column
@@ -392,25 +312,6 @@ const RegisterAssignmentStudent = () => {
                   }}
                 />
                 <Column
-                  dataField="status"
-                  alignment="center"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Trạng thái xóa "
-                  dataType="string"
-                  width={120}
-                  cellRender={row => {
-                    if (!row.data.status) {
-                      return <>{row.data.status}</>;
-                    }
-                    const requestStatusData = listBankCodeType.find(obj => obj.val === row.data.status);
-
-                    if (requestStatusData) {
-                      return <>{i18next.t(requestStatusData.text)}</>;
-                    }
-                  }}
-                />
-                <Column
                   dataField="createAt"
                   alignment="center"
                   allowFiltering={false}
@@ -433,16 +334,14 @@ const RegisterAssignmentStudent = () => {
             </div>
           </Spin>
         </div>
-
         <EditAssignmentStudentRegister
           isEdit={showForm === 'edit'}
-          onSearch={_onSearchRegisterAssignmentStudent}
+          onSearch={_onSearchFileUploadAssignmentApprove}
           selected={listSelected[0]}
           onChangeFormAdd={_onChangeFormAdd}
-          listPeriodAssignment = {listPeriodAssignment}
         />
       </div>
     </div>
   );
 };
-export default RegisterAssignmentStudent;
+export default FileUploadAssignmentApprove;
