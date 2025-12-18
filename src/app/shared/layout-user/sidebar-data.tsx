@@ -18,7 +18,7 @@ export const sidebarMenu = [
         title: 'Quản lý tệp tin đồ án',
       },
       {
-        id: ID_MENU_TAB.Z0030,
+        id: ID_MENU_TAB.Z0031,
         title: 'Tra cứu điểm dồ án',
       }
     ],

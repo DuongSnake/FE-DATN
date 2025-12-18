@@ -363,7 +363,7 @@ const PeriodAssignment = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.status')}
+                  caption={i18next.t('')}
                   dataType="string"
                   width={120}
                   cellRender={row => {

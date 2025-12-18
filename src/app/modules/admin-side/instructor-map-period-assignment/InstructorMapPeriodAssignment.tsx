@@ -8,7 +8,7 @@ import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
 import { deleteInstructorMapPeriodAssignment, getListInstructorMapPeriodAssignment, resetDept} from './InstructorMapPeriodAssignment.reducer';
 import { getAllPeriodAssignmentActive} from '../period-assignment/PeriodAssignment.reducer';
-import { selectAllInstructorActive} from '../user-management/UserManagement.reducer';
+import { selectAllStudentActive} from '../user-management/UserManagement.reducer';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../shared/layout/content-task.scss';
@@ -112,7 +112,7 @@ const InstructorMapPeriodAssignment = () => {
   };
 
   const getAllIntructor = () => {
-   dispatch(selectAllInstructorActive()).then(res => {
+   dispatch(selectAllStudentActive()).then(res => {
       if (checkSuccessDispatch(res)) {
         const objectResponse: IParamCommonDuong = res.payload;
         setListInstructor(objectResponse?.data ?? []);
@@ -200,7 +200,7 @@ const InstructorMapPeriodAssignment = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Map giáo viên và kỳ hạn của chuyên ngành
+          Map sinh viên và kỳ hạn của chuyên ngành
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -209,7 +209,7 @@ const InstructorMapPeriodAssignment = () => {
         <div className="page-search-template">
           <Row style={{ marginBottom: 18 }} align="middle">
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Mã giáo viên - kỳ hạn</label>
+              <label className="cms-search-label label-padding-left">Mã sinh viên - kỳ hạn</label>
             </Col>
 
             <Col xl={5} xxl={4}>
@@ -224,7 +224,7 @@ const InstructorMapPeriodAssignment = () => {
             </Col>
 
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Tên giáo viên</label>
+              <label className="cms-search-label label-padding-left">Tên sinh viên</label>
             </Col>
 
             <Col xl={5} xxl={4}>
@@ -342,7 +342,7 @@ const InstructorMapPeriodAssignment = () => {
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Mã giáo viên - kỳ hạn"
+                  caption="Mã sinh viên - kỳ hạn"
                   dataType="string"
                   width={150}
                 />
@@ -367,7 +367,7 @@ const InstructorMapPeriodAssignment = () => {
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Tên giáo viên"
+                  caption="Tên sinh viên"
                   dataType="string"
                 />
                 <Column
@@ -375,7 +375,7 @@ const InstructorMapPeriodAssignment = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.status')}
+                  caption="Trạng thái"
                   dataType="string"
                   width={120}
                   cellRender={row => {

@@ -39,7 +39,7 @@ export const sidebarMenu = [
       },
       {
         id: ID_MENU_TAB.Z0025,
-        title: 'Map giáo viên và chuyên ngành',
+        title: 'Map sinh viên và chuyên ngành',
       },
       {
         id: ID_MENU_TAB.Z0026,
@@ -48,6 +48,10 @@ export const sidebarMenu = [
       {
         id: ID_MENU_TAB.Z0027,
         title: 'Đăng ký đề tài',
+      },
+      {
+        id: ID_MENU_TAB.Z0036,
+        title: 'Quản lý điểm đồ án',
       },
     ],
   },

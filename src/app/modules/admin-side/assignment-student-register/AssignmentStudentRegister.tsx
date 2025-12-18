@@ -195,7 +195,7 @@ const AssignmentStudentRegister = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Map giáo viên và kỳ hạn của chuyên ngành
+          Map sinh viên và kỳ hạn của chuyên ngành
           <span className="sub-heading-template"></span>
         </h3>
       </div>

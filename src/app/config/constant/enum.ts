@@ -110,13 +110,14 @@ export const ID_MENU_TAB = {
   Z0026: 'studentMapInstructor',
   Z0027: 'assignmentStudentRegister',
   Z0028: 'registerAssignmentStudent',
-  Z0029: 'demo',
+  Z0029: 'fileUploadAssignmentApprove',
   Z0030: 'progressAssignmentApprove',
   Z0031: 'searchScoreAssignment',
   Z0032: 'assignmentApprove',
   Z0033: 'listStudentMapInstructor',
   Z0034: 'listAssgignmentApprove',
-  Z0035: 'scoreAssigmentManagement'
+  Z0035: 'scoreAssigmentManagement',
+  Z0036: 'scoreAssigmentManagementAdmin'
 };
 
 export const MENU_PRIVILEGES = [
@@ -258,6 +259,10 @@ export const MENU_PRIVILEGES = [
   },
   {
     tabId: ID_MENU_TAB.Z0035,
+    userGroup: [USER_TYPE.S, USER_TYPE.B],
+  },
+  {
+    tabId: ID_MENU_TAB.Z0036,
     userGroup: [USER_TYPE.S, USER_TYPE.B],
   },
 ];
@@ -1070,5 +1075,19 @@ export const APPROVE_ASSIGNMENT_REGISTER_STATUS = [
     text: 'Bảo lưu',
     textColor: '#EA5455',
   },
-];;
+];
+export const LIST_MONTH = [
+  { value: '01', name: 'Tháng 1' },
+  { value: '02', name: 'Tháng 2' },
+  { value: '03', name: 'Tháng 3' },
+  { value: '04', name: 'Tháng 4' },
+  { value: '05', name: 'Tháng 5' },
+  { value: '06', name: 'Tháng 6' },
+  { value: '07', name: 'Tháng 7' },
+  { value: '08', name: 'Tháng 8' },
+  { value: '09', name: 'Tháng 9' },
+  { value: '10', name: 'Tháng 10' },
+  { value: '11', name: 'Tháng 11' },
+  { value: '12', name: 'Tháng 12' },
+];
 

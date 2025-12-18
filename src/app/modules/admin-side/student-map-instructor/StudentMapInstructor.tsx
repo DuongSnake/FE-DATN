@@ -200,7 +200,7 @@ const StudentMapInstructor = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Map giáo viên và kỳ hạn của chuyên ngành
+          Map sinh viên và giáo viên
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -209,7 +209,7 @@ const StudentMapInstructor = () => {
         <div className="page-search-template">
           <Row style={{ marginBottom: 18 }} align="middle">
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Mã giáo viên - kỳ hạn</label>
+              <label className="cms-search-label label-padding-left">Mã sinh viên - kỳ hạn</label>
             </Col>
 
             <Col xl={5} xxl={4}>
@@ -367,7 +367,7 @@ const StudentMapInstructor = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.status')}
+                  caption="Trạng thái"
                   dataType="string"
                   width={120}
                   cellRender={row => {

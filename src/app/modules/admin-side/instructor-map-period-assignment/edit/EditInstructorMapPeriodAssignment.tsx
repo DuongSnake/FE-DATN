@@ -123,7 +123,7 @@ const EditInstructorMapPeriodAssignment = ({ isEdit, onSearch, selected, onChang
             </Col>
 
             <Col xs={10} md={3}>
-              <span className="cms-search-label">Tên giáo viên</span>
+              <span className="cms-search-label">Tên sinh viên</span>
               <span className="cms-required-field"> *</span>
             </Col>
 

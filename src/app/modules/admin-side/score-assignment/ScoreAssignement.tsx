@@ -7,31 +7,37 @@ import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-import { deleteAdmissionPeriod, getListAdmissionPeriod, resetDept} from './AdmissionPeriod.reducer';
+// import { deleteScoreAssignment, getListScoreAssignment, resetDept} from './ScoreAssignmentManagement.reducer';
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../shared/layout/content-task.scss';
-import EditAdmissionPeriod from './edit/EditAdmissionPeriod';
+// import EditScoreAssignment from './edit/EditScoreAssignmentManagement';
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
 import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
 const { RangePicker } = DatePicker;
-const AdmissionPeriod = () => {
+const ScoreAssignment = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(state => state.admissionPeriodManagementReducer.loading);
-  const loadingDelete = useAppSelector(state => state.admissionPeriodManagementReducer.loadingDelete);
-  const listAdmissionPeriod = useAppSelector(state => state.admissionPeriodManagementReducer.listAdmissionPeriod);
-  const [admissionPeriodId, setAdmissionPeriodId] = useState('');
-  const [admissionPeriodName, setAdmissionPeriodname] = useState('');
+  const loading = [];
+  const loadingDelete = [];
+  const listScoreAssignment = [    {
+      "id": "1",
+      "sorceName": "Quản lý sinh viên",
+      "sorceName123": "7.5",
+      "status": "1",
+      "createAt": "2025-11-24"
+    }];
+  const [ScoreAssignmentId, setScoreAssignmentId] = useState('');
+  const [ScoreAssignmentname, setScoreAssignmentname] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [createUser, setCreateUser] = useState('');
   const [status, setStatus] = useState('');
   const [listSelected, setListSelected] = useState([]);
   const [showForm, setShowForm] = useState('add');
-  const [listAdmissionPeriodType, setListAdmissionPeriodType] = useState(RESPONSE_CODE_STATUS);
+  const [listScoreAssignmentType, setListScoreAssignmentType] = useState(RESPONSE_CODE_STATUS);
   const [listBankCodeType, setListBankCodeType] = useState(RESPONSE_CODE_STATUS);
 
   const dataGridRef = useRef(null);
@@ -42,9 +48,9 @@ const AdmissionPeriod = () => {
     onScrollToBottom();
   };
 
-  const _handleChangeAdmissionPeriodId = e => {
+  const _handleChangeScoreAssignmentId = e => {
     const { value } = e.target;
-    setAdmissionPeriodId(value);
+    setScoreAssignmentId(value);
   };
 
   const _onChangeShowForm = value => {
@@ -57,9 +63,9 @@ const AdmissionPeriod = () => {
     setShowForm('add');
   };
 
-  const _handleChangeAdmissionPeriodName = e => {
+  const _handleChangeScoreAssignmentName = e => {
     const { value } = e.target;
-    setAdmissionPeriodname(value);
+    setScoreAssignmentname(value);
   };
 
   const _handleChangeStatus = e => {
@@ -67,10 +73,10 @@ const AdmissionPeriod = () => {
   };
 
   const onChangeDate = value => {
-    const AdmissionPeriodFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
-    const AdmissionPeriodToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
-    setFromDate(AdmissionPeriodFromDt);
-    setToDate(AdmissionPeriodToDt);
+    const ScoreAssignmentFromDt = value && value.length === 2 ? moment(value[0]).format(APP_DATE_FORMAT) : '';
+    const ScoreAssignmentToDt = value && value.length === 2 ? moment(value[1]).format(APP_DATE_FORMAT) : '';
+    setFromDate(ScoreAssignmentFromDt);
+    setToDate(ScoreAssignmentToDt);
     };
 
   const onSelectionChanged = async () => {
@@ -83,7 +89,7 @@ const AdmissionPeriod = () => {
     setListSelected(listData);
   };
 
-  const _onDeleteAdmissionPeriod = () => {
+  const _onDeleteScoreAssignment = () => {
     Modal.confirm({
       title: i18next.t('confirm.title'),
       icon: <QuestionCircleOutlined />,
@@ -93,7 +99,7 @@ const AdmissionPeriod = () => {
       cancelText: i18next.t('button.close'),
       async onOk() {
         await _onDelete();
-        await _onSearchAdmissionPeriod();
+        await _onSearchScoreAssignment();
       },
     });
   };
@@ -101,28 +107,29 @@ const AdmissionPeriod = () => {
   const _onDelete = async () => {
     const listDelete = [];
 
-    listSelected.forEach(item => listDelete.push(item.admissionPeriodId));
+    listSelected.forEach(item => listDelete.push(item.ScoreAssignmentId));
 
-    dispatch(deleteAdmissionPeriod(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
-      if (checkSuccessDispatch(res)) {
-        onScrollToTop();
-        _onSearchAdmissionPeriod();
-      }
-    });
+    // dispatch(deleteScoreAssignment(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
+    //   if (checkSuccessDispatch(res)) {
+    //     onScrollToTop();
+    //     _onSearchScoreAssignment();
+    //   }
+    // });
   };
 
   const _onRowClick = e => {
     dataGridRef.current.instance.selectRowsByIndexes(e.rowIndex);
   };
 
-  const _onSearchAdmissionPeriod = async () => {
+  const _onSearchScoreAssignment = async () => {
     setListSelected([]);
+    dataGridRef.current.instance.clearSelection();
     let pageRequestDto = {
       pageNum: 0,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ admissionPeriodId, admissionPeriodName, fromDate, toDate, status, createUser, pageRequestDto });
-    dispatch(getListAdmissionPeriod(payload));
+    const payload = createCommonIParamsDuong({ ScoreAssignmentId, ScoreAssignmentname, fromDate, toDate, status, createUser, pageRequestDto });
+    // dispatch(getListScoreAssignment(payload));
   };
 
   const _onDoubleClickRow = e => {
@@ -134,14 +141,14 @@ const AdmissionPeriod = () => {
 
   const _onEnter = e => {
     if (e.key === 'Enter') {
-      _onSearchAdmissionPeriod();
+      _onSearchScoreAssignment();
     }
   };
 
   useEffect(() => {
-    _onSearchAdmissionPeriod();
+    _onSearchScoreAssignment();
     return () => {
-      dispatch(resetDept());
+    //   dispatch(resetDept());
     };
   }, []);
 
@@ -155,7 +162,7 @@ const AdmissionPeriod = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Kỳ học
+          Điểm đồ án
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -164,14 +171,14 @@ const AdmissionPeriod = () => {
         <div className="page-search-template">
           <Row style={{ marginBottom: 18 }} align="middle">
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Mã kỳ học</label>
+              <label className="cms-search-label label-padding-left">Mã điểm đồ án</label>
             </Col>
 
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={admissionPeriodId}
-                onChange={_handleChangeAdmissionPeriodId}
+                value={ScoreAssignmentId}
+                onChange={_handleChangeScoreAssignmentId}
                 maxLength={80}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
@@ -179,18 +186,20 @@ const AdmissionPeriod = () => {
             </Col>
 
             <Col xl={3} xxl={3}>
-              <label className="cms-search-label label-padding-left">Tên kỳ học</label>
+              <label className="cms-search-label label-padding-left">Tên đồ án</label>
             </Col>
 
             <Col xl={5} xxl={4}>
-              <Input
-                className="cms-form-control"
-                value={admissionPeriodName}
-                onChange={_handleChangeAdmissionPeriodName}
-                maxLength={60}
-                onKeyPress={_onEnter}
-                placeholder="Nhập vào đi bạn"
-              />
+              <Select value={status} onChange={_handleChangeStatus} placeholder={i18next.t('label.all')} allowClear>
+                <Select.Option value="">{i18next.t('label.all')}</Select.Option>
+                {listScoreAssignmentType.map((obj, i) => {
+                  return (
+                    <Select.Option key={i} value={obj.val}>
+                      {i18next.t(obj.text)}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
             </Col>
             <Col xl={3} xxl={3}>
               <label className="cms-search-label label-padding-left">Trạng thái</label>
@@ -198,7 +207,7 @@ const AdmissionPeriod = () => {
             <Col xl={5} xxl={4}>
               <Select value={status} onChange={_handleChangeStatus} placeholder={i18next.t('label.all')} allowClear>
                 <Select.Option value="">{i18next.t('label.all')}</Select.Option>
-                {listAdmissionPeriodType.map((obj, i) => {
+                {listScoreAssignmentType.map((obj, i) => {
                   return (
                     <Select.Option key={i} value={obj.val}>
                       {i18next.t(obj.text)}
@@ -211,14 +220,14 @@ const AdmissionPeriod = () => {
 
           <Row align="middle">
             <Col xl={3} xxl={3}>
-                <label className="cms-search-label label-padding-left">Ngày đăng ký</label>
+                <label className="cms-search-label label-padding-left">Ngày nhập điểm</label>
             </Col>
             <Col xl={5} xxl={4}>
                     <RangePicker className="date" id="date" onChange={onChangeDate} />
             </Col>
 
             <Col className="form-btn-search">
-              <Button icon={<SearchOutlined />} loading={loading} className="button-search" onClick={_onSearchAdmissionPeriod}>
+              <Button icon={<SearchOutlined />} className="button-search" onClick={_onSearchScoreAssignment}>
                 Tìm kiếm
               </Button>
             </Col>
@@ -242,28 +251,26 @@ const AdmissionPeriod = () => {
 
             <Button
               disabled={listSelected.length === 0}
-              loading={loadingDelete}
               className="button-delete"
               icon={<DeleteOutlined />}
-              onClick={_onDeleteAdmissionPeriod}
+              onClick={_onDeleteScoreAssignment}
             >
               {i18next.t('button.delete')}
             </Button>
           </div>
 
-          <Spin spinning={loading} tip={i18next.t('getData')}>
+          <Spin tip={i18next.t('getData')}>
             <div className="table-data">
               <DataGrid
                 id="gridContainer"
-                dataSource={listAdmissionPeriod}
+                dataSource={listScoreAssignment}
                 showBorders={true}
-                keyExpr="admissionPeriodId"
+                keyExpr="id"
                 ref={dataGridRef}
                 allowColumnResizing={true}
                 columnResizingMode={'nextColumn'}
                 columnMinWidth={50}
                 allowColumnReordering={true}
-                onSelectionChanged={onSelectionChanged}
                 wordWrapEnabled={true}
                 hoverStateEnabled={true}
                 onRowDblClick={_onDoubleClickRow}
@@ -273,36 +280,28 @@ const AdmissionPeriod = () => {
                 <Paging defaultPageSize={10} enabled={true} />
                 <Pager visible={true} showNavigationButtons={true} />
                 <Column
-                  dataField="admissionPeriodId"
+                  dataField="id"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Mã kỳ học"
+                  caption="Mã điểm đồ án"
                   dataType="string"
                   width={150}
                 />
                 <Column
-                  dataField="admissionPeriodName"
+                  dataField="sorceName"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Tên kỳ học"
+                  caption="Tên đồ án"
                   dataType="string"
                 />
                 <Column
-                  dataField="startPeriod"
+                  dataField="sorceName123"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Ngày bắt đầu kỳ học"
-                  dataType="string"
-                />
-                <Column
-                  dataField="endPeriod"
-                  alignment="left"
-                  allowFiltering={false}
-                  allowSorting={true}
-                  caption="Ngày kết thúc kỳ học"
+                  caption="Điểm trung bình"
                   dataType="string"
                 />
                 <Column
@@ -329,7 +328,7 @@ const AdmissionPeriod = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Ngày đăng ký"
+                  caption="Ngày nhập điểm"
                   dataType="string"
                   width={180}
                 />
@@ -338,14 +337,14 @@ const AdmissionPeriod = () => {
           </Spin>
         </div>
 
-        <EditAdmissionPeriod
+        {/* <EditScoreAssignment
           isEdit={showForm === 'edit'}
-          onSearch={_onSearchAdmissionPeriod}
+          onSearch={_onSearchScoreAssignment}
           selected={listSelected[0]}
           onChangeFormAdd={_onChangeFormAdd}
-        />
+        /> */}
       </div>
     </div>
   );
 };
-export default AdmissionPeriod;
+export default ScoreAssignment;

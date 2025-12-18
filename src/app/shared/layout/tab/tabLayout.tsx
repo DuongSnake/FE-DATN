@@ -38,6 +38,10 @@ const AssignmentStudentRegister = importedComponent(() => import('@/app/modules/
   LoadingComponent: () => <Skeleton loading={true} active />,
 });
 
+const ScoreAssignmentAdmin = importedComponent(() => import('@/app/modules/admin-side/score-assignment/ScoreAssignement'), {
+  LoadingComponent: () => <Skeleton loading={true} active />,
+});
+
 const listComponent = [
   {
     id: 'dashboard',
@@ -70,6 +74,10 @@ const listComponent = [
   {
     id: ID_MENU_TAB.Z0027,
     panelComponent: <AssignmentStudentRegister />,
+  },
+  {
+    id: ID_MENU_TAB.Z0036,
+    panelComponent: <ScoreAssignmentAdmin />,
   },
 ];
 

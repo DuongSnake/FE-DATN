@@ -25,7 +25,13 @@ export const removeVietnameseTones = str => {
 };
 
 export const formatCurrency = (number, local) => {
-  return new Intl.NumberFormat(local).format(number);
+  if (number === 0) {
+    return number;
+  }
+
+  if (number) {
+    return new Intl.NumberFormat(local).format(number);
+  }
 };
 
 export const totalValueOfObjectArray = (dataList: any[], key: string | number) => {

@@ -295,7 +295,7 @@ const Major = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption={i18next.t('bankCodeManagement.table.status')}
+                  caption="Trạng thái"
                   dataType="string"
                   width={120}
                   cellRender={row => {
