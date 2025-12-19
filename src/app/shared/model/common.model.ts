@@ -18,6 +18,10 @@ export interface IParamCommonDuong {
   data?: any;
 }
 
+export interface IParamCommonListDuong {
+  list?: any;
+}
+
 export interface IResponseCommon {
   responseCd: string;
   responseMsg: string;

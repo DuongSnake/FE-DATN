@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
-import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
+import { IParamCommonListDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
 import { selectFileUploadAssignmentApprove, getListFileUploadAssignmentApprove, resetDept, updateFileUploadAssignmentApprove, insertFileUploadAssignmentApprove} from './FileUploadAssignmentApprove.reducer';
 
 import 'devextreme/dist/css/dx.common.css';
@@ -20,12 +20,11 @@ const { RangePicker } = DatePicker;
 const FileUploadAssignmentApprove = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(state => state.fileUploadAssignmentApprove.loading);
-  const loadingDelete = useAppSelector(state => state.fileUploadAssignmentApprove.loadingDelete);
   const listFileUploadAssignmentApprove = useAppSelector(state => state.fileUploadAssignmentApprove.listFileUploadAssignmentApprove);
   const totalRecord = useAppSelector(state => state.fileUploadAssignmentApprove.totalRecord);
   const [assignmentRegisterId, setaAsignmentRegisterId] = useState('');
   const [assignmentRegisterName, setAssignmentRegisterName] = useState('');
-  const [periodAssignmentId, setPeriodAssignmentId] = useState('');
+  const [listFileUpload, setListFileUpload] = useState([]);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [studentId, setStudentId] = useState('');
@@ -59,7 +58,7 @@ const FileUploadAssignmentApprove = () => {
 
   const _onChangeShowForm = value => {
     onScrollToBottom();
-
+    setListFileUpload([]);
     setShowForm(value);
   };
 
@@ -67,12 +66,15 @@ const FileUploadAssignmentApprove = () => {
     setShowForm('add');
   };
 
-  const _handleChangePeriodAssignmentId = e => {
-    setPeriodAssignmentId(e);
-  };
-
-  const _handleChangeStudentId = e => {
-    setStudentId(e);
+  const _handleSelectListFileUpload = (valueAssmentId) => {
+    const payload = createCommonIParamsDuong({assignmentRegisterId: valueAssmentId});
+    dispatch(selectFileUploadAssignmentApprove(payload)).then(res => {
+              if (checkSuccessDispatch(res)) {
+                const objectResponse: IParamCommonListDuong = res.payload;
+                console.log("objbjbj:"+JSON.stringify(objectResponse?.list));
+                setListFileUpload(objectResponse?.list);
+              }
+            });
   };
 
   const _handleChangeStatus = e => {
@@ -90,7 +92,7 @@ const FileUploadAssignmentApprove = () => {
         pageNum: pageNum,
         pageSize: pageSize,
       };
-    const payload = createCommonIParamsDuong({ assignmentRegisterId, assignmentRegisterName, periodAssignmentId, fromDate, toDate, status, pageRequestDto });
+    const payload = createCommonIParamsDuong({ assignmentRegisterId, assignmentRegisterName, fromDate, toDate, status, pageRequestDto });
     dispatch(getListFileUploadAssignmentApprove(payload));
     };
   
@@ -102,7 +104,7 @@ const FileUploadAssignmentApprove = () => {
       pageNum: 1,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ assignmentRegisterId, assignmentRegisterName, periodAssignmentId, fromDate, toDate, status, pageRequestDto });
+    const payload = createCommonIParamsDuong({ assignmentRegisterId, assignmentRegisterName, fromDate, toDate, status, pageRequestDto });
     dispatch(getListFileUploadAssignmentApprove(payload));
     };
 
@@ -115,30 +117,36 @@ const FileUploadAssignmentApprove = () => {
 
   const onSelectionChanged = async () => {
     const listData = [];
+    setListFileUpload([]);
     await dataGridRef.current.instance.getSelectedRowsData().then(list => {
       list.map(data => {
         listData.push(data);
         setRequestId(data.assignmentRegisterId);
+    // _handleSelectListFileUpload(data.assignmentRegisterId);
       });
     });
     setListSelected(listData);
   };
 
   const _onRowClick = e => {
+    setListFileUpload([]);
     dataGridRef.current.instance.selectRowsByIndexes(e.rowIndex);
-    
     dataGridRef.current.instance.getSelectedRowsData().then(list => {
       list.map(data => {
     setRequestId(data.assignmentRegisterId);
+    // _handleSelectListFileUpload(data.assignmentRegisterId);
       });
     });
   };
 
   const _onDoubleClickRow = e => {
+      setListFileUpload([]);
     _onChangeShowForm('edit');
     const lstSelected = [];
     lstSelected.push(e.data);
     setListSelected(lstSelected);
+    // _handleSelectListFileUpload(e.data.assignmentRegisterId);
+
   };
 
   const _onEnter = e => {
@@ -164,7 +172,7 @@ const FileUploadAssignmentApprove = () => {
     <div className="page-content-template department-management">
       <div className="page-heading-template">
         <h3 className="heading-template">
-          Danh sach do an da duyet
+          Danh sách đồ án đã duyệt
           <span className="sub-heading-template"></span>
         </h3>
       </div>
@@ -195,7 +203,7 @@ const FileUploadAssignmentApprove = () => {
               <Input
                 className="cms-form-control"
                 value={assignmentRegisterName}
-                onChange={_handleChangeFileUploadAssignmentApproveId}
+                onChange={_handleChangeFileUploadAssignmentApproveName}
                 maxLength={80}
                 onKeyPress={_onEnter}
                 placeholder="Nhập vào đi bạn"
@@ -339,6 +347,7 @@ const FileUploadAssignmentApprove = () => {
           onSearch={_onSearchFileUploadAssignmentApprove}
           selected={listSelected[0]}
           onChangeFormAdd={_onChangeFormAdd}
+          valueAssmentId={requestId}
         />
       </div>
     </div>

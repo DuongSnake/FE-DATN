@@ -8,7 +8,8 @@ import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { checkSuccessDispatch } from '@/app/shared/util/global-function';
 import { selectFileUploadAssignmentApprove, getListFileUploadAssignmentApprove, resetDept, updateFileUploadAssignmentApprove, insertFileUploadAssignmentApprove } from '../FileUploadAssignmentApprove.reducer';
-const EditFileUploadAssignmentApprove = ({ isEdit, onSearch, selected, onChangeFormAdd }) => {
+import { IParamCommonListDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
+const EditFileUploadAssignmentApprove = ({ isEdit, onSearch, selected, onChangeFormAdd, valueAssmentId }) => {
   const dispatch = useAppDispatch();
   const { loadingAdd, validateError, loadingUpdate } = useAppSelector(state => state.fileUploadAssignmentApprove);
   const [formRegis] = Form.useForm();
@@ -16,9 +17,10 @@ const EditFileUploadAssignmentApprove = ({ isEdit, onSearch, selected, onChangeF
   const [listIdDelete, setListIdDelete] = useState([]);
   const [listFileInsert, setListFileInsert] = useState([]);
   const [listFileUpdate, setListFileUpdate] = useState([]);
+  const [listFileUploadGetFromDb, setListFileUploadGetFromDb] = useState([]);
   const [fileList, setFileList] = useState<any[]>([]);
-  const [rows, setRows] = useState<any[]>([
-    { id: 1, fileList: [] }]);
+  const [rows, setRows] = useState<any[]>([]);
+
 
   const _onSuccess = () => {
     _onResetForm();
@@ -26,38 +28,59 @@ const EditFileUploadAssignmentApprove = ({ isEdit, onSearch, selected, onChangeF
     onChangeFormAdd();
     onScrollToTop();
   };
-const handleChange = (info, rowId) => {
-  let newFileList = [...info.fileList];
-  newFileList = newFileList.slice(-1);
+  const handleChange = (info, rowData) => {
+    let newFileList = [...info.fileList];
+    newFileList = newFileList.slice(-1);
 
-  // Update rows state for UI
-  setRows(prev =>
-    prev.map(row =>
-      row.id === rowId ? { ...row, fileList: newFileList } : row
-    )
-  );
+    // Update rows state for UI
+    setRows(prev =>
+      prev.map(row =>
+        row.id === rowData.id ? { ...row, fileList: newFileList } : row
+      )
+    );
 
-  // Only store originFileObj in listFileInsert
-  const onlyOriginFiles = newFileList
-    .map(file => file.originFileObj)
-    .filter(Boolean); // remove undefined/null
-
-  setListFileInsert(prev => [...prev, ...onlyOriginFiles]);
-};
+    // Extract origin files
+    const onlyOriginFiles = newFileList
+      .map(file => file.originFileObj)
+      .filter(Boolean);
+    //The file upload will have but the list file upload ban dau không tồn tại
+    if (onlyOriginFiles.length > 0 && (listFileUploadGetFromDb != null && listFileUploadGetFromDb.length > 0)) {
+      // Check if rowId exists in listFileUploadGetFromDb
+      const existsInDb = listFileUploadGetFromDb.some(file => file.fileId === rowData.fileList[0].uid);
+    console.log("existsInDb:"+existsInDb);
+      if (existsInDb) {
+        // Update case
+        setListIdUpdate(prev => [...prev, rowData.fileList[0].uid]);
+        setListFileUpdate(prev => [...prev, ...onlyOriginFiles]);
+      } else {
+        // Insert case
+        setListFileInsert(prev => [...prev, ...onlyOriginFiles]);
+      }
+    }
+    //The file upload will have but the list file upload ban dau không tồn tại
+    if (onlyOriginFiles.length > 0 && (listFileUploadGetFromDb == null || listFileUploadGetFromDb.length == 0)) {
+        // Insert case
+        setListFileInsert(prev => [...prev, ...onlyOriginFiles]);
+    }
+  };
 
   const _onSubmit = async (values: any) => {
-    console.log("list file upload:"+JSON.stringify(listFileInsert));
+    //Handle case not upload new
+    if (listFileInsert.length == 0 && listIdUpdate.length == 0 && listIdDelete.length == 0) {
+      _onSuccess();
+      return;
+    }
+    //Handle case will have file upload
     if (isEdit) {
       _onUpdateFileUploadAssignmentApprove(values);
       return;
     } else {
+      //Handle case only insert new file
       const formData = new FormData();
       if (fileList[0].url != "") {
         formData.append("fileUpload", fileList[0].originFileObj);
       }
-      formData.append("FileUploadAssignmentApproveId", values.FileUploadAssignmentApproveId);
-      formData.append("assignmentRegisterName", values.assignmentRegisterName);
-      formData.append("studentMapInstructorId", values.studentMapInstructorId);
+      formData.append("assignmentRegisterId", values.assignmentRegisterId);
       dispatch(insertFileUploadAssignmentApprove(formData)).then(res => {
         if (checkSuccessDispatch(res)) {
           _onSuccess();
@@ -67,19 +90,62 @@ const handleChange = (info, rowId) => {
   };
   const _onUpdateFileUploadAssignmentApprove = (values: any) => {
     const formData = new FormData();
-  // Append all files under the same field name "fileUpload"
-  listFileInsert.forEach(file => {
-    formData.append("listFile", file);
-  });
-
-
+    // Append all files under the same field name "fileUpload"
+    if(listFileInsert.length > 0){
+    listFileInsert.forEach(file => {
+      formData.append("listFileInsert", file);
+    });
+    }
+    if(listFileUpdate.length > 0){
+    listFileUpdate.forEach(file => {
+      formData.append("listFileUpdate", file);
+    });
+    }
+    if(listIdUpdate.length > 0){
+    listIdUpdate.forEach(file => {
+      formData.append("listIdUpdate", file);
+    });
+    }
+    if(listIdDelete.length > 0){
+    listIdDelete.forEach(file => {
+      formData.append("listIdDelete", file);
+    });
+    }
     formData.append("assignmentRegisterId", values.assignmentRegisterId);
-    dispatch(insertFileUploadAssignmentApprove(formData)).then(res => {
+    dispatch(updateFileUploadAssignmentApprove(formData)).then(res => {
       if (checkSuccessDispatch(res)) {
         _onSuccess();
       }
     });
-  }
+  };
+  const _handleSelectListFileUpload = (valueAssmentId) => {
+    const payload = createCommonIParamsDuong({ assignmentRegisterId: valueAssmentId });
+    dispatch(selectFileUploadAssignmentApprove(payload)).then(res => {
+      if (checkSuccessDispatch(res)) {
+        const objectResponse: IParamCommonListDuong = res.payload;
+        setListFileUploadGetFromDb(objectResponse?.list);
+        setRows([]);
+        const objectResponse123123 = [];
+        if (objectResponse?.list != null && objectResponse?.list.length != 0) {
+          for (let i = 0; i < objectResponse?.list.length; i++) {
+            let valueId = i + 1;
+            const defaultFile: UploadFile = {
+              uid: objectResponse?.list[i].fileId,
+              name: objectResponse?.list[i].fileName,
+              status: 'done',
+              url: '',
+            };
+            const fileListUpaload = [];
+            fileListUpaload.push(defaultFile);
+            const defaultObjectFile = { id: valueId, fileList: fileListUpaload };
+            objectResponse123123.push(defaultObjectFile);
+          }
+          setRows(objectResponse123123);
+
+        }
+      }
+    });
+  };
   const _onAddRowToTable = async () => {
     ///Add more row in table
     const newRow = {
@@ -90,11 +156,29 @@ const handleChange = (info, rowId) => {
 
   };
 
-  const _onResetForm = () => {
-    if (isEdit) return;
+  const handleDeleteRow = (rowId: number) => {
+    // Find the row being deleted
+    const deletedRow = rows.find(r => r.id === rowId);
 
-    setFileList([]);
-    formRegis.resetFields();
+    if (deletedRow) {
+      // Add deleted row info into listIdDelete (append, not overwrite)
+      setListIdDelete(prev => [...prev, deletedRow.fileList[0].uid]);
+    }
+
+    // Remove from rows
+    setRows(prev => prev.filter(r => r.id !== rowId));
+  };
+
+  const _onResetForm = () => {
+    if (isEdit) {
+      // setRows([]);
+      // setFileList([]);
+      setListIdUpdate([]);
+      setListFileUpdate([]);
+      setListFileInsert([]);
+      setListIdDelete([]);
+      return;
+    }
   };
 
   useEffect(() => {
@@ -117,17 +201,13 @@ const handleChange = (info, rowId) => {
       formRegis.setFieldsValue({
         ...selected
       });
+      //Set default row
+      _handleSelectListFileUpload(selected.assignmentRegisterId);
       //Set default value date for form regis and variable fromDate and toDate
       formRegis.setFieldsValue({
         studentMapInstructorId: selected.studentMapInstructorId
       });
-      const defaultFile: UploadFile = {
-        uid: '-1',
-        name: selected.fileName,
-        status: 'done',
-        url: '', // optional: link to file if available
-      };
-      setFileList([defaultFile]);
+
 
     }
   }, [isEdit, selected]);
@@ -144,7 +224,7 @@ const handleChange = (info, rowId) => {
             {i18next.t('button.go-to-list')}
           </Button>
 
-          <Button className="button-edit" disabled={isEdit} icon={<ClearOutlined />} onClick={_onResetForm}>
+          <Button className="button-edit" disabled={isEdit ? false : true} icon={<ClearOutlined />}>
             {i18next.t('button.clear')}
           </Button>
         </div>
@@ -191,37 +271,41 @@ const handleChange = (info, rowId) => {
               </thead>
               {/* handle that table */}
               <tbody>
-                {rows.map(row => (
-                  <tr key={row.id}>
-                    <td>{row.id}</td>
-                    <td>
-                      <Form.Item name={`contentAssignment_${row.id}`}>
-                        <Upload
-                          beforeUpload={() => false}
-                          onChange={(info) => handleChange(info, row.id)}
-                          fileList={row.fileList}
-                          multiple={false}
-                          showUploadList={false}
-                        >
-                          <Button icon={<UploadOutlined />}>
-                            {row.fileList.length > 0 ? row.fileList[0].name : 'Click to Upload'}
+                {rows != null && rows.length != 0 ?
+                  (<>
+                    {rows.map(row => (
+                      <tr key={row.id}>
+                        <td>{row.id}</td>
+                        <td>
+                          <Form.Item name={`contentAssignment_${row.id}`}>
+                            <Upload
+                              beforeUpload={() => false}
+                              onChange={(info) => handleChange(info, row)}
+                              fileList={row.fileList}
+                              multiple={false}
+                              showUploadList={false}
+                            >
+                              <Button icon={<UploadOutlined />}>
+                                {row.fileList.length > 0 ? row.fileList[0].name : 'Click to Upload'}
+                              </Button>
+                            </Upload>
+                          </Form.Item>
+                        </td>
+                        <td>
+                          <Button
+                            className="button-delete"
+                            icon={<DeleteOutlined />}
+                            onClick={() => handleDeleteRow(row.id)}
+
+                          >
+                            {i18next.t('button.delete')}
                           </Button>
-                        </Upload>
-                      </Form.Item>
-                    </td>
-                    <td>
-                      <Button
-                        className="button-delete"
-                        icon={<DeleteOutlined />}
-                        onClick={() =>
-                          setRows(rows.filter(r => r.id !== row.id))
-                        }
-                      >
-                        {i18next.t('button.delete')}
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+                        </td>
+                      </tr>
+                    ))}
+                  </>)
+                  :
+                  (<></>)}
               </tbody>
 
             </table>

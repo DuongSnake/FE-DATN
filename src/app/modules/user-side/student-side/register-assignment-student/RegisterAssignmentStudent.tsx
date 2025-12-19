@@ -174,7 +174,6 @@ const RegisterAssignmentStudent = () => {
 
   const _onRowClick = e => {
     dataGridRef.current.instance.selectRowsByIndexes(e.rowIndex);
-    
     dataGridRef.current.instance.getSelectedRowsData().then(list => {
       list.map(data => {
     setRequestId(data.assignmentRegisterId);
