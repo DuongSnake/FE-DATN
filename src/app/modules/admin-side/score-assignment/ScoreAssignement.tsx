@@ -7,34 +7,29 @@ import i18next from '@/i18n/i18n';
 import { useAppDispatch, useAppSelector } from '@/app/config/redux/store';
 import { onScrollToBottom, onScrollToTop } from '@/app/shared/helpers/cms-helper';
 import { IParamCommonDuong, createCommonIParamsDuong, createCommonIParamsListDuong } from '@/app/shared/model/common.model';
-// import { deleteScoreAssignment, getListScoreAssignment, resetDept} from './ScoreAssignmentManagement.reducer';
+import { deleteScoreAssigment, getListScoreAssigment, resetDept} from './ScoreAssignment.reducer';
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import '../../../shared/layout/content-task.scss';
-// import EditScoreAssignment from './edit/EditScoreAssignmentManagement';
+import EditScoreAssignment from './edit/EditScoreAssignment';
 import { APP_DATE_FORMAT, FORMAT_YYYYMMDD } from '@/app/config/constant/constants.ts';
 import moment from 'moment';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
 import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
+import { selectAssignmentStudentApprove } from '../assignment-student-register/AssignmentStudentRegister.reducer';
 const { RangePicker } = DatePicker;
 const ScoreAssignment = () => {
   const dispatch = useAppDispatch();
-  const loading = [];
-  const loadingDelete = [];
-  const listScoreAssignment = [    {
-      "id": "1",
-      "sorceName": "Quản lý sinh viên",
-      "sorceName123": "7.5",
-      "status": "1",
-      "createAt": "2025-11-24"
-    }];
-  const [ScoreAssignmentId, setScoreAssignmentId] = useState('');
-  const [ScoreAssignmentname, setScoreAssignmentname] = useState('');
+  const loading = useAppSelector(state => state.majorManagementReducer.loading);
+  const loadingDelete = useAppSelector(state => state.majorManagementReducer.loadingDelete);
+  const listScoreAssignment = useAppSelector(state => state.scoreAssignement.listAllScoreAssigment);
+  const [scoreAssignmentId, setScoreAssignmentId] = useState('');
+  const [assignmentRegisterId, setAssignmentRegisterId] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-  const [createUser, setCreateUser] = useState('');
   const [status, setStatus] = useState('');
+  const [listAssignmentRegister, setListAssignmentRegister] = useState([]);
   const [listSelected, setListSelected] = useState([]);
   const [showForm, setShowForm] = useState('add');
   const [listScoreAssignmentType, setListScoreAssignmentType] = useState(RESPONSE_CODE_STATUS);
@@ -65,7 +60,7 @@ const ScoreAssignment = () => {
 
   const _handleChangeScoreAssignmentName = e => {
     const { value } = e.target;
-    setScoreAssignmentname(value);
+    setAssignmentRegisterId(value);
   };
 
   const _handleChangeStatus = e => {
@@ -107,14 +102,14 @@ const ScoreAssignment = () => {
   const _onDelete = async () => {
     const listDelete = [];
 
-    listSelected.forEach(item => listDelete.push(item.ScoreAssignmentId));
+    listSelected.forEach(item => listDelete.push(item.scoreAssignmentId));
 
-    // dispatch(deleteScoreAssignment(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
-    //   if (checkSuccessDispatch(res)) {
-    //     onScrollToTop();
-    //     _onSearchScoreAssignment();
-    //   }
-    // });
+    dispatch(deleteScoreAssigment(createCommonIParamsListDuong({ listData: listDelete }))).then(res => {
+      if (checkSuccessDispatch(res)) {
+        onScrollToTop();
+        _onSearchScoreAssignment();
+      }
+    });
   };
 
   const _onRowClick = e => {
@@ -128,8 +123,8 @@ const ScoreAssignment = () => {
       pageNum: 0,
       pageSize: 10,
     };
-    const payload = createCommonIParamsDuong({ ScoreAssignmentId, ScoreAssignmentname, fromDate, toDate, status, createUser, pageRequestDto });
-    // dispatch(getListScoreAssignment(payload));
+    const payload = createCommonIParamsDuong({ scoreAssignmentId, assignmentRegisterId, fromDate, toDate, status, pageRequestDto });
+    dispatch(getListScoreAssigment(payload));
   };
 
   const _onDoubleClickRow = e => {
@@ -145,10 +140,21 @@ const ScoreAssignment = () => {
     }
   };
 
+
+    //Get all AssignmentStudentApprove
+    const getAllAssignmentStudentApprove = () => {
+      dispatch(selectAssignmentStudentApprove()).then(res => {
+        if (checkSuccessDispatch(res)) {
+          const objectResponse: IParamCommonDuong = res.payload;
+          setListAssignmentRegister(objectResponse.data.data);
+        }
+      });
+    }
   useEffect(() => {
     _onSearchScoreAssignment();
+    getAllAssignmentStudentApprove();
     return () => {
-    //   dispatch(resetDept());
+      dispatch(resetDept());
     };
   }, []);
 
@@ -177,7 +183,7 @@ const ScoreAssignment = () => {
             <Col xl={5} xxl={4}>
               <Input
                 className="cms-form-control"
-                value={ScoreAssignmentId}
+                value={scoreAssignmentId}
                 onChange={_handleChangeScoreAssignmentId}
                 maxLength={80}
                 onKeyPress={_onEnter}
@@ -259,18 +265,19 @@ const ScoreAssignment = () => {
             </Button>
           </div>
 
-          <Spin tip={i18next.t('getData')}>
+          <Spin spinning={loading} tip={i18next.t('getData')}>
             <div className="table-data">
               <DataGrid
                 id="gridContainer"
                 dataSource={listScoreAssignment}
                 showBorders={true}
-                keyExpr="id"
+                keyExpr="scoreAssignmentId"
                 ref={dataGridRef}
                 allowColumnResizing={true}
                 columnResizingMode={'nextColumn'}
                 columnMinWidth={50}
                 allowColumnReordering={true}
+                onSelectionChanged={onSelectionChanged}
                 wordWrapEnabled={true}
                 hoverStateEnabled={true}
                 onRowDblClick={_onDoubleClickRow}
@@ -280,28 +287,28 @@ const ScoreAssignment = () => {
                 <Paging defaultPageSize={10} enabled={true} />
                 <Pager visible={true} showNavigationButtons={true} />
                 <Column
-                  dataField="id"
+                  dataField="scoreAssignmentId"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Mã điểm đồ án"
+                  caption="Mã diem do an"
                   dataType="string"
                   width={150}
                 />
                 <Column
-                  dataField="sorceName"
+                  dataField="assignmentRegisterName"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Tên đồ án"
+                  caption="Ten de tai"
                   dataType="string"
                 />
                 <Column
-                  dataField="sorceName123"
+                  dataField="scoreAverage"
                   alignment="left"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Điểm trung bình"
+                  caption="Diem trung binh"
                   dataType="string"
                 />
                 <Column
@@ -328,7 +335,7 @@ const ScoreAssignment = () => {
                   alignment="center"
                   allowFiltering={false}
                   allowSorting={true}
-                  caption="Ngày nhập điểm"
+                  caption="Ngày đăng ký"
                   dataType="string"
                   width={180}
                 />
@@ -337,12 +344,13 @@ const ScoreAssignment = () => {
           </Spin>
         </div>
 
-        {/* <EditScoreAssignment
+        <EditScoreAssignment
           isEdit={showForm === 'edit'}
           onSearch={_onSearchScoreAssignment}
           selected={listSelected[0]}
+          listAssignmentRegister = {listAssignmentRegister}
           onChangeFormAdd={_onChangeFormAdd}
-        /> */}
+        />
       </div>
     </div>
   );

@@ -92,7 +92,7 @@ export const API_SELECT_STUDENT_MAP_INSTRUCTOR = PRE_FIX_API + 'studentMapInstru
 export const API_GET_ALL_STUDENT_MAP_INSTRUCTOR_ACTIVE = PRE_FIX_API + 'studentMapInstructor/selectListAllActive';
 
 /**
- * Assignment Student Register Management(cai nay sau se bo)
+ * Assignment Student Register Management
  */
 export const API_GET_LIST_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/selectList';
 export const API_ADD_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/insert';
@@ -100,9 +100,25 @@ export const API_UPDATE_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentS
 export const API_DELETE_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/delete';
 export const API_SELECT_ASSIGNMENT_STUDENT_REGISTER = PRE_FIX_API + 'assignmentStudentRegister/select';
 
+
+/**
+ * Score assignement management
+ */
+export const API_GET_LIST_SCORE_ASSIGNMENT = PRE_FIX_API + 'scoreAssignment/selectList';
+export const API_ADD_SCORE_ASSIGNMENT = PRE_FIX_API + 'scoreAssignment/insert';
+export const API_UPDATE_SCORE_ASSIGNMENT = PRE_FIX_API + 'scoreAssignment/update';
+export const API_DELETE_SCORE_ASSIGNMENT = PRE_FIX_API + 'scoreAssignment/delete';
+export const API_SELECT_SCORE_ASSIGNMENT = PRE_FIX_API + 'scoreAssignment/select';
+
+/**
+ * User site
+ */
+
+
 /**
  * List Assignment register
  */
+export const API_GET_LIST_ASSIGNMENT_WAITING_APPROVE = PRE_FIX_API + 'assignmentRegister/selectListWaitingSend';
 export const API_GET_LIST_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/selectList';
 export const API_ADD_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/insert';
 export const API_UPDATE_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assignmentRegister/update';
@@ -115,6 +131,7 @@ export const API_SEND_REQUEST_ASSIGNMENT_STUDENT_USER_SIDE = PRE_FIX_API + 'assi
  * List Assignment register approve
  */
 export const API_GET_LIST_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/selectListAssApprove';
+export const API_GET_LIST_All_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/selectListAllAssApprove';
 export const API_GET_LIST_FILE_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/selectListFileAss';
 export const API_ADD_LIST_FILE_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/insertListFileAssignment';
 export const API_UPDATE_LIST_FILE_ASSIGNMENT_APPROVE = PRE_FIX_API + 'assignmentRegister/updateListFileAssignment';

@@ -9,7 +9,8 @@ import {
   API_DELETE_ASSIGNMENT_STUDENT_REGISTER,
   API_GET_LIST_ASSIGNMENT_STUDENT_REGISTER,
   API_SELECT_ASSIGNMENT_STUDENT_REGISTER,
-  API_UPDATE_ASSIGNMENT_STUDENT_REGISTER
+  API_UPDATE_ASSIGNMENT_STUDENT_REGISTER,
+  API_GET_LIST_All_ASSIGNMENT_APPROVE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
 import { stringify } from 'querystring';
@@ -24,6 +25,7 @@ const initialState = {
   listAssignmentStudentRegister: [],
   listAllAssignmentStudentRegister: [],
   data: {},
+  listAllAssignmentStudentApprove: [],
   validateError: [],
   totalRecord : 0
 };
@@ -43,6 +45,12 @@ export const deleteAssignmentStudentRegister = createAsyncThunk('api/v1/assignme
 
 export const selectAssignmentStudentRegister = createAsyncThunk('api/v1/assignmentStudentRegister/select', async (param: IParamCommon) => {
   const response = await apiClient.post<IResponseCommon>(API_SELECT_ASSIGNMENT_STUDENT_REGISTER, param);
+
+  return response.data;
+});
+
+export const selectAssignmentStudentApprove = createAsyncThunk('api/v1/assignmentStudentRegister/selectAllListAssApprove', async () => {
+  const response = await apiClient.post<IResponseCommon>(API_GET_LIST_All_ASSIGNMENT_APPROVE, null);
 
   return response.data;
 });
@@ -159,6 +167,23 @@ export const AssignmentStudentRegisterSlice = createSlice({
       .addCase(updateAssignmentStudentRegister.pending, state => ({
         ...state,
         loadingUpdate: true
+      }))
+      
+      .addCase(selectAssignmentStudentApprove.fulfilled, (state, action) => {
+        return ({
+          ...state,
+          loading: false,
+          listAssignmentStudentRegister: (undefined === action.payload.data) ? null :  action.payload.data,
+          totalRecord: (undefined === action.payload.totalRecord) ? null :  action.payload.totalRecord
+        })
+      })
+      .addCase(selectAssignmentStudentApprove.rejected, state => ({
+        ...state,
+        loading: false
+      }))
+      .addCase(selectAssignmentStudentApprove.pending, state => ({
+        ...state,
+        loading: true
       }));
   }
 });

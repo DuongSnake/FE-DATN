@@ -11,6 +11,7 @@ import periodAssignmentManagementReducer from '@/app/modules/admin-side/period-a
 import instructorMapPeriodAssignment from '@/app/modules/admin-side/instructor-map-period-assignment/InstructorMapPeriodAssignment.reducer';
 import studentMapInstructor from '@/app/modules/admin-side/student-map-instructor/StudentMapInstructor.reducer';
 import assignmentStudentRegister from '@/app/modules/admin-side/assignment-student-register/AssignmentStudentRegister.reducer';
+import scoreAssignement from '@/app/modules/admin-side/score-assignment/ScoreAssignment.reducer';
 //Student API
 import registerAssignmentStudent from '@/app/modules/user-side/student-side/register-assignment-student/RegisterAssignmentStudent.reducer';
 import fileUploadAssignmentApprove from '@/app/modules/user-side/student-side/file-upload-assignment-approve/FileUploadAssignmentApprove.reducer';
@@ -33,6 +34,7 @@ const rootReducer = {
   ,assignmentStudentRegister
   ,registerAssignmentStudent
   ,fileUploadAssignmentApprove
+  ,scoreAssignement
 };
 
 export default rootReducer;
