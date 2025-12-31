@@ -29,9 +29,8 @@ export const notificationSuccessAction = (responseCode, msg) => {
 
 export const notificationMiddleware = () => next => action => {
   if (!action) return;
-
+console.log("value handle  notificationMiddleware:");
   const { error, payload } = action;
-
   if (isFulfilledAction(action) && payload) {
     const listStatusErrorCodeSystem = [
       CmsStatusCode.NOT_FOUND_DATA,
@@ -149,7 +148,7 @@ export const notificationMiddleware = () => next => action => {
             if (errorResponse?.responseCd && ERRORS[errorResponse.responseCd]) {
               openNotification(NOTIFICATION.ERROR, ERRORS[errorResponse.responseCd]);
             } else {
-              openNotification(NOTIFICATION.ERROR, 'error.http.400', '', errorResponse.responseMsg);
+              openNotificationAction(NOTIFICATION.ERROR, 'error.http.400', '', errorResponse.responseMsg);
             }
             break;
           }

@@ -40,6 +40,9 @@ export const API_SELECT_ALL_USER_ACCOUNT = PRE_FIX_API + 'user/selectAll';
 export const API_SELECT_ALL_ROLE = PRE_FIX_API + 'user/selectAllRole';
 export const API_SELECT_ALL_INSTRUCTOR_ACTIVE = PRE_FIX_API + 'user/selectAllInstructor';
 export const API_SELECT_ALL_STUDENT_ACTIVE = PRE_FIX_API + 'user/selectAllStudent';
+export const API_DOWNLOAD_FILE_EXAMPLE = PRE_FIX_API + 'user/downlaodFileExample';
+export const API_UPLOAD_FILE = PRE_FIX_API + 'user/uploadFile';
+export const API_INSERT_FILE = PRE_FIX_API + 'user/insertFile';
 
 /**
  * Major Management

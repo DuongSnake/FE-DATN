@@ -15,7 +15,8 @@ import '../../../shared/layout/content-task.scss';
 import EditBankCode from './edit/EditUserManagement';
 import { checkSuccessDispatch, checkInsertSuccessDispatch } from '@/app/shared/util/global-function';
 import { RESPONSE_CODE_STATUS,BANK_CODE_STATUS } from '@/app/config/constant/enum';
-
+import './popUpModal.scss';
+import BatchRegisterPopup from './BatchRegisterPopup';
 const User = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(state => state.userManagement.loading);
@@ -286,6 +287,7 @@ const User = () => {
               {i18next.t('button.edit')}
             </Button>
 
+            <BatchRegisterPopup fetchListAgain={() => null} />
             <Button
               disabled={listSelected.length === 0}
               loading={loadingDelete}

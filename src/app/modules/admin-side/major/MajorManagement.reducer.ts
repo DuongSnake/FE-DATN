@@ -13,7 +13,7 @@ import {
   API_GET_ALL_SELECT_MAJOR_ACITVE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
-import { stringify } from 'querystring';
+import { serializeAxiosError } from '@/app/shared/reducers/reducer.utils';
 
 const initialState = {
   loading: false,
@@ -39,7 +39,8 @@ export const insertMajor = createAsyncThunk('api/v1/major/insert', async (param:
   const response = await apiClient.post<IResponseCommon>(API_ADD_MAJOR, param);
 
   return response.data;
-});
+  //Them doan nay moi thong bao loi
+},{ serializeError: serializeAxiosError });
 
 export const deleteMajor = createAsyncThunk('api/v1/major/delete', async (param: IParamCommon) => {
   const response = await apiClient.post<any>(API_DELETE_MAJOR, param);

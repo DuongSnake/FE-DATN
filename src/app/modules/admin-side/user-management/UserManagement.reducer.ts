@@ -13,10 +13,14 @@ import {
   API_SELECT_USER_ACCOUNT,
   API_UPDATE_USER_ACCOUNT,
   API_SELECT_ALL_INSTRUCTOR_ACTIVE,
-  API_SELECT_ALL_STUDENT_ACTIVE
+  API_SELECT_ALL_STUDENT_ACTIVE,
+  API_DOWNLOAD_FILE_EXAMPLE,
+  API_UPLOAD_FILE,
+  API_INSERT_FILE
 } from '@/app/config/constant/api';
 import { RESPONSECD_VALID_INPUT } from '@/app/config/constant/constants';
-import { stringify } from 'querystring';
+import { downloadFileWithAxios } from '@/app/shared/util/download-excel-utils';
+import { serializeAxiosError } from '@/app/shared/reducers/reducer.utils';
 
 const initialState = {
   loading: false,
@@ -79,6 +83,35 @@ export const selectAllStudentActive = createAsyncThunk('api/v1/user/selectAllStu
   const response = await apiClient.post<IResponseCommon>(API_SELECT_ALL_STUDENT_ACTIVE);
   return response.data;
 });
+
+export const batchInsertUser = createAsyncThunk('api/v1/user/insertBatch', async (param: IParamCommon) => {
+  apiClient.defaults.timeout = 180000;
+  const response = await apiClient.post<IResponseCommon>(API_INSERT_FILE, param);
+
+  return response.data;
+});
+
+export const uploadBatchFile = createAsyncThunk(
+  'Z032/uploadFile',
+  async (params: any) => {
+    const response = await apiClient.post<any>(API_UPLOAD_FILE, params, {
+      headers: {
+        lang: 'vi',
+      },
+    });
+
+    return response.data;
+  },
+  { serializeError: serializeAxiosError }
+);
+
+export const downloadTemplate = createAsyncThunk(
+  'api/v1/user/template',
+  async (query: IParamCommon) => {
+    downloadFileWithAxios(API_DOWNLOAD_FILE_EXAMPLE, query, 'Tai lieu dang ky danh sach');
+  },
+  { serializeError: serializeAxiosError }
+);
 
 export const UserManagementSlice = createSlice({
   name: 'api/v1/user',

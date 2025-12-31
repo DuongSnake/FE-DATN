@@ -4,6 +4,7 @@ import { FORMAT_DATE_OUTPUT, FORMAT_YYYYMMDD } from '@/app/config/constant/const
 import _ from 'lodash';
 import { LIST_FEE_AC, LIST_FEE_ACC, LIST_FEE_TRANSFER } from '@/app/config/constant/enum';
 import { v4 as uuidv4 } from 'uuid';
+import { UploadFile } from 'antd/es/upload/interface';
 
 export const checkSuccessDispatch = res => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -372,4 +373,14 @@ export const groupArrayBy = array => {
   });
 
   return newArray;
+};
+
+export const validateFileType = ({ type, name }: UploadFile, allowedTypes?: string[]) => {
+  if (!allowedTypes.length) {
+    return true;
+  }
+
+  if (type) {
+    return allowedTypes?.some(item => item?.includes(type));
+  }
 };
